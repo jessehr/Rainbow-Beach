@@ -9,15 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State
-    private var buttonColor: Color = .red
     var body: some View {
-        Button {
-            buttonColor = buttonColor == .blue ? .red : .blue
-        } label: {
-            buttonColor
-                .frame(width: 50, height: 50)
-                .cornerRadius(10)
+        Grid {
+            ForEach(0..<13) { _ in
+                GridRow {
+                    ForEach(0..<6) { _ in
+                        ButtonView()
+                    }
+                }
+            }
         }
     }
 }
