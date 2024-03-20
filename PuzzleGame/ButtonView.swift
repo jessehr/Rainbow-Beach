@@ -7,24 +7,15 @@
 
 import SwiftUI
 
-struct ButtonView: View {
-    @State
-    private var buttonColor: Color = .red
+struct ButtonView: View {   
+    let color: Color
     
     var body: some View {
         Rectangle()
-            .foregroundStyle(buttonColor)
-            .animation(.smooth(duration: 0.15), value: buttonColor)
-            .onTapGesture {
-                onButtonTap()
-            }
-    }
-    
-    func onButtonTap() {
-        buttonColor = (buttonColor == .red) ? .yellow : .red
+            .foregroundStyle(color)
     }
 }
 
 #Preview {
-    ButtonView()
+    ButtonView(color: Color.red)
 }
