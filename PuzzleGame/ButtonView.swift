@@ -12,13 +12,16 @@ struct ButtonView: View {
     private var buttonColor: Color = .red
     
     var body: some View {
-        Button {
-            buttonColor = (buttonColor == .blue) ? .red : .blue
-        } label: {
-            buttonColor
-                .frame(width: 50, height: 50)
-                .cornerRadius(10)
-        }
+        Rectangle()
+            .foregroundStyle(buttonColor)
+            .animation(.smooth(duration: 0.15), value: buttonColor)
+            .onTapGesture {
+                onButtonTap()
+            }
+    }
+    
+    func onButtonTap() {
+        buttonColor = (buttonColor == .red) ? .yellow : .red
     }
 }
 
