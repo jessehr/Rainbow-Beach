@@ -51,7 +51,7 @@ struct GameView: View {
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         let tapCoords = getCoordinates(using: reader, with: value)
-                        addTap(at: tapCoords)
+                        onTap(at: tapCoords)
                     }
                     .onEnded { _ in
                         tapsAddedThisRound = []
@@ -68,12 +68,30 @@ struct GameView: View {
         return actualSize
     }
     
-    func addTap(at coords: Coordinates) {
-        guard !tapsAddedThisRound.contains(coords) else {
-            tapsAddedThisRound.append(coords)
+    func onTap(at coords: Coordinates) {
+        addMissingTaps(near: coords)
+        incrementTapCount(at: coords)
+    }
+    
+    func addMissingTaps(near coords: Coordinates) {
+        guard
+            let lastTap = tapsAddedThisRound.last,
+            !lastTap.touching(coords) else {
             return
         }
+        
+        let tapsBetween = coords.coordsBetween(lastTap)
+        for tap in tapsBetween where !tapsAddedThisRound.contains(tap) {
+            incrementTapCount(at: tap)
+        }
+    }
+    
+    func incrementTapCount(at coords: Coordinates) {
+        let alreadyTappedThisRound = tapsAddedThisRound.contains(coords)
         tapsAddedThisRound.append(coords)
+        guard !alreadyTappedThisRound else {
+            return
+        }
         self.taps[coords.y][coords.x] += 1
     }
     
