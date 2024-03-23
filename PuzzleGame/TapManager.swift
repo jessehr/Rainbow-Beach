@@ -48,7 +48,9 @@ class TapManager: ObservableObject {
         guard !alreadyTappedThisRound else {
             return
         }
-        guard coords.y < taps.count && coords.x < taps[0].count else { return }
+        guard coords.y < taps   .count && coords.y >= 0 else { return }
+        guard coords.x < taps[0].count && coords.x >= 0 else { return }
+
         self.taps[coords.y][coords.x] += 1
     }
 }
