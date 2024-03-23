@@ -12,3 +12,13 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+extension Int {
+    var rangeToZero: Range<Int> {
+        if self >= 0 {
+            return 0..<self
+        } else {
+            return self..<0
+        }
+    }
+}

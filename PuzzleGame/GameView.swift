@@ -51,7 +51,9 @@ struct GameView: View {
                         let tapCoords = getCoordinates(using: reader, with: value)
                         tapManager.onTap(at: tapCoords)
                     }
-                    .onEnded { _ in
+                    .onEnded { value in
+                        let tapCoords = getCoordinates(using: reader, with: value)
+                        tapManager.onTap(at: tapCoords)
                         tapManager.endRound()
                     }
             )

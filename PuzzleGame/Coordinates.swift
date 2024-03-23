@@ -16,32 +16,41 @@ struct Coordinates: Equatable {
     }
     
     func coordsBetween(_ otherCoords: Coordinates) -> [Coordinates] {
-        let xStart = min(self.x, otherCoords.x)
-        let xEnd   = max(self.x, otherCoords.x)
-        let xDiff = xEnd - xStart
-        let yStart = min(self.y, otherCoords.y)
-        let yEnd   = max(self.y, otherCoords.y)
-        let yDiff = yEnd - yStart
+        let xDiff = otherCoords.x - self.x
+        let yDiff = otherCoords.y - self.y
         
-        var coordsBetween: [Coordinates] = []
+        let isSteep = abs(yDiff) > abs(xDiff)
         
-        if xDiff > yDiff {
-            let yAmountToMove = Double(yDiff) / Double(xDiff)
-            for i in 0..<xDiff {
-                let currentX = i + xStart
-                let currentY = Int(yAmountToMove * Double(i)) + yStart
-                coordsBetween.append(Coordinates(x: currentX, y: currentY))
-            }
-        } else {
-            let xAmountToMove = Double(xDiff) / Double(yDiff)
-            for i in 0..<yDiff {
-                let currentX = Int(xAmountToMove * Double(i)) + xStart
-                let currentY = i + yStart
-                coordsBetween.append(Coordinates(x: currentX, y: currentY))
-
-            }
+        let biggerDiff  = isSteep ? yDiff : xDiff
+        let smallerDiff = isSteep ? xDiff : yDiff
+        
+        return biggerDiff.rangeToZero.map { i in
+            singleCoordsBetween(
+                position: i,
+                isSteep: isSteep,
+                biggerDiff: biggerDiff,
+                smallerDiff: smallerDiff
+            )
         }
+    }
+    
+    private func singleCoordsBetween(
+        position i: Int,
+        isSteep: Bool,
+        biggerDiff: Int,
+        smallerDiff: Int
+    ) -> Coordinates {
+        let fasterAxisStartPosition = isSteep ? self.y : self.x
+        let slowerAxisStartPosition = isSteep ? self.x : self.y
         
-        return coordsBetween
+        let slowerAxisAmountToMove = Double(smallerDiff) / Double(biggerDiff)
+
+        let fasterAxisCurrent = i + fasterAxisStartPosition
+        let slowerAxisCurrent = Int(slowerAxisAmountToMove * Double(i)) + slowerAxisStartPosition
+        
+        let xCurrent = isSteep ? slowerAxisCurrent : fasterAxisCurrent
+        let yCurrent = isSteep ? fasterAxisCurrent : slowerAxisCurrent
+        
+        return Coordinates(x: xCurrent, y: yCurrent)
     }
 }
