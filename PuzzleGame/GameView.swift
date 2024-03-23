@@ -14,8 +14,11 @@ struct GameView: View {
     @State
     var taps: [[Int]]
     
+    @State
+    var tapsAddedThisRound: [Coordinates] = []
+    
     var colors: [[Color]] {
-        let colors: [Color] = [.red, .purple, .blue, .green, .yellow, .orange, .red, .pink, .white, .black]
+        let colors: [Color] = [.red, .blue, .yellow, .brown, .pink, .white, .mint, .teal]
         return taps
             .map {
                 $0.map {
@@ -49,6 +52,9 @@ struct GameView: View {
                     .onChanged { value in
                         addTap(using: reader, with: value)
                     }
+                    .onEnded { _ in
+                        tapsAddedThisRound = []
+                    }
             )
         }
         .ignoresSafeArea()
@@ -66,6 +72,11 @@ struct GameView: View {
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
         let percentageRight = dragValue.location.x / reader.size.width
         let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
+        let coords = Coordinates(x: columnNumber, y: rowNumber)
+        guard !tapsAddedThisRound.contains(coords) else {
+            return
+        }
+        tapsAddedThisRound.append(coords)
         self.taps[rowNumber][columnNumber] += 1
     }
 }
