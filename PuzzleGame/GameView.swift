@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct GameView: View {
+    @StateObject
+    var tapManager: TapManager
+    
     let nRows: Int
     let nColumns: Int
     
-    @State
-    var taps: [[Int]]
-    
-    @State
-    var tapsAddedThisRound: [Coordinates] = []
-    
     var colors: [[Color]] {
         let colors: [Color] = [.red, .blue, .yellow, .brown, .pink, .white, .mint, .teal]
-        return taps
+        return tapManager.taps
             .map {
                 $0.map {
                     colors[safe: $0] ?? .black
@@ -30,8 +27,9 @@ struct GameView: View {
     init(nRows: Int, nColumns: Int) {
         self.nRows = nRows
         self.nColumns = nColumns
-        let sampleRow = Array(repeating: 0, count: nColumns)
-        self.taps = Array(repeating: sampleRow, count: nRows)
+        self._tapManager = StateObject(wrappedValue: 
+            TapManager(nColumns: nColumns, nRows: nRows)
+        )
     }
     
     var body: some View {
@@ -51,51 +49,24 @@ struct GameView: View {
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         let tapCoords = getCoordinates(using: reader, with: value)
-                        onTap(at: tapCoords)
+                        tapManager.onTap(at: tapCoords)
                     }
                     .onEnded { _ in
-                        tapsAddedThisRound = []
+                        tapManager.endRound()
                     }
             )
         }
         .ignoresSafeArea()
     }
     
-    func squareSize(using reader: GeometryProxy) -> CGFloat {
+    private func squareSize(using reader: GeometryProxy) -> CGFloat {
         let desiredWidth = reader.size.width / CGFloat(nColumns)
         let desiredHeight = reader.size.height / CGFloat(nRows)
         let actualSize = min(desiredWidth, desiredHeight)
         return actualSize
     }
     
-    func onTap(at coords: Coordinates) {
-        addMissingTaps(near: coords)
-        incrementTapCount(at: coords)
-    }
-    
-    func addMissingTaps(near coords: Coordinates) {
-        guard
-            let lastTap = tapsAddedThisRound.last,
-            !lastTap.touching(coords) else {
-            return
-        }
-        
-        let tapsBetween = coords.coordsBetween(lastTap)
-        for tap in tapsBetween where !tapsAddedThisRound.contains(tap) {
-            incrementTapCount(at: tap)
-        }
-    }
-    
-    func incrementTapCount(at coords: Coordinates) {
-        let alreadyTappedThisRound = tapsAddedThisRound.contains(coords)
-        tapsAddedThisRound.append(coords)
-        guard !alreadyTappedThisRound else {
-            return
-        }
-        self.taps[coords.y][coords.x] += 1
-    }
-    
-    func getCoordinates(using reader: GeometryProxy, with dragValue: DragGesture.Value) -> Coordinates {
+    private func getCoordinates(using reader: GeometryProxy, with dragValue: DragGesture.Value) -> Coordinates {
         let percentageDown = dragValue.location.y / reader.size.height
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
         let percentageRight = dragValue.location.x / reader.size.width
