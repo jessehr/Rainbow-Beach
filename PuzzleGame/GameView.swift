@@ -50,7 +50,8 @@ struct GameView: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        addTap(using: reader, with: value)
+                        let tapCoords = getCoordinates(using: reader, with: value)
+                        addTap(at: tapCoords)
                     }
                     .onEnded { _ in
                         tapsAddedThisRound = []
@@ -67,17 +68,21 @@ struct GameView: View {
         return actualSize
     }
     
-    func addTap(using reader: GeometryProxy, with dragValue: DragGesture.Value) {
+    func addTap(at coords: Coordinates) {
+        guard !tapsAddedThisRound.contains(coords) else {
+            tapsAddedThisRound.append(coords)
+            return
+        }
+        tapsAddedThisRound.append(coords)
+        self.taps[coords.y][coords.x] += 1
+    }
+    
+    func getCoordinates(using reader: GeometryProxy, with dragValue: DragGesture.Value) -> Coordinates {
         let percentageDown = dragValue.location.y / reader.size.height
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
         let percentageRight = dragValue.location.x / reader.size.width
         let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
-        let coords = Coordinates(x: columnNumber, y: rowNumber)
-        guard !tapsAddedThisRound.contains(coords) else {
-            return
-        }
-        tapsAddedThisRound.append(coords)
-        self.taps[rowNumber][columnNumber] += 1
+        return Coordinates(x: columnNumber, y: rowNumber)
     }
 }
 
