@@ -12,13 +12,23 @@ struct GameView: View {
     let nColumns: Int
     
     @State
-    var colors: [[Color]]
+    var taps: [[Int]]
+    
+    var colors: [[Color]] {
+        let colors: [Color] = [.red, .purple, .blue, .green, .yellow, .orange, .red, .pink, .white, .black]
+        return taps
+            .map {
+                $0.map {
+                    colors[safe: $0] ?? .black
+                }
+            }
+    }
     
     init(nRows: Int, nColumns: Int) {
         self.nRows = nRows
         self.nColumns = nColumns
-        let sampleRow = Array(repeating: Color.red, count: nColumns)
-        self.colors = Array(repeating: sampleRow, count: nRows)
+        let sampleRow = Array(repeating: 0, count: nColumns)
+        self.taps = Array(repeating: sampleRow, count: nRows)
     }
     
     var body: some View {
@@ -37,7 +47,7 @@ struct GameView: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        changeSquareColor(using: reader, for: value)
+                        addTap(using: reader, with: value)
                     }
             )
         }
@@ -51,17 +61,17 @@ struct GameView: View {
         return actualSize
     }
     
-    func changeSquareColor(using reader: GeometryProxy, for dragValue: DragGesture.Value) {
+    func addTap(using reader: GeometryProxy, with dragValue: DragGesture.Value) {
         let percentageDown = dragValue.location.y / reader.size.height
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
         let percentageRight = dragValue.location.x / reader.size.width
         let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
-        self.colors[rowNumber][columnNumber] = .blue
+        self.taps[rowNumber][columnNumber] += 1
     }
 }
 
 #Preview {
-    GameView(nRows: 13, nColumns: 6)
+    GameView(nRows: 26, nColumns: 12)
 }
 
 // the puzzle could be: can you make the whole screen solid blue? or solid red? with certain moves you can make to try to make it so. Maybe involving flipping or rotating or something.

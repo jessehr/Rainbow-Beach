@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA5B5BB62BA96C3500FEC448 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB52BA96C3500FEC448 /* SquareView.swift */; };
 		AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB72BAE967400FEC448 /* GameView.swift */; };
+		AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */; };
 		AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */; };
 		AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572812BA827BF0001BBB5 /* ContentView.swift */; };
 		AA9572842BA827BF0001BBB5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572832BA827BF0001BBB5 /* Item.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		AA5B5BB52BA96C3500FEC448 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		AA5B5BB72BAE967400FEC448 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA95727C2BA827BF0001BBB5 /* PuzzleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameApp.swift; sourceTree = "<group>"; };
 		AA9572812BA827BF0001BBB5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				AA5B5BB72BAE967400FEC448 /* GameView.swift */,
 				AA5B5BB52BA96C3500FEC448 /* SquareView.swift */,
 				AA9572832BA827BF0001BBB5 /* Item.swift */,
+				AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */,
 				AA9572852BA827C00001BBB5 /* Assets.xcassets */,
 				AA9572872BA827C00001BBB5 /* Preview Content */,
 			);
@@ -149,6 +152,7 @@
 				AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */,
 				AA9572842BA827BF0001BBB5 /* Item.swift in Sources */,
 				AA5B5BB62BA96C3500FEC448 /* SquareView.swift in Sources */,
+				AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */,
 				AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
 			);

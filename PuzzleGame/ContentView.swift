@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     var body: some View {
-        GameView(nRows: 13, nColumns: 6)
+        GameView(nRows: 26, nColumns: 12)
     }
 }
 
