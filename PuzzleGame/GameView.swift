@@ -24,30 +24,36 @@ struct GameView: View {
     
     var body: some View {
         GeometryReader { reader in
-            let size = self.squareSize(using: reader)
-            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                ForEach(0..<nRows, id: \.self) { i in
-                    GridRow {
-                        ForEach(0..<nColumns, id: \.self) { j in
-                            SquareView(square: $squareManager.squares[i][j])
-                                .frame(width: size, height: size)
-                        }
+            gridView(using: reader)
+                .gesture(gestures(using: reader))
+        }
+        .ignoresSafeArea()
+    }
+    
+    private func gridView(using reader: GeometryProxy) -> some View {
+        let size = self.squareSize(using: reader)
+        return Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+            ForEach(0..<nRows, id: \.self) { i in
+                GridRow {
+                    ForEach(0..<nColumns, id: \.self) { j in
+                        SquareView(square: $squareManager.squares[i][j])
+                            .frame(width: size, height: size)
                     }
                 }
             }
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        let tapCoords = getCoordinates(using: reader, with: value)
-                        squareManager.onHover(at: tapCoords)
-                    }
-                    .onEnded { value in
-                        let releaseCoords = getCoordinates(using: reader, with: value)
-                        squareManager.onRelease(at: releaseCoords)
-                    }
-            )
         }
-        .ignoresSafeArea()
+    }
+    
+    private func gestures(using reader: GeometryProxy) -> some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged { value in
+                let tapCoords = getCoordinates(using: reader, with: value)
+                squareManager.onHover(at: tapCoords)
+            }
+            .onEnded { value in
+                let releaseCoords = getCoordinates(using: reader, with: value)
+                squareManager.onRelease(at: releaseCoords)
+            }
     }
     
     private func squareSize(using reader: GeometryProxy) -> CGFloat {
