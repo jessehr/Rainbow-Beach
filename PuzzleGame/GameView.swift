@@ -15,7 +15,7 @@ struct GameView: View {
     let nColumns: Int
     
     var colors: [[Color]] {
-        let colors: [Color] = [.red, .blue, .yellow, .brown, .pink, .white, .mint, .teal]
+        let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .black]
         return tapManager.taps
             .map {
                 $0.map {
