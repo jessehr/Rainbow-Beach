@@ -8,30 +8,25 @@
 import SwiftUI
 
 struct SquareView: View {   
-    let color: Color
-    let size: Double
-    let isSandy = false
+    @Binding var square: Square
     
     var body: some View {
         Rectangle()
-            .foregroundStyle(color)
-            .frame(width: size, height: size)
+            .foregroundStyle(square.color)
+            .animation(.smooth(duration: 0.2), value: square.color)
             .overlay {
-                if isSandy { randomSand }
+                if square.hasHoveringSand { sandView }
             }
     }
     
-    var randomSand: some View {
-        Canvas { context, size in
-            for _ in 0..<800 {
-                let point = CGPoint(x: CGFloat.random(in: 0..<size.width), y: CGFloat.random(in: 0..<size.height))
-                context.fill(Path(ellipseIn: CGRect(origin: point, size: CGSize(width: 1, height: 1))), with: .color(.black.opacity(0.1)))
+    var sandView: some View {
+        Color.brown
+            .overlay {
+                SandView()
             }
-        }
-
     }
 }
 
 #Preview {
-    SquareView(color: Color.red, size: 100)
+    SquareView(square: Binding.constant(Square(depth: 0)))
 }

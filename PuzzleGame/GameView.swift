@@ -9,26 +9,16 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject
-    var tapManager: TapManager
+    var squareManager: SquareManager
     
     let nRows: Int
     let nColumns: Int
     
-    var colors: [[Color]] {
-        let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .black]
-        return tapManager.taps
-            .map {
-                $0.map {
-                    colors[safe: $0] ?? .black
-                }
-            }
-    }
-    
     init(nRows: Int, nColumns: Int) {
         self.nRows = nRows
         self.nColumns = nColumns
-        self._tapManager = StateObject(wrappedValue: 
-            TapManager(nColumns: nColumns, nRows: nRows)
+        self._squareManager = StateObject(wrappedValue:
+            SquareManager(nColumns: nColumns, nRows: nRows)
         )
     }
     
@@ -39,22 +29,21 @@ struct GameView: View {
                 ForEach(0..<nRows, id: \.self) { i in
                     GridRow {
                         ForEach(0..<nColumns, id: \.self) { j in
-                            SquareView(color: colors[i][j], size: size)
+                            SquareView(square: $squareManager.squares[i][j])
+                                .frame(width: size, height: size)
                         }
                     }
                 }
             }
-            .animation(.smooth(duration: 0.2), value: colors)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         let tapCoords = getCoordinates(using: reader, with: value)
-                        tapManager.onTap(at: tapCoords)
+                        squareManager.onHover(at: tapCoords)
                     }
                     .onEnded { value in
-                        let tapCoords = getCoordinates(using: reader, with: value)
-                        tapManager.onTap(at: tapCoords)
-                        tapManager.endRound()
+                        let releaseCoords = getCoordinates(using: reader, with: value)
+                        squareManager.onRelease(at: releaseCoords)
                     }
             )
         }
@@ -80,5 +69,3 @@ struct GameView: View {
 #Preview {
     GameView(nRows: 26, nColumns: 12)
 }
-
-// the puzzle could be: can you make the whole screen solid blue? or solid red? with certain moves you can make to try to make it so. Maybe involving flipping or rotating or something.

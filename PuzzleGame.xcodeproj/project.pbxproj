@@ -16,7 +16,9 @@
 		AA9572842BA827BF0001BBB5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572832BA827BF0001BBB5 /* Item.swift */; };
 		AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572852BA827C00001BBB5 /* Assets.xcassets */; };
 		AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */; };
-		AABE86172BAF755800E7B744 /* TapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86162BAF755800E7B744 /* TapManager.swift */; };
+		AABE86192BB0A0A200E7B744 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86182BB0A0A200E7B744 /* Square.swift */; };
+		AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* SquareManager.swift */; };
+		AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861C2BB0A7E400E7B744 /* SandView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +32,9 @@
 		AA9572832BA827BF0001BBB5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AA9572852BA827C00001BBB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AABE86162BAF755800E7B744 /* TapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapManager.swift; sourceTree = "<group>"; };
+		AABE86182BB0A0A200E7B744 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		AABE861A2BB0A23B00E7B744 /* SquareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareManager.swift; sourceTree = "<group>"; };
+		AABE861C2BB0A7E400E7B744 /* SandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +70,11 @@
 				AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */,
 				AA9572812BA827BF0001BBB5 /* ContentView.swift */,
 				AA5B5BB72BAE967400FEC448 /* GameView.swift */,
+				AABE861A2BB0A23B00E7B744 /* SquareManager.swift */,
 				AA5B5BBB2BAE9EA700FEC448 /* Coordinates.swift */,
-				AABE86162BAF755800E7B744 /* TapManager.swift */,
 				AA5B5BB52BA96C3500FEC448 /* SquareView.swift */,
+				AABE861C2BB0A7E400E7B744 /* SandView.swift */,
+				AABE86182BB0A0A200E7B744 /* Square.swift */,
 				AA9572832BA827BF0001BBB5 /* Item.swift */,
 				AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */,
 				AA9572852BA827C00001BBB5 /* Assets.xcassets */,
@@ -155,12 +161,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */,
 				AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */,
 				AA9572842BA827BF0001BBB5 /* Item.swift in Sources */,
 				AA5B5BBC2BAE9EA700FEC448 /* Coordinates.swift in Sources */,
-				AABE86172BAF755800E7B744 /* TapManager.swift in Sources */,
 				AA5B5BB62BA96C3500FEC448 /* SquareView.swift in Sources */,
 				AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */,
+				AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */,
+				AABE86192BB0A0A200E7B744 /* Square.swift in Sources */,
 				AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
 			);
