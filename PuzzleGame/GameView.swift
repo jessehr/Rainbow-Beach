@@ -8,62 +8,61 @@
 import SwiftUI
 
 struct GameView: View {
-    @StateObject
-    var squareManager: SquareManager
-    
     let nRows: Int
     let nColumns: Int
     
-    init(nRows: Int, nColumns: Int) {
+    let reader: GeometryProxy
+    
+    @StateObject
+    var squareManager: SquareManager
+
+    init(nRows: Int, nColumns: Int, using reader: GeometryProxy) {
         self.nRows = nRows
         self.nColumns = nColumns
+        self.reader = reader
         self._squareManager = StateObject(wrappedValue:
             SquareManager(nColumns: nColumns, nRows: nRows)
         )
     }
     
     var body: some View {
-        GeometryReader { reader in
-            gridView(using: reader)
-                .gesture(gestures(using: reader))
-        }
-        .ignoresSafeArea()
+        gridView
+            .gesture(gestures)
     }
     
-    private func gridView(using reader: GeometryProxy) -> some View {
-        let size = self.squareSize(using: reader)
+    private var gridView: some View {
         return Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<nRows, id: \.self) { i in
                 GridRow {
                     ForEach(0..<nColumns, id: \.self) { j in
                         SquareView(square: $squareManager.squares[i][j])
-                            .frame(width: size, height: size)
+                            .frame(width: squareSize, height: squareSize)
                     }
                 }
             }
         }
     }
     
-    private func gestures(using reader: GeometryProxy) -> some Gesture {
+    private var gestures: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
-                let tapCoords = getCoordinates(using: reader, with: value)
+                let tapCoords = getCoordinates(with: value)
                 squareManager.onHover(at: tapCoords)
             }
             .onEnded { value in
-                let releaseCoords = getCoordinates(using: reader, with: value)
+                let releaseCoords = getCoordinates(with: value)
                 squareManager.onRelease(at: releaseCoords)
             }
     }
     
-    private func squareSize(using reader: GeometryProxy) -> CGFloat {
+    private var squareSize: CGFloat {
         let desiredWidth = reader.size.width / CGFloat(nColumns)
         let desiredHeight = reader.size.height / CGFloat(nRows)
         let actualSize = min(desiredWidth, desiredHeight)
         return actualSize
     }
     
-    private func getCoordinates(using reader: GeometryProxy, with dragValue: DragGesture.Value) -> Coordinates {
+    private func getCoordinates(with dragValue: DragGesture.Value) -> Coordinates {
         let percentageDown = dragValue.location.y / reader.size.height
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
         let percentageRight = dragValue.location.x / reader.size.width
@@ -73,5 +72,7 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView(nRows: 26, nColumns: 12)
+    GeometryReader { reader in
+        GameView(nRows: 26, nColumns: 12, using: reader)
+    }
 }
