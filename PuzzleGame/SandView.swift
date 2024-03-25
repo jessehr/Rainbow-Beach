@@ -9,6 +9,13 @@ import SwiftUI
 
 struct SandView: View {
     var body: some View {
+        Color.brown
+            .overlay {
+                sand
+            }
+    }
+    
+    var sand: some View {
         Canvas { context, size in
             for _ in 0..<1200 {
                 let point = CGPoint(

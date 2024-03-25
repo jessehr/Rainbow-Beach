@@ -15,6 +15,4 @@ struct Square {
         let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .black]
         return colors[safe: depth] ?? .black
     }
-    
-    var hasHoveringSand = false
 }

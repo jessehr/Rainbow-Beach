@@ -14,16 +14,6 @@ struct SquareView: View {
         Rectangle()
             .foregroundStyle(square.color)
             .animation(.smooth(duration: 0.2), value: square.color)
-            .overlay {
-                if square.hasHoveringSand { sandView }
-            }
-    }
-    
-    var sandView: some View {
-        Color.brown
-            .overlay {
-                SandView()
-            }
     }
 }
 

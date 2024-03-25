@@ -12,7 +12,7 @@ struct GameView: View {
     let nColumns: Int
     
     let reader: GeometryProxy
-    
+        
     @StateObject
     var squareManager: SquareManager
 
@@ -35,23 +35,31 @@ struct GameView: View {
             ForEach(0..<nRows, id: \.self) { i in
                 GridRow {
                     ForEach(0..<nColumns, id: \.self) { j in
-                        SquareView(square: $squareManager.squares[i][j])
-                            .frame(width: squareSize, height: squareSize)
+                        squareView(at: Coordinates(x: j, y: i))
                     }
                 }
             }
         }
     }
     
+    private func squareView(at coords: Coordinates) -> some View {
+        ZStack {
+            SquareView(square: $squareManager.squares[coords.y][coords.x])
+            if squareManager.sandyCoords == coords {
+                SandView()
+            }
+        }
+        .frame(width: squareSize, height: squareSize)
+    }
+    
     private var gestures: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
                 let tapCoords = getCoordinates(with: value)
-                squareManager.onHover(at: tapCoords)
+                squareManager.sandyCoords = tapCoords
             }
-            .onEnded { value in
-                let releaseCoords = getCoordinates(with: value)
-                squareManager.onRelease(at: releaseCoords)
+            .onEnded { _ in
+                squareManager.sandyCoords = nil
             }
     }
     
