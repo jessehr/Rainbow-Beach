@@ -44,6 +44,10 @@ struct GameView: View {
     var body: some View {
         gridView
             .gesture(gestures)
+            .sensoryFeedback(
+                .impact(flexibility: .rigid, intensity: 0.5),
+                trigger: squareManager.sandyCoords
+            )
     }
     
     private var gridView: some View {
