@@ -15,7 +15,23 @@ struct GameView: View {
         
     @StateObject
     var squareManager: SquareManager
-
+    
+    var gameWidth: CGFloat {
+        reader.size.width
+    }
+    
+    var gameHeight: CGFloat {
+        reader.size.height
+    }
+    
+    var squareWidth: CGFloat {
+        gameWidth / CGFloat(nColumns)
+    }
+    
+    var squareHeight: CGFloat {
+        gameHeight / CGFloat(nRows)
+    }
+    
     init(nRows: Int, nColumns: Int, using reader: GeometryProxy) {
         self.nRows = nRows
         self.nColumns = nColumns
@@ -31,51 +47,59 @@ struct GameView: View {
     }
     
     private var gridView: some View {
-        return Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+        ZStack {
             ForEach(0..<nRows, id: \.self) { i in
-                GridRow {
-                    ForEach(0..<nColumns, id: \.self) { j in
-                        squareView(at: Coordinates(x: j, y: i))
-                    }
+                ForEach(0..<nColumns, id: \.self) { j in
+                    squareView(at: Coordinates(x: j, y: i))
                 }
+            }
+            if let sandyPosition {
+                SandView()
+                    .frame(width: squareWidth, height: squareHeight)
+                    .position(sandyPosition)
+                    .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
             }
         }
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        ZStack {
-            SquareView(square: $squareManager.squares[coords.y][coords.x])
-            if squareManager.sandyCoords == coords {
-                SandView()
-            }
-        }
-        .frame(width: squareSize, height: squareSize)
+        SquareView(square: $squareManager.squares[coords.y][coords.x])
+            .frame(width: squareWidth, height: squareHeight)
+            .position(position(from: coords))
     }
     
     private var gestures: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
-                let tapCoords = getCoordinates(with: value)
-                squareManager.sandyCoords = tapCoords
+                let tapCoords = coordinates(from: value.location)
+                withAnimation {
+                    squareManager.sandyCoords = tapCoords
+                }
             }
             .onEnded { _ in
                 squareManager.sandyCoords = nil
             }
     }
     
-    private var squareSize: CGFloat {
-        let desiredWidth = reader.size.width / CGFloat(nColumns)
-        let desiredHeight = reader.size.height / CGFloat(nRows)
-        let actualSize = min(desiredWidth, desiredHeight)
-        return actualSize
-    }
-    
-    private func getCoordinates(with dragValue: DragGesture.Value) -> Coordinates {
-        let percentageDown = dragValue.location.y / reader.size.height
+    private func coordinates(from position: CGPoint) -> Coordinates {
+        let percentageDown = position.y / gameHeight
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
-        let percentageRight = dragValue.location.x / reader.size.width
+        let percentageRight = position.x / gameWidth
         let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
         return Coordinates(x: columnNumber, y: rowNumber)
+    }
+    
+    private func position(from coordinates: Coordinates) -> CGPoint {
+        let x = (CGFloat(coordinates.x) + 0.5) * squareWidth
+        let y = (CGFloat(coordinates.y) + 0.5) * squareHeight
+        return CGPoint(x: x, y: y)
+    }
+    
+    private var sandyPosition: CGPoint? {
+        guard let sandyCoords = squareManager.sandyCoords else {
+            return nil
+        }
+        return position(from: sandyCoords)
     }
 }
 
