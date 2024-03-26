@@ -19,5 +19,16 @@ class SquareManager: ObservableObject {
         let baseRow = Array(repeating: baseSquare, count: nColumns)
         self.squares = Array(repeating: baseRow, count: nRows)
         self.sandyCoords = nil
+        // FIXME: remove
+        squares[5][3].depth = 4
+    }
+    
+    
+    func dropSand() {
+        guard let sandyCoords else { return }
+        if squares[sandyCoords.y][sandyCoords.x].depth > 0 {
+            squares[sandyCoords.y][sandyCoords.x].depth -= 1
+        }
+        self.sandyCoords = nil
     }
 }

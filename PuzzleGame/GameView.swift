@@ -82,7 +82,7 @@ struct GameView: View {
                 }
             }
             .onEnded { _ in
-                squareManager.sandyCoords = nil
+                squareManager.dropSand()
             }
     }
     
