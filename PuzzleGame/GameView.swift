@@ -60,6 +60,7 @@ struct GameView: View {
             if let sandyPosition {
                 SandView()
                     .frame(width: squareWidth, height: squareHeight)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
                     .position(sandyPosition)
                     .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
             }
