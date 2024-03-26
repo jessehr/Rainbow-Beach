@@ -11,15 +11,17 @@ struct GameView: View {
     let nRows: Int
     let nColumns: Int
     
-    let reader: GeometryProxy
+    let width: CGFloat
+    let height: CGFloat
         
     @StateObject
     var squareManager: SquareManager
 
-    init(nRows: Int, nColumns: Int, using reader: GeometryProxy) {
+    init(nRows: Int, nColumns: Int, width: CGFloat, height: CGFloat) {
         self.nRows = nRows
         self.nColumns = nColumns
-        self.reader = reader
+        self.width = width
+        self.height = height
         self._squareManager = StateObject(wrappedValue:
             SquareManager(nColumns: nColumns, nRows: nRows)
         )
@@ -64,16 +66,16 @@ struct GameView: View {
     }
     
     private var squareSize: CGFloat {
-        let desiredWidth = reader.size.width / CGFloat(nColumns)
-        let desiredHeight = reader.size.height / CGFloat(nRows)
+        let desiredWidth = width / CGFloat(nColumns)
+        let desiredHeight = height / CGFloat(nRows)
         let actualSize = min(desiredWidth, desiredHeight)
         return actualSize
     }
     
     private func getCoordinates(with dragValue: DragGesture.Value) -> Coordinates {
-        let percentageDown = dragValue.location.y / reader.size.height
+        let percentageDown = dragValue.location.y / height
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
-        let percentageRight = dragValue.location.x / reader.size.width
+        let percentageRight = dragValue.location.x / width
         let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
         return Coordinates(x: columnNumber, y: rowNumber)
     }
@@ -81,6 +83,11 @@ struct GameView: View {
 
 #Preview {
     GeometryReader { reader in
-        GameView(nRows: 26, nColumns: 12, using: reader)
+        GameView(
+            nRows: 26,
+            nColumns: 12,
+            width: reader.size.width,
+            height: reader.size.height
+        )
     }
 }
