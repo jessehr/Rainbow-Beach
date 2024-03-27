@@ -42,7 +42,7 @@ struct GameView: View {
     }
     
     var body: some View {
-        gridView
+        totalView
             .gesture(gestures)
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.5),
@@ -50,20 +50,29 @@ struct GameView: View {
             )
     }
     
-    private var gridView: some View {
+    private var totalView: some View {
         ZStack {
-            ForEach(0..<nRows, id: \.self) { i in
-                ForEach(0..<nColumns, id: \.self) { j in
-                    squareView(at: Coordinates(x: j, y: i))
-                }
+            gridView
+            possibleSandView
+        }
+    }
+    
+    private var gridView: some View {
+        ForEach(0..<nRows, id: \.self) { i in
+            ForEach(0..<nColumns, id: \.self) { j in
+                squareView(at: Coordinates(x: j, y: i))
             }
-            if let sandyPosition {
-                SandView()
-                    .frame(width: squareWidth, height: squareHeight)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .position(sandyPosition)
-                    .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
-            }
+        }
+    }
+    
+    @ViewBuilder
+    private var possibleSandView: some View {
+        if let sandyPosition {
+            SandView()
+                .frame(width: squareWidth, height: squareHeight)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .position(sandyPosition)
+                .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
         }
     }
     
