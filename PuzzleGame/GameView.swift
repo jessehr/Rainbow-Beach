@@ -53,7 +53,7 @@ struct GameView: View {
     private var totalView: some View {
         ZStack {
             gridView
-            possibleSandView
+            allSandView
         }
     }
     
@@ -66,29 +66,31 @@ struct GameView: View {
     }
     
     @ViewBuilder
-    private var possibleSandView: some View {
-        if let sandyPosition {
-            SandView()
-                .frame(width: squareWidth, height: squareHeight)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
-                .position(sandyPosition)
-                .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
+    private var allSandView: some View {
+        ForEach(sandyPositions.indices, id: \.self) { index in
+            sandSquareView
+                .possiblePosition(sandyPositions[index])
         }
+    }
+    
+    private var sandSquareView: some View {
+        SandView()
+            .frame(width: squareWidth, height: squareHeight)
+            // .clipShape(RoundedRectangle(cornerRadius: 5))
+            .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
     }
     
     private func squareView(at coords: Coordinates) -> some View {
         SquareView(square: $squareManager.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
-            .position(position(from: coords))
+            .possiblePosition(position(from: coords))
     }
     
     private var gestures: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
                 let tapCoords = coordinates(from: value.location)
-                withAnimation {
-                    squareManager.sandyCoords = tapCoords
-                }
+                squareManager.baseSandySquareCoords = tapCoords
             }
             .onEnded { _ in
                 squareManager.dropSand()
@@ -103,17 +105,18 @@ struct GameView: View {
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
-    private func position(from coordinates: Coordinates) -> CGPoint {
+    private func position(from coordinates: Coordinates) -> CGPoint? {
         let x = (CGFloat(coordinates.x) + 0.5) * squareWidth
         let y = (CGFloat(coordinates.y) + 0.5) * squareHeight
-        return CGPoint(x: x, y: y)
-    }
-    
-    private var sandyPosition: CGPoint? {
-        guard let sandyCoords = squareManager.sandyCoords else {
+        if x >= 0 && x < gameWidth && y >= 0 && y < gameHeight {
+            return CGPoint(x: x, y: y)
+        } else {
             return nil
         }
-        return position(from: sandyCoords)
+    }
+    
+    private var sandyPositions: [CGPoint] {
+        return squareManager.sandyCoords.compactMap { position(from: $0) }
     }
 }
 

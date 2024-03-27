@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Collection {
     subscript (safe index: Index) -> Element? {
@@ -19,6 +20,17 @@ extension Int {
             return 0..<self
         } else {
             return self..<0
+        }
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func possiblePosition(_ possPosition: CGPoint?) -> some View {
+        if let position = possPosition {
+            self.position(position)
+        } else {
+            self
         }
     }
 }
