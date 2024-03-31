@@ -16,6 +16,8 @@ struct GameView: View {
     @StateObject
     var squareManager: SquareManager
     
+    let soundManager: SoundManager
+    
     var gameWidth: CGFloat {
         reader.size.width
     }
@@ -36,6 +38,7 @@ struct GameView: View {
         self.nRows = nRows
         self.nColumns = nColumns
         self.reader = reader
+        self.soundManager = SoundManager(filename: Constants.dragSoundFilename)
         self._squareManager = StateObject(wrappedValue:
             SquareManager(nColumns: nColumns, nRows: nRows)
         )
@@ -76,8 +79,10 @@ struct GameView: View {
     private var sandSquareView: some View {
         SandView()
             .frame(width: squareWidth, height: squareHeight)
-            // .clipShape(RoundedRectangle(cornerRadius: 5))
-            .animation(.smooth(duration: 0.1), value: squareManager.sandyCoords)
+            .animation(
+                .smooth(duration: Constants.dragAnimationLength),
+                value: squareManager.sandyCoords
+            )
     }
     
     private func squareView(at coords: Coordinates) -> some View {
@@ -89,14 +94,22 @@ struct GameView: View {
     private var gestures: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
-                let tapCoords = coordinates(from: value.location)
-                squareManager.baseSandySquareCoords = tapCoords
+                onDrag(with: value)
             }
             .onEnded { _ in
                 squareManager.dropSand()
             }
     }
     
+    private func onDrag(with value: DragGesture.Value) {
+        let tapCoords = coordinates(from: value.location)
+        guard squareManager.baseSandySquareCoords != tapCoords else {
+            return
+        }
+        soundManager.play(for: Constants.dragAnimationLength)
+        squareManager.baseSandySquareCoords = tapCoords
+    }
+
     private func coordinates(from position: CGPoint) -> Coordinates {
         let percentageDown = position.y / gameHeight
         let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))

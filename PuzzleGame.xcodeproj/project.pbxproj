@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE0F2BB6A26000801892 /* SoundManager.swift */; };
+		AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */; };
+		AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */; };
+		AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3BD4D72BB8C3C40003BF48 /* Constants.swift */; };
 		AA5B5BB62BA96C3500FEC448 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB52BA96C3500FEC448 /* SquareView.swift */; };
 		AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB72BAE967400FEC448 /* GameView.swift */; };
 		AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA1CEE0F2BB6A26000801892 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-short.mp3"; sourceTree = "<group>"; };
+		AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-medium.mp3"; sourceTree = "<group>"; };
+		AA3BD4D72BB8C3C40003BF48 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AA5B5BB52BA96C3500FEC448 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		AA5B5BB72BAE967400FEC448 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -48,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3BD4D22BB8BF180003BF48 /* SoundFiles */ = {
+			isa = PBXGroup;
+			children = (
+				AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */,
+				AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */,
+			);
+			path = SoundFiles;
+			sourceTree = "<group>";
+		};
 		AA9572732BA827BE0001BBB5 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +87,7 @@
 				AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */,
 				AA9572812BA827BF0001BBB5 /* ContentView.swift */,
 				AA5B5BB72BAE967400FEC448 /* GameView.swift */,
+				AA1CEE0F2BB6A26000801892 /* SoundManager.swift */,
 				AABE861A2BB0A23B00E7B744 /* SquareManager.swift */,
 				AA5B5BBB2BAE9EA700FEC448 /* Coordinates.swift */,
 				AA5B5BB52BA96C3500FEC448 /* SquareView.swift */,
@@ -77,7 +95,9 @@
 				AABE86182BB0A0A200E7B744 /* Square.swift */,
 				AA9572832BA827BF0001BBB5 /* Item.swift */,
 				AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */,
+				AA3BD4D72BB8C3C40003BF48 /* Constants.swift */,
 				AA9572852BA827C00001BBB5 /* Assets.xcassets */,
+				AA3BD4D22BB8BF180003BF48 /* SoundFiles */,
 				AA9572872BA827C00001BBB5 /* Preview Content */,
 			);
 			path = PuzzleGame;
@@ -150,7 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
+				AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */,
 				AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */,
+				AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +192,9 @@
 				AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */,
 				AABE86192BB0A0A200E7B744 /* Square.swift in Sources */,
 				AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */,
+				AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
+				AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
