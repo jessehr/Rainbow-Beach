@@ -40,7 +40,7 @@ struct GameView: View {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dragSoundFilename)
         self._squareManager = StateObject(wrappedValue:
-            SquareManager(nColumns: nColumns, nRows: nRows)
+            SquareManager(levelNumber: 1)
         )
     }
     
@@ -86,7 +86,7 @@ struct GameView: View {
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        SquareView(square: $squareManager.squares[coords.y][coords.x])
+        SquareView(square: $squareManager.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
             .possiblePosition(position(from: coords))
     }

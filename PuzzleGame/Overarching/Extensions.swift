@@ -34,3 +34,9 @@ extension View {
         }
     }
 }
+
+extension Character {
+    var asInt: Int? {
+        return Int(String(self))
+    }
+}

@@ -8,9 +8,8 @@
 import Foundation
 
 class SquareManager: ObservableObject {
-    
     @Published
-    var squares: [[Square]]
+    var map: Map
     
     @Published
     var baseSandySquareCoords: Coordinates?
@@ -26,28 +25,14 @@ class SquareManager: ObservableObject {
         ]
     }
     
-    init(nColumns: Int, nRows: Int) {
-        let baseSquare = Square(depth: 0)
-        let baseRow = Array(repeating: baseSquare, count: nColumns)
-        self.squares = Array(repeating: baseRow, count: nRows)
+    init(levelNumber: Int) {
+        self.map = MapLoader.loadMap(levelNumber: levelNumber)
         self.baseSandySquareCoords = nil
-        squares[5][3].depth += 2
-        squares[6][3].depth += 2
-        squares[7][3].depth += 2
-        squares[7][4].depth += 2
-        
-        squares[4][2].depth += 2
-        squares[5][2].depth += 2
-        squares[6][2].depth += 2
-        squares[6][3].depth += 2
     }
-    
     
     func dropSand() {
         for sandySquare in sandyCoords {
-            if squares[safe: sandySquare.y]?[safe: sandySquare.x]?.depth ?? -1 > 0 {
-                squares[sandySquare.y][sandySquare.x].depth -= 1
-            }
+            map.reduceDepth(at: sandySquare)
         }
         self.baseSandySquareCoords = nil
     }

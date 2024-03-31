@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE0F2BB6A26000801892 /* SoundManager.swift */; };
 		AA29AFD92BB9FE670074B875 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFD82BB9FE670074B875 /* TimeManager.swift */; };
+		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
+		AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* MapLoader.swift */; };
+		AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE02BBA13AC0074B875 /* Map.swift */; };
 		AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */; };
 		AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */; };
 		AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3BD4D72BB8C3C40003BF48 /* Constants.swift */; };
@@ -29,6 +32,9 @@
 /* Begin PBXFileReference section */
 		AA1CEE0F2BB6A26000801892 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		AA29AFD82BB9FE670074B875 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		AA29AFDE2BBA13820074B875 /* MapLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLoader.swift; sourceTree = "<group>"; };
+		AA29AFE02BBA13AC0074B875 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-short.mp3"; sourceTree = "<group>"; };
 		AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-medium.mp3"; sourceTree = "<group>"; };
 		AA3BD4D72BB8C3C40003BF48 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -64,6 +70,7 @@
 				AA1CEE0F2BB6A26000801892 /* SoundManager.swift */,
 				AA29AFD82BB9FE670074B875 /* TimeManager.swift */,
 				AABE861A2BB0A23B00E7B744 /* SquareManager.swift */,
+				AA29AFDE2BBA13820074B875 /* MapLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -84,6 +91,7 @@
 			children = (
 				AABE86182BB0A0A200E7B744 /* Square.swift */,
 				AA5B5BBB2BAE9EA700FEC448 /* Coordinates.swift */,
+				AA29AFE02BBA13AC0074B875 /* Map.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -116,6 +124,14 @@
 			path = Overarching;
 			sourceTree = "<group>";
 		};
+		AA29AFDB2BBA08C30074B875 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				AA29AFDC2BBA091A0074B875 /* level1.txt */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
 		AA3BD4D22BB8BF180003BF48 /* SoundFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,9 +160,10 @@
 		AA95727E2BA827BF0001BBB5 /* PuzzleGame */ = {
 			isa = PBXGroup;
 			children = (
-				AA29AFD72BB9FBA40074B875 /* Overarching */,
 				AA29AFD32BB9FB1C0074B875 /* Views */,
 				AA29AFD22BB9FB170074B875 /* Managers */,
+				AA29AFD72BB9FBA40074B875 /* Overarching */,
+				AA29AFDB2BBA08C30074B875 /* Levels */,
 				AA29AFD42BB9FB2B0074B875 /* Models */,
 				AA29AFD62BB9FB6A0074B875 /* Assets */,
 				AA29AFD52BB9FB520074B875 /* DeleteLaterProbably */,
@@ -220,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */,
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
 				AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */,
 				AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */,
@@ -236,6 +254,8 @@
 			files = (
 				AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */,
 				AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */,
+				AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */,
+				AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */,
 				AA9572842BA827BF0001BBB5 /* Item.swift in Sources */,
 				AA5B5BBC2BAE9EA700FEC448 /* Coordinates.swift in Sources */,
 				AA5B5BB62BA96C3500FEC448 /* SquareView.swift in Sources */,
