@@ -23,4 +23,11 @@ struct Map {
     func square(at coords: Coordinates) -> Square? {
         squares[safe: coords.y]?[safe: coords.x]
     }
+    
+    var isSolved: Bool {
+        let isNotSolved = squares.contains { row in
+            row.contains { $0.depth != 0 }
+        }
+        return !isNotSolved
+    }
 }

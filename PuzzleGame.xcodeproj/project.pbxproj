@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE0F2BB6A26000801892 /* SoundManager.swift */; };
 		AA29AFD92BB9FE670074B875 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFD82BB9FE670074B875 /* TimeManager.swift */; };
-		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
+		AA29AFDD2BBA091A0074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level4.txt */; };
 		AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* MapLoader.swift */; };
 		AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE02BBA13AC0074B875 /* Map.swift */; };
 		AA29AFE32BBA50260074B875 /* SandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE22BBA50260074B875 /* SandManager.swift */; };
+		AA29AFE72BBAA6B40074B875 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level2.txt */; };
+		AA29AFE92BBAA8E80074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level1.txt */; };
+		AA29AFEB2BBAA9B10074B875 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level3.txt */; };
 		AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */; };
 		AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */; };
 		AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3BD4D72BB8C3C40003BF48 /* Constants.swift */; };
@@ -33,10 +36,13 @@
 /* Begin PBXFileReference section */
 		AA1CEE0F2BB6A26000801892 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		AA29AFD82BB9FE670074B875 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
-		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		AA29AFDC2BBA091A0074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
 		AA29AFDE2BBA13820074B875 /* MapLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLoader.swift; sourceTree = "<group>"; };
 		AA29AFE02BBA13AC0074B875 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		AA29AFE22BBA50260074B875 /* SandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandManager.swift; sourceTree = "<group>"; };
+		AA29AFE62BBAA6B40074B875 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		AA29AFE82BBAA8E80074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		AA29AFEA2BBAA9B10074B875 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 		AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-short.mp3"; sourceTree = "<group>"; };
 		AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-medium.mp3"; sourceTree = "<group>"; };
 		AA3BD4D72BB8C3C40003BF48 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -130,7 +136,10 @@
 		AA29AFDB2BBA08C30074B875 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				AA29AFDC2BBA091A0074B875 /* level1.txt */,
+				AA29AFE82BBAA8E80074B875 /* level1.txt */,
+				AA29AFE62BBAA6B40074B875 /* level2.txt */,
+				AA29AFEA2BBAA9B10074B875 /* level3.txt */,
+				AA29AFDC2BBA091A0074B875 /* level4.txt */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -240,8 +249,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */,
+				AA29AFE92BBAA8E80074B875 /* level1.txt in Resources */,
+				AA29AFDD2BBA091A0074B875 /* level4.txt in Resources */,
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
+				AA29AFEB2BBAA9B10074B875 /* level3.txt in Resources */,
+				AA29AFE72BBAA6B40074B875 /* level2.txt in Resources */,
 				AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */,
 				AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */,
 				AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */,

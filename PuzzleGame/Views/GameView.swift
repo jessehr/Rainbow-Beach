@@ -40,7 +40,7 @@ struct GameView: View {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dragSoundFilename)
         self._squareManager = StateObject(wrappedValue:
-            SquareManager(levelNumber: 1)
+            SquareManager()
         )
     }
     
@@ -51,6 +51,11 @@ struct GameView: View {
                 .impact(flexibility: .rigid, intensity: 0.5),
                 trigger: squareManager.sandyCoords
             )
+            .onChange(of: squareManager.map.isSolved) {
+                if squareManager.map.isSolved {
+                    squareManager.incrementLevel()
+                }
+            }
     }
     
     private var totalView: some View {

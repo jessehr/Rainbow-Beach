@@ -14,6 +14,9 @@ class SquareManager: ObservableObject {
     @Published
     var baseSandySquareCoords: Coordinates?
     
+    @Published
+    private var levelNumber: Int
+    
     var sandyCoords: [Coordinates] {
         guard let baseSandySquareCoords else { return [] }
         return [
@@ -25,9 +28,9 @@ class SquareManager: ObservableObject {
         ]
     }
     
-    init(levelNumber: Int) {
-        self.map = MapLoader.loadMap(levelNumber: levelNumber)
-        self.baseSandySquareCoords = nil
+    init() {
+        self.levelNumber = 1
+        self.map = MapLoader.loadMap(levelNumber: 1)
     }
     
     func dropSand() {
@@ -35,5 +38,10 @@ class SquareManager: ObservableObject {
             map.reduceDepth(at: sandySquare)
         }
         self.baseSandySquareCoords = nil
+    }
+    
+    func incrementLevel() {
+        levelNumber += 1
+        self.map = MapLoader.loadMap(levelNumber: levelNumber)
     }
 }
