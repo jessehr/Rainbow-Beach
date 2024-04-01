@@ -11,9 +11,8 @@ struct SquareView: View {
     @Binding var square: Square
     
     var body: some View {
-        Rectangle()
-            .foregroundStyle(square.color)
-            .animation(.smooth(duration: 0.2), value: square.color)
+        SandView(baseColor: square.color, sandAggressionFactor: 0.7)
+            .animation(.smooth(duration: 0.3), value: square.color)
     }
 }
 

@@ -77,7 +77,7 @@ struct GameView: View {
     }
     
     private var sandSquareView: some View {
-        SandView()
+        SandView(baseColor: .brown, sandAggressionFactor: 1.0)
             .frame(width: squareWidth, height: squareHeight)
             .animation(
                 .smooth(duration: Constants.dragAnimationLength),

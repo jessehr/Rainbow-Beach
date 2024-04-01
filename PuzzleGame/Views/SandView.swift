@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct SandView: View {
+    let baseColor: Color
+    let sandAggressionFactor: Double
+    
+    @StateObject
+    var sandManager = SandManager()
+    
     var body: some View {
-        Color.brown
+        baseColor
             .overlay {
                 sand
             }
@@ -17,47 +23,19 @@ struct SandView: View {
     
     var sand: some View {
         return Canvas { context, size in
-            randomSand(
-                color: Color.white,
-                opacity: 0.3,
-                nParticles: 1000,
-                size: size,
-                context: context
-            )
-            randomSand(
-                color: Color.black,
-                opacity: 0.2,
-                nParticles: 1000,
-                size: size,
-                context: context
-            )
-        }
-        
-        func randomSand(
-            color: Color,
-            opacity: CGFloat,
-            nParticles: Int,
-            size: CGSize,
-            context: GraphicsContext
-        ) {
-            for _ in 0..<nParticles {
-                let point = CGPoint(
-                    x: CGFloat.random(in: 0..<size.width),
-                    y: CGFloat.random(in: 0..<size.height)
-                )
+            if sandManager.particles.isEmpty {
+                sandManager.instantiateParticles(with: size, sandAggressionFactor: sandAggressionFactor)
+            }
+            for particle in sandManager.particles {
                 context.fill(
-                    Path(
-                        ellipseIn: CGRect(origin: point, size: CGSize(width: 1, height: 1))
-                    ),
-                    with: .color(color.opacity(opacity))
+                    Path(ellipseIn: particle.asRect),
+                    with: .color(particle.color)
                 )
             }
-
         }
-        
     }
 }
 
 #Preview {
-    SandView()
+    SandView(baseColor: .brown, sandAggressionFactor: 1.0)
 }
