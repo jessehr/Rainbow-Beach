@@ -12,7 +12,7 @@ class MapLoader {
         let path = Bundle.main.path(forResource: "level\(levelNumber)", ofType: "txt")!
         let fileContents = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
         let rowStrings = fileContents.components(separatedBy: .newlines)
-        var depths = rowStringsToInts(rowStrings: rowStrings)
+        let depths = rowStringsToInts(rowStrings: rowStrings)
         return Map(depths: depths)
     }
     
@@ -20,6 +20,7 @@ class MapLoader {
         return rowStrings.map { rowString in
             rowStringToInts(rowString: rowString)
         }
+        .filter { !$0.isEmpty }
     }
     
     private static func rowStringToInts(rowString: String) -> [Int] {

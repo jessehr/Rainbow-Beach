@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct GameView: View {
-    let nRows: Int
-    let nColumns: Int
-    
     let reader: GeometryProxy
         
     @StateObject
     var squareManager: SquareManager
     
     let soundManager: SoundManager
+    
+    var nRows: Int {
+        squareManager.map.squares.count
+    }
+    
+    var nColumns: Int {
+        squareManager.map.squares.first?.count ?? 0
+    }
     
     var gameWidth: CGFloat {
         reader.size.width
@@ -34,9 +39,7 @@ struct GameView: View {
         gameHeight / CGFloat(nRows)
     }
     
-    init(nRows: Int, nColumns: Int, using reader: GeometryProxy) {
-        self.nRows = nRows
-        self.nColumns = nColumns
+    init(using reader: GeometryProxy) {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dragSoundFilename)
         self._squareManager = StateObject(wrappedValue:
@@ -140,6 +143,6 @@ struct GameView: View {
 
 #Preview {
     GeometryReader { reader in
-        GameView(nRows: 26, nColumns: 12, using: reader)
+        GameView(using: reader)
     }
 }

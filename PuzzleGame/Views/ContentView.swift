@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     var body: some View {
         GeometryReader { reader in
-            GameView(nRows: 13, nColumns: 6, using: reader)
+            GameView(using: reader)
         }
         .ignoresSafeArea()
     }
