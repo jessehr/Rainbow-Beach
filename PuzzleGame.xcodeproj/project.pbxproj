@@ -23,6 +23,7 @@
 		AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB72BAE967400FEC448 /* GameView.swift */; };
 		AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */; };
 		AA5B5BBC2BAE9EA700FEC448 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B5BBB2BAE9EA700FEC448 /* Coordinates.swift */; };
+		AA876AA12BBB99950072E712 /* ShakeSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA876AA02BBB99940072E712 /* ShakeSetup.swift */; };
 		AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */; };
 		AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572812BA827BF0001BBB5 /* ContentView.swift */; };
 		AA9572842BA827BF0001BBB5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572832BA827BF0001BBB5 /* Item.swift */; };
@@ -50,6 +51,7 @@
 		AA5B5BB72BAE967400FEC448 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA5B5BBB2BAE9EA700FEC448 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		AA876AA02BBB99940072E712 /* ShakeSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeSetup.swift; sourceTree = "<group>"; };
 		AA95727C2BA827BF0001BBB5 /* PuzzleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameApp.swift; sourceTree = "<group>"; };
 		AA9572812BA827BF0001BBB5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				AA95727F2BA827BF0001BBB5 /* PuzzleGameApp.swift */,
 				AA5B5BB92BAE9DCC00FEC448 /* Extensions.swift */,
 				AA3BD4D72BB8C3C40003BF48 /* Constants.swift */,
+				AA876AA02BBB99940072E712 /* ShakeSetup.swift */,
 			);
 			path = Overarching;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				AABE86192BB0A0A200E7B744 /* Square.swift in Sources */,
 				AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */,
 				AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */,
+				AA876AA12BBB99950072E712 /* ShakeSetup.swift in Sources */,
 				AA29AFE32BBA50260074B875 /* SandManager.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
 				AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */,

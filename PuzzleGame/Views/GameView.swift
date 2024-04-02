@@ -59,6 +59,9 @@ struct GameView: View {
                     squareManager.incrementLevel()
                 }
             }
+            .onShake {
+                squareManager.reset()
+            }
     }
     
     private var totalView: some View {

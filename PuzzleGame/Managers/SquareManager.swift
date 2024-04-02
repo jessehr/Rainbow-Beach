@@ -44,4 +44,8 @@ class SquareManager: ObservableObject {
         levelNumber += 1
         self.map = MapLoader.loadMap(levelNumber: levelNumber)
     }
+    
+    func reset() {
+        self.map = MapLoader.loadMap(levelNumber: levelNumber)
+    }
 }
