@@ -40,3 +40,7 @@ extension Character {
         return Int(String(self))
     }
 }
+
+enum GeneralError: Error {
+    case generalError
+}

@@ -8,9 +8,11 @@
 import Foundation
 
 class MapLoader {
-    static func loadMap(levelNumber: Int) -> Map {
-        let path = Bundle.main.path(forResource: "level\(levelNumber)", ofType: "txt")!
-        let fileContents = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+    static func loadMap(levelNumber: Int) throws -> Map {
+        guard let path = Bundle.main.path(forResource: "level\(levelNumber)", ofType: "txt") else {
+            throw GeneralError.generalError
+        }
+        let fileContents = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
         let rowStrings = fileContents.components(separatedBy: .newlines)
         let depths = rowStringsToInts(rowStrings: rowStrings)
         return Map(depths: depths)

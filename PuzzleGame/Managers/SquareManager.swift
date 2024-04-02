@@ -15,6 +15,9 @@ class SquareManager: ObservableObject {
     var baseSandySquareCoords: Coordinates?
     
     @Published
+    var outOfLevels = false
+    
+    @Published
     private var levelNumber: Int
     
     var sandyCoords: [Coordinates] {
@@ -30,7 +33,7 @@ class SquareManager: ObservableObject {
     
     init() {
         self.levelNumber = 1
-        self.map = MapLoader.loadMap(levelNumber: 1)
+        self.map = try! MapLoader.loadMap(levelNumber: 1)
     }
     
     func dropSand() {
@@ -42,10 +45,14 @@ class SquareManager: ObservableObject {
     
     func incrementLevel() {
         levelNumber += 1
-        self.map = MapLoader.loadMap(levelNumber: levelNumber)
+        do {
+            self.map = try MapLoader.loadMap(levelNumber: levelNumber)
+        } catch {
+            outOfLevels = true
+        }
     }
     
     func reset() {
-        self.map = MapLoader.loadMap(levelNumber: levelNumber)
+        self.map = try! MapLoader.loadMap(levelNumber: levelNumber)
     }
 }

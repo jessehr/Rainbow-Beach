@@ -67,6 +67,7 @@ struct GameView: View {
     private var totalView: some View {
         ZStack {
             gridView
+            winningView
             allSandView
         }
     }
@@ -84,6 +85,19 @@ struct GameView: View {
         ForEach(sandyPositions.indices, id: \.self) { index in
             sandSquareView
                 .possiblePosition(sandyPositions[index])
+        }
+    }
+    
+    @ViewBuilder
+    private var winningView: some View {
+        if squareManager.outOfLevels {
+            Text("You won! Yay!")
+                .font(.largeTitle)
+                .bold()
+                .italic()
+                .foregroundStyle(Color.blue)
+                .padding(4)
+                .background(Color.white.opacity(0.5))
         }
     }
     
