@@ -36,11 +36,22 @@ class SquareManager: ObservableObject {
         self.map = try! MapLoader.loadMap(levelNumber: 1)
     }
     
-    func dropSand() {
+    func dropSand() throws {
+        defer { self.baseSandySquareCoords = nil }
+        
+        guard allSandCanDrop else {
+            throw GeneralError.generalError
+        }
+        
         for sandySquare in sandyCoords {
             map.reduceDepth(at: sandySquare)
         }
+        
         self.baseSandySquareCoords = nil
+    }
+    
+    private var allSandCanDrop: Bool {
+        sandyCoords.allSatisfy({ map.square(at: $0)?.canBeFilled ?? false })
     }
     
     func incrementLevel() {

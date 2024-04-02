@@ -123,7 +123,7 @@ struct GameView: View {
             }
             .onEnded { _ in
                 soundManager.play(for: Constants.dropAnimationLength)
-                squareManager.dropSand()
+                try? squareManager.dropSand()
             }
     }
     
