@@ -41,7 +41,7 @@ struct GameView: View {
     
     init(using reader: GeometryProxy) {
         self.reader = reader
-        self.soundManager = SoundManager(filename: Constants.dragSoundFilename)
+        self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
         self._squareManager = StateObject(wrappedValue:
             SquareManager()
         )
@@ -51,7 +51,7 @@ struct GameView: View {
         totalView
             .gesture(gestures)
             .sensoryFeedback(
-                .impact(flexibility: .rigid, intensity: 0.5),
+                .impact(flexibility: .rigid, intensity: 0.6),
                 trigger: squareManager.sandyCoords
             )
             .onChange(of: squareManager.map.isSolved) {
@@ -88,7 +88,7 @@ struct GameView: View {
         SandView(baseColor: .brown, sandAggressionFactor: 1.0)
             .frame(width: squareWidth, height: squareHeight)
             .animation(
-                .smooth(duration: Constants.dragAnimationLength),
+                .smooth(duration: Constants.dropAnimationLength),
                 value: squareManager.sandyCoords
             )
     }
@@ -105,6 +105,7 @@ struct GameView: View {
                 onDrag(with: value)
             }
             .onEnded { _ in
+                soundManager.play(for: Constants.dropAnimationLength)
                 squareManager.dropSand()
             }
     }
@@ -114,7 +115,6 @@ struct GameView: View {
         guard squareManager.baseSandySquareCoords != tapCoords else {
             return
         }
-        soundManager.play(for: Constants.dragAnimationLength)
         squareManager.baseSandySquareCoords = tapCoords
     }
 
