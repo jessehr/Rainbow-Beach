@@ -16,8 +16,13 @@ struct Map {
     }
     
     mutating func reduceDepth(at coords: Coordinates) {
-        guard let square = square(at: coords), square.depth > 0 else { return }
+        guard let square = square(at: coords) else { return }
+        #if LEVELBUILDER
+        squares[coords.y][coords.x].depth += 1
+        #else
+        guard square.depth > 0 else { return }
         squares[coords.y][coords.x].depth -= 1
+        #endif
     }
     
     func square(at coords: Coordinates) -> Square? {
@@ -30,4 +35,17 @@ struct Map {
         }
         return !isNotSolved
     }
+    
+    #if LEVELBUILDER
+    func printMap() {
+        print()
+        for row in squares {
+            for square in row {
+                print("\(square.depth)", terminator: "")
+            }
+            print()
+        }
+        print()
+    }
+    #endif
 }

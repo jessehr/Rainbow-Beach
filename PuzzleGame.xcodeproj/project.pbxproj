@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE0F2BB6A26000801892 /* SoundManager.swift */; };
 		AA29AFD92BB9FE670074B875 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFD82BB9FE670074B875 /* TimeManager.swift */; };
-		AA29AFDD2BBA091A0074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level4.txt */; };
+		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
 		AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* MapLoader.swift */; };
 		AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE02BBA13AC0074B875 /* Map.swift */; };
 		AA29AFE32BBA50260074B875 /* SandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE22BBA50260074B875 /* SandManager.swift */; };
-		AA29AFE72BBAA6B40074B875 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level2.txt */; };
-		AA29AFE92BBAA8E80074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level1.txt */; };
-		AA29AFEB2BBAA9B10074B875 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level3.txt */; };
+		AA29AFE72BBAA6B40074B875 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level3.txt */; };
+		AA29AFE92BBAA8E80074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level4.txt */; };
+		AA29AFEB2BBAA9B10074B875 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level6.txt */; };
 		AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */; };
 		AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */; };
 		AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3BD4D72BB8C3C40003BF48 /* Constants.swift */; };
@@ -32,18 +32,20 @@
 		AABE86192BB0A0A200E7B744 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86182BB0A0A200E7B744 /* Square.swift */; };
 		AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* SquareManager.swift */; };
 		AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861C2BB0A7E400E7B744 /* SandView.swift */; };
+		AAF3CAA02BBD3FF000FFDBF4 /* level5.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */; };
+		AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CAA12BBD420200FFDBF4 /* level2.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AA1CEE0F2BB6A26000801892 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		AA29AFD82BB9FE670074B875 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
-		AA29AFDC2BBA091A0074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
+		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		AA29AFDE2BBA13820074B875 /* MapLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLoader.swift; sourceTree = "<group>"; };
 		AA29AFE02BBA13AC0074B875 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		AA29AFE22BBA50260074B875 /* SandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandManager.swift; sourceTree = "<group>"; };
-		AA29AFE62BBAA6B40074B875 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
-		AA29AFE82BBAA8E80074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
-		AA29AFEA2BBAA9B10074B875 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
+		AA29AFE62BBAA6B40074B875 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
+		AA29AFE82BBAA8E80074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
+		AA29AFEA2BBAA9B10074B875 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
 		AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-short.mp3"; sourceTree = "<group>"; };
 		AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-medium.mp3"; sourceTree = "<group>"; };
 		AA3BD4D72BB8C3C40003BF48 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -61,6 +63,8 @@
 		AABE86182BB0A0A200E7B744 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		AABE861A2BB0A23B00E7B744 /* SquareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareManager.swift; sourceTree = "<group>"; };
 		AABE861C2BB0A7E400E7B744 /* SandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandView.swift; sourceTree = "<group>"; };
+		AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level5.txt; sourceTree = "<group>"; };
+		AAF3CAA12BBD420200FFDBF4 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,10 +143,12 @@
 		AA29AFDB2BBA08C30074B875 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				AA29AFE82BBAA8E80074B875 /* level1.txt */,
-				AA29AFE62BBAA6B40074B875 /* level2.txt */,
-				AA29AFEA2BBAA9B10074B875 /* level3.txt */,
-				AA29AFDC2BBA091A0074B875 /* level4.txt */,
+				AA29AFDC2BBA091A0074B875 /* level1.txt */,
+				AAF3CAA12BBD420200FFDBF4 /* level2.txt */,
+				AA29AFE62BBAA6B40074B875 /* level3.txt */,
+				AA29AFE82BBAA8E80074B875 /* level4.txt */,
+				AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */,
+				AA29AFEA2BBAA9B10074B875 /* level6.txt */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -252,12 +258,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA29AFE92BBAA8E80074B875 /* level1.txt in Resources */,
-				AA29AFDD2BBA091A0074B875 /* level4.txt in Resources */,
+				AA29AFE92BBAA8E80074B875 /* level4.txt in Resources */,
+				AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */,
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
-				AA29AFEB2BBAA9B10074B875 /* level3.txt in Resources */,
-				AA29AFE72BBAA6B40074B875 /* level2.txt in Resources */,
+				AA29AFEB2BBAA9B10074B875 /* level6.txt in Resources */,
+				AA29AFE72BBAA6B40074B875 /* level3.txt in Resources */,
+				AAF3CAA02BBD3FF000FFDBF4 /* level5.txt in Resources */,
 				AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */,
+				AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */,
 				AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */,
 				AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */,
 			);
@@ -434,6 +442,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jesserapoport.PuzzleGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -472,6 +481,100 @@
 			};
 			name = Release;
 		};
+		AAF3CA9D2BBD3B3F00FFDBF4 /* LevelBuilderConfig */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = LevelBuilderConfig;
+		};
+		AAF3CA9E2BBD3B3F00FFDBF4 /* LevelBuilderConfig */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PuzzleGame/Assets/Preview Content\"";
+				DEVELOPMENT_TEAM = 79623MFXZW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-DLEVELBUILDER";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jesserapoport.PuzzleGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = LevelBuilderConfig;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -479,6 +582,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA95728A2BA827C00001BBB5 /* Debug */,
+				AAF3CA9D2BBD3B3F00FFDBF4 /* LevelBuilderConfig */,
 				AA95728B2BA827C00001BBB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -488,6 +592,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA95728D2BA827C00001BBB5 /* Debug */,
+				AAF3CA9E2BBD3B3F00FFDBF4 /* LevelBuilderConfig */,
 				AA95728E2BA827C00001BBB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

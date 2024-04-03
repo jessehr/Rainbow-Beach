@@ -48,10 +48,17 @@ class SquareManager: ObservableObject {
         }
         
         self.baseSandySquareCoords = nil
+        #if LEVELBUILDER
+        map.printMap()
+        #endif
     }
     
     private var allSandCanDrop: Bool {
+        #if LEVELBUILDER
+        true
+        #else
         sandyCoords.allSatisfy({ map.square(at: $0)?.canBeFilled ?? false })
+        #endif
     }
     
     func incrementLevel() {

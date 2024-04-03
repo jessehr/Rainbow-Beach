@@ -27,7 +27,11 @@ class MapLoader {
     
     private static func rowStringToInts(rowString: String) -> [Int] {
         return rowString.map { char in
+            #if LEVELBUILDER
+            0
+            #else
             char.asInt!
+            #endif
         }
     }
 }
