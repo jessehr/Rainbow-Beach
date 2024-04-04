@@ -85,6 +85,11 @@ struct GameView: View {
         ForEach(sandyPositions.indices, id: \.self) { index in
             sandSquareView
                 .possiblePosition(sandyPositions[index])
+                .opacity(squareManager.allSandCanDrop ? 1.0 : 0.5)
+                .animation(
+                    .smooth(duration: Constants.dropAnimationLength),
+                    value: squareManager.allSandCanDrop
+                )
         }
     }
     
@@ -122,8 +127,10 @@ struct GameView: View {
                 onDrag(with: value)
             }
             .onEnded { _ in
-                soundManager.play(for: Constants.dropAnimationLength)
-                try? squareManager.dropSand()
+                do {
+                    try squareManager.dropSand()
+                    soundManager.play(for: Constants.dropAnimationLength)
+                } catch { }
             }
     }
     

@@ -53,7 +53,7 @@ class SquareManager: ObservableObject {
         #endif
     }
     
-    private var allSandCanDrop: Bool {
+    var allSandCanDrop: Bool {
         #if LEVELBUILDER
         true
         #else
