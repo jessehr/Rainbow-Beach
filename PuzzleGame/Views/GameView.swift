@@ -82,15 +82,16 @@ struct GameView: View {
     
     @ViewBuilder
     private var allSandView: some View {
-        ForEach(sandyPositions.indices, id: \.self) { index in
-            sandSquareView
-                .possiblePosition(sandyPositions[index])
-                .opacity(squareManager.allSandCanDrop ? 1.0 : 0.5)
-                .animation(
-                    .smooth(duration: Constants.dropAnimationLength),
-                    value: squareManager.allSandCanDrop
-                )
-        }
+        GamePieceView()
+        //        ForEach(sandyPositions.indices, id: \.self) { index in
+        //            sandSquareView
+        //                .possiblePosition(sandyPositions[index])
+        //                .opacity(squareManager.allSandCanDrop ? 1.0 : 0.5)
+        //                .animation(
+        //                    .smooth(duration: Constants.dropAnimationLength),
+        //                    value: squareManager.allSandCanDrop
+        //                )
+        //        }
     }
     
     @ViewBuilder

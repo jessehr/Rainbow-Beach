@@ -22,7 +22,7 @@ struct SandView: View {
     }
     
     var sand: some View {
-        return Canvas { context, size in
+        Canvas { context, size in
             if sandManager.particles.isEmpty {
                 sandManager.instantiateParticles(with: size, sandAggressionFactor: sandAggressionFactor)
             }
