@@ -39,10 +39,10 @@ class SquareManager: ObservableObject {
         self.map = try! MapLoader.loadMap(levelNumber: 1)
     }
     
-    func dropSand() throws {
+    func dropGamePieceSand() throws {
         defer { self.baseGamePieceCoords = nil }
         
-        guard allSandCanDrop else {
+        guard gamePieceCanDrop else {
             throw GeneralError.generalError
         }
         
@@ -56,7 +56,7 @@ class SquareManager: ObservableObject {
         #endif
     }
     
-    var allSandCanDrop: Bool {
+    var gamePieceCanDrop: Bool {
         #if LEVELBUILDER
         true
         #else

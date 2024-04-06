@@ -11,11 +11,12 @@ struct GamePieceView: View {
     let squareWidth: CGFloat
     let squareHeight: CGFloat
     
-    let squaresCoords: [Coordinates]
+    let relativePositions: [RelativePosition]
     
     var body: some View {
         Canvas { context, size in
-            for squareCoords in squaresCoords {
+            let gamePieceCoords = relativePositions.map { $0.asLocalCoords }
+            for squareCoords in gamePieceCoords {
                 let path = getPath(at: squareCoords)
                 context.fill(path, with: .color(.blue))
             }
@@ -41,6 +42,11 @@ struct GamePieceView: View {
     GamePieceView(
         squareWidth: 100,
         squareHeight: 100,
-        squaresCoords: [Coordinates(x: 0,y: 0)]
+        relativePositions: [
+            RelativePosition(rightward: 0, downward: 0),
+            RelativePosition(rightward: 0, downward: 1),
+            RelativePosition(rightward: 0, downward: 1),
+            RelativePosition(rightward: 1, downward: 2)
+        ]
     )
 }

@@ -68,7 +68,7 @@ struct GameView: View {
         ZStack {
             gridView
             winningView
-            allSandView
+            gamePieceView
         }
     }
     
@@ -81,23 +81,17 @@ struct GameView: View {
     }
     
     @ViewBuilder
-    private var allSandView: some View {
+    private var gamePieceView: some View {
         GamePieceView(
             squareWidth: squareWidth,
             squareHeight: squareHeight,
-            squaresCoords: squareManager.gamePieceCoords
+            relativePositions: squareManager.gamePieceRelativePositions
         )
-
-        // FIXME: remove this
-        //        ForEach(sandyPositions.indices, id: \.self) { index in
-        //            sandSquareView
-        //                .possiblePosition(sandyPositions[index])
-        //                .opacity(squareManager.allSandCanDrop ? 1.0 : 0.5)
-        //                .animation(
-        //                    .smooth(duration: Constants.dropAnimationLength),
-        //                    value: squareManager.allSandCanDrop
-        //                )
-        //        }
+        .possiblePosition(position(from: squareManager.baseGamePieceCoords))
+        .animation(
+            .smooth(duration: Constants.dropAnimationLength),
+            value: squareManager.gamePieceCoords
+        )
     }
     
     @ViewBuilder
@@ -113,15 +107,6 @@ struct GameView: View {
         }
     }
     
-    private var sandSquareView: some View {
-        SandView(baseColor: .brown, sandAggressionFactor: 1.0)
-            .frame(width: squareWidth, height: squareHeight)
-            .animation(
-                .smooth(duration: Constants.dropAnimationLength),
-                value: squareManager.gamePieceCoords
-            )
-    }
-    
     private func squareView(at coords: Coordinates) -> some View {
         SquareView(square: $squareManager.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
@@ -135,7 +120,7 @@ struct GameView: View {
             }
             .onEnded { _ in
                 do {
-                    try squareManager.dropSand()
+                    try squareManager.dropGamePieceSand()
                     soundManager.play(for: Constants.dropAnimationLength)
                 } catch { }
             }
@@ -157,7 +142,8 @@ struct GameView: View {
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
-    private func position(from coordinates: Coordinates) -> CGPoint? {
+    private func position(from coordinates: Coordinates?) -> CGPoint? {
+        guard let coordinates else { return nil }
         let x = (CGFloat(coordinates.x) + 0.5) * squareWidth
         let y = (CGFloat(coordinates.y) + 0.5) * squareHeight
         if x >= 0 && x < gameWidth && y >= 0 && y < gameHeight {
@@ -166,11 +152,6 @@ struct GameView: View {
             return nil
         }
     }
-    
-    // FIXME: remove this
-    //    private var sandyPositions: [CGPoint] {
-    //        return squareManager.gamePieceCoords.compactMap { position(from: $0) }
-    //    }
 }
 
 #Preview {
