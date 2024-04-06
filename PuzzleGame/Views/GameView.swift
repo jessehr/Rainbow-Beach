@@ -82,7 +82,12 @@ struct GameView: View {
     
     @ViewBuilder
     private var allSandView: some View {
-        GamePieceView(squareWidth: squareWidth, squareHeight: squareHeight)
+        GamePieceView(
+            squareWidth: squareWidth,
+            squareHeight: squareHeight,
+            squaresCoords: squareManager.sandyCoords
+        )
+
         //        ForEach(sandyPositions.indices, id: \.self) { index in
         //            sandSquareView
         //                .possiblePosition(sandyPositions[index])
