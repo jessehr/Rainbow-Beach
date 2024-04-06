@@ -52,7 +52,7 @@ struct GameView: View {
             .gesture(gestures)
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.6),
-                trigger: squareManager.sandyCoords
+                trigger: squareManager.gamePieceCoords
             )
             .onChange(of: squareManager.map.isSolved) {
                 if squareManager.map.isSolved {
@@ -85,9 +85,10 @@ struct GameView: View {
         GamePieceView(
             squareWidth: squareWidth,
             squareHeight: squareHeight,
-            squaresCoords: squareManager.sandyCoords
+            squaresCoords: squareManager.gamePieceCoords
         )
 
+        // FIXME: remove this
         //        ForEach(sandyPositions.indices, id: \.self) { index in
         //            sandSquareView
         //                .possiblePosition(sandyPositions[index])
@@ -117,7 +118,7 @@ struct GameView: View {
             .frame(width: squareWidth, height: squareHeight)
             .animation(
                 .smooth(duration: Constants.dropAnimationLength),
-                value: squareManager.sandyCoords
+                value: squareManager.gamePieceCoords
             )
     }
     
@@ -142,10 +143,10 @@ struct GameView: View {
     
     private func onDrag(with value: DragGesture.Value) {
         let tapCoords = coordinates(from: value.location)
-        guard squareManager.baseSandySquareCoords != tapCoords else {
+        guard squareManager.baseGamePieceCoords != tapCoords else {
             return
         }
-        squareManager.baseSandySquareCoords = tapCoords
+        squareManager.baseGamePieceCoords = tapCoords
     }
 
     private func coordinates(from position: CGPoint) -> Coordinates {
@@ -166,9 +167,10 @@ struct GameView: View {
         }
     }
     
-    private var sandyPositions: [CGPoint] {
-        return squareManager.sandyCoords.compactMap { position(from: $0) }
-    }
+    // FIXME: remove this
+    //    private var sandyPositions: [CGPoint] {
+    //        return squareManager.gamePieceCoords.compactMap { position(from: $0) }
+    //    }
 }
 
 #Preview {
