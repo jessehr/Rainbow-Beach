@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct GamePieceView: View {
+    let squareWidth: CGFloat
+    let squareHeight: CGFloat
+    
     var body: some View {
         Canvas { context, size in
-            let containerRect = CGRect(origin: .zero, size: size)
-            let path = Circle().path(in: containerRect)
-            context.fill(path, with: .color(.yellow))
+            let newSize = CGSizeMake(squareWidth, squareHeight)
+            let containerRect = CGRect(origin: .zero, size: newSize)
+            let path = Rectangle().path(in: containerRect)
+            context.fill(path, with: .color(.blue))
         }
     }
 }
 
 #Preview {
-    GamePieceView()
+    GamePieceView(squareWidth: 100, squareHeight: 100)
 }
