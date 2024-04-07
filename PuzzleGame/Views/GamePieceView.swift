@@ -25,12 +25,12 @@ struct GamePieceView: View {
     }
     
     private var canvasWidth: CGFloat {
-        let rightwardMax = normalizedLocalCoords.map { $0.x }.max() ?? 0
+        let rightwardMax = normalizedLocalCoords.map { $0.x }.max() ?? -1
         return (rightwardMax + 1) * squareWidth
     }
     
     private var canvasHeight: CGFloat {
-        let downwardMax = normalizedLocalCoords.map { $0.y }.max() ?? 0
+        let downwardMax = normalizedLocalCoords.map { $0.y }.max() ?? -1
         return (downwardMax + 1) * squareHeight
     }
     
