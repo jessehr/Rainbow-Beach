@@ -32,11 +32,11 @@ struct GameView: View {
     }
     
     var squareWidth: CGFloat {
-        gameWidth / CGFloat(nColumns)
+        gameWidth / nColumns
     }
     
     var squareHeight: CGFloat {
-        gameHeight / CGFloat(nRows)
+        gameHeight / nRows
     }
     
     init(using reader: GeometryProxy) {
@@ -136,16 +136,16 @@ struct GameView: View {
 
     private func coordinates(from position: CGPoint) -> Coordinates {
         let percentageDown = position.y / gameHeight
-        let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
+        let rowNumber = Int(floor(nRows * percentageDown))
         let percentageRight = position.x / gameWidth
-        let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
+        let columnNumber = Int(floor(nColumns * percentageRight))
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
     private func position(from coordinates: Coordinates?) -> CGPoint? {
         guard let coordinates else { return nil }
-        let x = (CGFloat(coordinates.x) + 0.5) * squareWidth
-        let y = (CGFloat(coordinates.y) + 0.5) * squareHeight
+        let x = (coordinates.x + 0.5) * squareWidth
+        let y = (coordinates.y + 0.5) * squareHeight
         if x >= 0 && x < gameWidth && y >= 0 && y < gameHeight {
             return CGPoint(x: x, y: y)
         } else {
