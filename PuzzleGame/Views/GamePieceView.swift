@@ -13,6 +13,20 @@ struct GamePieceView: View {
     
     let relativePositions: [RelativePosition]
     
+    private var canvasWidth: CGFloat {
+        let xMin = relativePositions.map { $0.rightward }.min() ?? 0
+        let xMax = relativePositions.map { $0.rightward }.max() ?? 0
+        let diff = xMax - xMin
+        return diff * squareWidth
+    }
+    
+    private var canvasHeight: CGFloat {
+        let yMin = relativePositions.map { $0.downward }.min() ?? 0
+        let yMax = relativePositions.map { $0.downward }.max() ?? 0
+        let diff = yMax - yMin
+        return diff * squareHeight
+    }
+    
     var body: some View {
         Canvas { context, size in
             let gamePieceCoords = relativePositions.map { $0.asLocalCoords }
@@ -21,6 +35,7 @@ struct GamePieceView: View {
                 context.fill(path, with: .color(.blue))
             }
         }
+        .frame(width: canvasWidth, height: canvasHeight)
     }
     
     private func getPath(at coords: Coordinates) -> Path {
@@ -30,9 +45,8 @@ struct GamePieceView: View {
     
     private func getSquare(at coords: Coordinates) -> CGRect {
         return CGRect(
-            // FIXME: remove these hardcoded weird numbers
-            x: (CGFloat(coords.x) + 2.5) * squareWidth,
-            y: (CGFloat(coords.y) + 6.0) * squareHeight,
+            x: coords.x * squareWidth,
+            y: coords.y * squareHeight,
             width: squareWidth,
             height: squareHeight
         )
