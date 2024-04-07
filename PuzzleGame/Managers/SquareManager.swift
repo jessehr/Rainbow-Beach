@@ -74,6 +74,8 @@ class SquareManager: ObservableObject {
     }
     
     func reset() {
-        self.map = try! MapLoader.loadMap(levelNumber: levelNumber)
+        if let refreshedMap = try? MapLoader.loadMap(levelNumber: levelNumber) {
+            self.map = refreshedMap
+        }
     }
 }
