@@ -88,6 +88,11 @@ struct GameView: View {
             relativePositions: squareManager.gamePieceRelativePositions
         )
         .possiblePosition(position(from: squareManager.baseGamePieceCoords))
+        // FIXME: we don't want this here
+        .offset(
+            x: 0.5 * squareWidth,
+            y: squareHeight
+        )
         .animation(
             .smooth(duration: Constants.dropAnimationLength),
             value: squareManager.gamePieceCoords
