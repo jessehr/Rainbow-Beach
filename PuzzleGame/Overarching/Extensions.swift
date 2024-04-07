@@ -30,7 +30,7 @@ extension View {
         if let position = possPosition {
             self.position(position)
         } else {
-            self
+            EmptyView()
         }
     }
 }
