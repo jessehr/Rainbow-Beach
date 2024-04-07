@@ -24,14 +24,15 @@ struct GamePieceView: View {
     }
     
     private func getPath(at coords: Coordinates) -> Path {
-        let containerRect = getContainerRect(at: coords)
-        return Rectangle().path(in: containerRect)
+        let square = getSquare(at: coords)
+        return Rectangle().path(in: square)
     }
     
-    private func getContainerRect(at coords: Coordinates) -> CGRect {
+    private func getSquare(at coords: Coordinates) -> CGRect {
         return CGRect(
-            x: CGFloat(coords.x) * squareWidth,
-            y: CGFloat(coords.y) * squareHeight,
+            // FIXME: remove these hardcoded weird numbers
+            x: (CGFloat(coords.x) + 2.5) * squareWidth,
+            y: (CGFloat(coords.y) + 6.0) * squareHeight,
             width: squareWidth,
             height: squareHeight
         )
