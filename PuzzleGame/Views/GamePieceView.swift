@@ -11,32 +11,19 @@ struct GamePieceView: View {
     let squareWidth: CGFloat
     let squareHeight: CGFloat
     
-    let relativePositions: [RelativePosition]
-    
-    private var normalizedLocalCoords: [Coordinates] {
-        let xMin = relativePositions.map { $0.rightward }.min() ?? 0
-        let yMin = relativePositions.map { $0.downward }.min() ?? 0
-        return relativePositions.map { position in
-            Coordinates(
-                x: position.rightward - xMin,
-                y: position.downward - yMin
-            )
-        }
-    }
+    let gamePiece: GamePiece
     
     private var canvasWidth: CGFloat {
-        let rightwardMax = normalizedLocalCoords.map { $0.x }.max() ?? -1
-        return (rightwardMax + 1) * squareWidth
+        gamePiece.widthInSquares * squareWidth
     }
     
     private var canvasHeight: CGFloat {
-        let downwardMax = normalizedLocalCoords.map { $0.y }.max() ?? -1
-        return (downwardMax + 1) * squareHeight
+        gamePiece.heightInSquares * squareHeight
     }
     
     var body: some View {
         Canvas { context, size in
-            for squareCoords in normalizedLocalCoords {
+            for squareCoords in gamePiece.normalizedLocalCoords {
                 let path = getPath(at: squareCoords)
                 context.fill(path, with: .color(.blue))
             }
@@ -63,11 +50,13 @@ struct GamePieceView: View {
     GamePieceView(
         squareWidth: 100,
         squareHeight: 100,
-        relativePositions: [
-            RelativePosition(rightward: 0, downward: 0),
-            RelativePosition(rightward: 0, downward: 1),
-            RelativePosition(rightward: 0, downward: 1),
-            RelativePosition(rightward: 1, downward: 2)
-        ]
+        gamePiece: GamePiece(
+            relativePositions: [
+                RelativePosition(rightward: 0, downward: 0),
+                RelativePosition(rightward: 0, downward: 1),
+                RelativePosition(rightward: 0, downward: 1),
+                RelativePosition(rightward: 1, downward: 2)
+            ]
+        )
     )
 }
