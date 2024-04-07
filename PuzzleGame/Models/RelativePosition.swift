@@ -10,8 +10,4 @@ import Foundation
 struct RelativePosition {
     let rightward: Int
     let downward: Int
-    
-    var asLocalCoords: Coordinates {
-        Coordinates(x: rightward, y: downward)
-    }
 }

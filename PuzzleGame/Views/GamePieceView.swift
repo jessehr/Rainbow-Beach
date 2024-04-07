@@ -13,24 +13,34 @@ struct GamePieceView: View {
     
     let relativePositions: [RelativePosition]
     
+    private var normalizedLocalCoords: [Coordinates] {
+        let xMin = relativePositions.map { $0.rightward }.min() ?? 0
+        let yMin = relativePositions.map { $0.downward }.min() ?? 0
+        return relativePositions.map { position in
+            Coordinates(
+                x: position.rightward - xMin,
+                y: position.downward - yMin
+            )
+        }
+    }
+    
     private var canvasWidth: CGFloat {
         let xMin = relativePositions.map { $0.rightward }.min() ?? 0
         let xMax = relativePositions.map { $0.rightward }.max() ?? 0
         let diff = xMax - xMin
-        return diff * squareWidth
+        return (diff + 1) * squareWidth
     }
     
     private var canvasHeight: CGFloat {
         let yMin = relativePositions.map { $0.downward }.min() ?? 0
         let yMax = relativePositions.map { $0.downward }.max() ?? 0
         let diff = yMax - yMin
-        return diff * squareHeight
+        return (diff + 1) * squareHeight
     }
     
     var body: some View {
         Canvas { context, size in
-            let gamePieceCoords = relativePositions.map { $0.asLocalCoords }
-            for squareCoords in gamePieceCoords {
+            for squareCoords in normalizedLocalCoords {
                 let path = getPath(at: squareCoords)
                 context.fill(path, with: .color(.blue))
             }
