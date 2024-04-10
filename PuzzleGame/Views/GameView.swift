@@ -97,6 +97,11 @@ struct GameView: View {
             .smooth(duration: Constants.dropAnimationLength),
             value: squareManager.gamePieceCoords
         )
+        .opacity(squareManager.gamePieceCanDrop ? 1.0 : 0.5)
+        .animation(
+            .smooth(duration: Constants.dropAnimationLength),
+            value: squareManager.gamePieceCanDrop
+        )
     }
     
     @ViewBuilder
