@@ -87,11 +87,10 @@ struct GameView: View {
             squareHeight: squareHeight,
             gamePiece: squareManager.gamePiece
         )
-        .possiblePosition(position(from: squareManager.baseGamePieceCoords))
-        // FIXME: make this cleaner
+        .possiblePosition(centerPosition(from: squareManager.baseGamePieceCoords))
         .offset(
-            x: 0.5 * squareManager.gamePiece.widthInSquares * squareWidth - squareWidth * 0.5,
-            y: 0.5 * squareManager.gamePiece.heightInSquares * squareHeight - squareHeight * 0.5
+            x: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
+            y: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
         )
         .animation(
             .smooth(duration: Constants.dropAnimationLength),
@@ -120,7 +119,7 @@ struct GameView: View {
     private func squareView(at coords: Coordinates) -> some View {
         SquareView(square: $squareManager.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
-            .possiblePosition(position(from: coords))
+            .possiblePosition(centerPosition(from: coords))
     }
     
     private var gestures: some Gesture {
@@ -152,7 +151,7 @@ struct GameView: View {
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
-    private func position(from coordinates: Coordinates?) -> CGPoint? {
+    private func centerPosition(from coordinates: Coordinates?) -> CGPoint? {
         guard let coordinates else { return nil }
         let x = (coordinates.x + 0.5) * squareWidth
         let y = (coordinates.y + 0.5) * squareHeight
