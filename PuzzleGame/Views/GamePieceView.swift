@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// FIXME: it looks bad between the squares
+
 struct GamePieceView: View {
     let squareWidth: CGFloat
     let squareHeight: CGFloat
