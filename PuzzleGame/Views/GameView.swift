@@ -80,6 +80,7 @@ struct GameView: View {
         }
     }
     
+    // FIXME: this can definitely be cleaned up
     @ViewBuilder
     private var gamePieceView: some View {
         GamePieceView(
@@ -87,7 +88,7 @@ struct GameView: View {
             squareHeight: squareHeight,
             gamePiece: squareManager.gamePiece
         )
-        .possiblePosition(centerPosition(from: squareManager.baseGamePieceCoords))
+        .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
         .offset(
             x: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
             y: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
@@ -119,7 +120,7 @@ struct GameView: View {
     private func squareView(at coords: Coordinates) -> some View {
         SquareView(square: $squareManager.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
-            .possiblePosition(centerPosition(from: coords))
+            .possiblePosition(position(atCenterOf: coords))
     }
     
     private var gestures: some Gesture {
@@ -151,7 +152,7 @@ struct GameView: View {
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
-    private func centerPosition(from coordinates: Coordinates?) -> CGPoint? {
+    private func position(atCenterOf coordinates: Coordinates?) -> CGPoint? {
         guard let coordinates else { return nil }
         let x = (coordinates.x + 0.5) * squareWidth
         let y = (coordinates.y + 0.5) * squareHeight
