@@ -68,7 +68,7 @@ struct GameView: View {
         ZStack {
             gridView
             winningView
-            gamePieceView
+            gamePieceViewPositioned
         }
     }
     
@@ -80,7 +80,6 @@ struct GameView: View {
         }
     }
     
-    // FIXME: this can definitely be cleaned up
     @ViewBuilder
     private var gamePieceView: some View {
         GamePieceView(
@@ -88,19 +87,21 @@ struct GameView: View {
             squareHeight: squareHeight,
             gamePiece: squareManager.gamePiece
         )
-        .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
-        .offset(
-            x: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
-            y: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
-        )
-        .animation(
-            .smooth(duration: Constants.dropAnimationLength),
-            value: squareManager.gamePieceCoords
-        )
         .opacity(squareManager.gamePieceCanDrop ? 1.0 : 0.5)
-        .animation(
-            .smooth(duration: Constants.dropAnimationLength),
-            value: squareManager.gamePieceCanDrop
+        .smoothAnimation(value: squareManager.gamePieceCanDrop)
+    }
+    
+    private var gamePieceViewPositioned: some View {
+        gamePieceView
+            .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
+            .smoothAnimation(value: squareManager.gamePieceCoords)
+            .offset(gamePieceOffset)
+    }
+    
+    private var gamePieceOffset: CGSize {
+        CGSize(
+            width: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
+            height: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
         )
     }
     

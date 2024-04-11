@@ -33,6 +33,10 @@ extension View {
             EmptyView()
         }
     }
+    
+    func smoothAnimation<V>(value: V, for duration: Double = Constants.dropAnimationLength) -> some View where V : Equatable {
+        self.animation(.smooth(duration: duration), value: value)
+    }
 }
 
 extension Character {
