@@ -32,11 +32,11 @@ struct GameView: View {
     }
     
     var squareWidth: CGFloat {
-        gameWidth / CGFloat(nColumns)
+        gameWidth / nColumns
     }
     
     var squareHeight: CGFloat {
-        gameHeight / CGFloat(nRows)
+        gameHeight / nRows
     }
     
     init(using reader: GeometryProxy) {
@@ -52,7 +52,7 @@ struct GameView: View {
             .gesture(gestures)
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.6),
-                trigger: squareManager.sandyCoords
+                trigger: squareManager.gamePieceCoords
             )
             .onChange(of: squareManager.map.isSolved) {
                 if squareManager.map.isSolved {
@@ -68,7 +68,7 @@ struct GameView: View {
         ZStack {
             gridView
             winningView
-            allSandView
+            gamePieceViewPositioned
         }
     }
     
@@ -81,16 +81,28 @@ struct GameView: View {
     }
     
     @ViewBuilder
-    private var allSandView: some View {
-        ForEach(sandyPositions.indices, id: \.self) { index in
-            sandSquareView
-                .possiblePosition(sandyPositions[index])
-                .opacity(squareManager.allSandCanDrop ? 1.0 : 0.5)
-                .animation(
-                    .smooth(duration: Constants.dropAnimationLength),
-                    value: squareManager.allSandCanDrop
-                )
-        }
+    private var gamePieceView: some View {
+        GamePieceView(
+            squareWidth: squareWidth,
+            squareHeight: squareHeight,
+            gamePiece: squareManager.gamePiece
+        )
+        .opacity(squareManager.gamePieceCanDrop ? 1.0 : 0.5)
+        .smoothAnimation(value: squareManager.gamePieceCanDrop)
+    }
+    
+    private var gamePieceViewPositioned: some View {
+        gamePieceView
+            .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
+            .smoothAnimation(value: squareManager.gamePieceCoords)
+            .offset(gamePieceOffset)
+    }
+    
+    private var gamePieceOffset: CGSize {
+        CGSize(
+            width: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
+            height: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
+        )
     }
     
     @ViewBuilder
@@ -106,19 +118,10 @@ struct GameView: View {
         }
     }
     
-    private var sandSquareView: some View {
-        SandView(baseColor: .brown, sandAggressionFactor: 1.0)
-            .frame(width: squareWidth, height: squareHeight)
-            .animation(
-                .smooth(duration: Constants.dropAnimationLength),
-                value: squareManager.sandyCoords
-            )
-    }
-    
     private func squareView(at coords: Coordinates) -> some View {
         SquareView(square: $squareManager.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
-            .possiblePosition(position(from: coords))
+            .possiblePosition(position(atCenterOf: coords))
     }
     
     private var gestures: some Gesture {
@@ -128,7 +131,7 @@ struct GameView: View {
             }
             .onEnded { _ in
                 do {
-                    try squareManager.dropSand()
+                    try squareManager.dropGamePieceSand()
                     soundManager.play(for: Constants.dropAnimationLength)
                 } catch { }
             }
@@ -136,32 +139,29 @@ struct GameView: View {
     
     private func onDrag(with value: DragGesture.Value) {
         let tapCoords = coordinates(from: value.location)
-        guard squareManager.baseSandySquareCoords != tapCoords else {
+        guard squareManager.baseGamePieceCoords != tapCoords else {
             return
         }
-        squareManager.baseSandySquareCoords = tapCoords
+        squareManager.baseGamePieceCoords = tapCoords
     }
 
     private func coordinates(from position: CGPoint) -> Coordinates {
         let percentageDown = position.y / gameHeight
-        let rowNumber = Int(floor(CGFloat(nRows) * percentageDown))
+        let rowNumber = Int(floor(nRows * percentageDown))
         let percentageRight = position.x / gameWidth
-        let columnNumber = Int(floor(CGFloat(nColumns) * percentageRight))
+        let columnNumber = Int(floor(nColumns * percentageRight))
         return Coordinates(x: columnNumber, y: rowNumber)
     }
     
-    private func position(from coordinates: Coordinates) -> CGPoint? {
-        let x = (CGFloat(coordinates.x) + 0.5) * squareWidth
-        let y = (CGFloat(coordinates.y) + 0.5) * squareHeight
+    private func position(atCenterOf coordinates: Coordinates?) -> CGPoint? {
+        guard let coordinates else { return nil }
+        let x = (coordinates.x + 0.5) * squareWidth
+        let y = (coordinates.y + 0.5) * squareHeight
         if x >= 0 && x < gameWidth && y >= 0 && y < gameHeight {
             return CGPoint(x: x, y: y)
         } else {
             return nil
         }
-    }
-    
-    private var sandyPositions: [CGPoint] {
-        return squareManager.sandyCoords.compactMap { position(from: $0) }
     }
 }
 

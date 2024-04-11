@@ -12,7 +12,7 @@ class SquareManager: ObservableObject {
     var map: Map
     
     @Published
-    var baseSandySquareCoords: Coordinates?
+    var baseGamePieceCoords: Coordinates?
     
     @Published
     var outOfLevels = false
@@ -20,15 +20,20 @@ class SquareManager: ObservableObject {
     @Published
     private var levelNumber: Int
     
-    var sandyCoords: [Coordinates] {
-        guard let baseSandySquareCoords else { return [] }
-        return [
-            // FIXME: make this dynamic somehow
-            baseSandySquareCoords,
-            baseSandySquareCoords.moved(.down),
-            baseSandySquareCoords.moved(.down, 2),
-            baseSandySquareCoords.moved(.down, 2).moved(.right)
+    let gamePiece = GamePiece(
+        relativePositions: [
+            RelativePosition(rightward: 0, downward: 0),
+            RelativePosition(rightward: 0, downward: 1),
+            RelativePosition(rightward: 0, downward: 2),
+            RelativePosition(rightward: 1, downward: 2)
         ]
+    )
+     
+    var gamePieceCoords: [Coordinates] {
+        guard let baseGamePieceCoords else { return [] }
+        return gamePiece.relativePositions.map { relativePosition in
+            baseGamePieceCoords.moved(to: relativePosition)
+        }
     }
     
     init() {
@@ -36,28 +41,28 @@ class SquareManager: ObservableObject {
         self.map = try! MapLoader.loadMap(levelNumber: 1)
     }
     
-    func dropSand() throws {
-        defer { self.baseSandySquareCoords = nil }
+    func dropGamePieceSand() throws {
+        defer { self.baseGamePieceCoords = nil }
         
-        guard allSandCanDrop else {
+        guard gamePieceCanDrop else {
             throw GeneralError.generalError
         }
         
-        for sandySquare in sandyCoords {
-            map.reduceDepth(at: sandySquare)
+        for gamePieceCoord in gamePieceCoords {
+            map.reduceDepth(at: gamePieceCoord)
         }
         
-        self.baseSandySquareCoords = nil
+        self.baseGamePieceCoords = nil
         #if LEVELBUILDER
         map.printMap()
         #endif
     }
     
-    var allSandCanDrop: Bool {
+    var gamePieceCanDrop: Bool {
         #if LEVELBUILDER
         true
         #else
-        sandyCoords.allSatisfy({ map.square(at: $0)?.canBeFilled ?? false })
+        gamePieceCoords.allSatisfy({ map.square(at: $0)?.canBeFilled ?? false })
         #endif
     }
     
@@ -71,6 +76,8 @@ class SquareManager: ObservableObject {
     }
     
     func reset() {
-        self.map = try! MapLoader.loadMap(levelNumber: levelNumber)
+        if let refreshedMap = try? MapLoader.loadMap(levelNumber: levelNumber) {
+            self.map = refreshedMap
+        }
     }
 }

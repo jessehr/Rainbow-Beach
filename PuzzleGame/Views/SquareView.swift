@@ -12,7 +12,7 @@ struct SquareView: View {
     
     var body: some View {
         SandView(baseColor: square.color, sandAggressionFactor: 0.7)
-            .animation(.smooth(duration: 0.3), value: square.color)
+            .smoothAnimation(value: square.color, for: 0.3)
     }
 }
 
