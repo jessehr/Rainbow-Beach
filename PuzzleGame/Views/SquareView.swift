@@ -11,8 +11,17 @@ struct SquareView: View {
     @Binding var square: Square
     
     var body: some View {
-        square.color
-            .smoothAnimation(value: square.color, for: 0.3)
+        ZStack {
+            square.color
+            sand
+        }
+        .smoothAnimation(value: square.color, for: 0.3)
+    }
+    
+    var sand: some View {
+        Image("sand1")
+            .resizable()
+            .clipped()
     }
 }
 
