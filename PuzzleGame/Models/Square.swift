@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct Square {
+    let coords: Coordinates
+    let image: Image
+    
     var depth: Int
     
     var color: Color {
@@ -18,5 +21,11 @@ struct Square {
     
     var canBeFilled: Bool {
         return depth > 0
+    }
+    
+    init(depth: Int, coords: Coordinates) {
+        self.depth = depth
+        self.coords = coords
+        self.image = ImageLoader.image(for: "Square-\(coords.x)-\(coords.y)")
     }
 }

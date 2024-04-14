@@ -12,7 +12,15 @@ struct Map {
     var squares: [[Square]]
     
     init(depths: [[Int]]) {
-        self.squares = depths.map { $0.map { Square(depth: $0) } }
+        self.squares = depths.indices.map { rowIndex in
+            depths[rowIndex].indices.map { columnIndex in
+                let coords = Coordinates(x: columnIndex, y: rowIndex)
+                return Square(
+                    depth: depths.at(coords),
+                    coords: coords
+                )
+            }
+        }
     }
     
     mutating func reduceDepth(at coords: Coordinates) {

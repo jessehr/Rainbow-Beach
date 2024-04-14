@@ -11,11 +11,26 @@ struct SquareView: View {
     @Binding var square: Square
     
     var body: some View {
-        SandView(baseColor: square.color, sandAggressionFactor: 0.7)
-            .smoothAnimation(value: square.color, for: 0.3)
+        ZStack {
+            square.color
+            sand
+        }
+        .smoothAnimation(value: square.color, for: 0.3)
+    }
+    
+    var sand: some View {
+        square.image
+            .resizable()
+            .clipped()
     }
 }
 
+
 #Preview {
-    SquareView(square: Binding.constant(Square(depth: 0)))
+    SquareView(square: Binding.constant(
+        Square(
+            depth: 0,
+            coords: Coordinates(x: 0, y: 0)
+        )
+    ))
 }
