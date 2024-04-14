@@ -26,15 +26,23 @@ struct GamePieceView: View {
     var body: some View {
         Canvas { context, size in
             for squareCoords in gamePiece.normalizedLocalCoords {
-                let path = getPath(at: squareCoords)
-                context.fill(path, with: .color(.brown))
-                
-                let sand = Image("sand2")
-                let rect = getSquare(at: squareCoords)
-                context.draw(sand, in: rect)
+                drawColor(at: squareCoords, with: context)
+                addSand(at: squareCoords, with: context)
             }
         }
         .frame(width: canvasWidth, height: canvasHeight)
+    }
+    
+    private func drawColor(at coords: Coordinates, with context: GraphicsContext) {
+        let path = getPath(at: coords)
+        context.fill(path, with: .color(.brown))
+    }
+    
+    private func addSand(at coords: Coordinates, with context: GraphicsContext) {
+        let imageHashName = "GamePieceView-\(coords.x)-\(coords.y)"
+        let sand = ImageLoader.image(for: imageHashName)
+        let rect = getSquare(at: coords)
+        context.draw(sand, in: rect)
     }
     
     private func getPath(at coords: Coordinates) -> Path {

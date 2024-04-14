@@ -12,7 +12,6 @@ class ImageLoader {
     static func image(for stringToHash: String) -> Image {
         let hashedString = stringToHash.hashValue
         let sandImageNumber = abs(hashedString) % sandImageCount + 1
-        print(stringToHash)
         return Image("sand\(sandImageNumber)")
     }
     
