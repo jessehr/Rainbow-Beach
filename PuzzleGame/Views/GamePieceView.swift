@@ -27,7 +27,11 @@ struct GamePieceView: View {
         Canvas { context, size in
             for squareCoords in gamePiece.normalizedLocalCoords {
                 let path = getPath(at: squareCoords)
-                context.fill(path, with: .color(.blue))
+                context.fill(path, with: .color(.brown))
+                
+                let sand = Image("sand2")
+                let rect = getSquare(at: squareCoords)
+                context.draw(sand, in: rect)
             }
         }
         .frame(width: canvasWidth, height: canvasHeight)
