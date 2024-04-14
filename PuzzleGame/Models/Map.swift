@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+// FIXME: rename to Level since GamePiece is included now
+
 struct Map {
     var squares: [[Square]]
     let gamePiece: GamePiece

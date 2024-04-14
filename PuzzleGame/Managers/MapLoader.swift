@@ -14,18 +14,11 @@ class MapLoader {
         }
         let fileContents = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
         let rowStrings = fileContents.components(separatedBy: .newlines)
-        let depths = rowStringsToInts(rowStrings: rowStrings)
-        return Map(
-            depths: depths,
-            gamePiece: GamePiece(
-                relativePositions: [
-                    RelativePosition(rightward: 0, downward: 0),
-                    RelativePosition(rightward: 1, downward: 0),
-                    RelativePosition(rightward: 2, downward: 0),
-                    RelativePosition(rightward: 2, downward: 1)
-                ]
-            )
-        )
+        let gamePieceStrings = Array(rowStrings[1..<4])
+        let mapStrings = Array(rowStrings[5...])
+        let mapDepths = rowStringsToInts(rowStrings: mapStrings)
+        let gamePiece = GamePiece(from: gamePieceStrings)
+        return Map(depths: mapDepths, gamePiece: gamePiece)
     }
     
     private static func rowStringsToInts(rowStrings: [String]) -> [[Int]] {
