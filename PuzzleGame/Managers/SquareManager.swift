@@ -40,7 +40,7 @@ class SquareManager: ObservableObject {
         defer { self.baseGamePieceCoords = nil }
         
         guard gamePieceCanDrop else {
-            throw GeneralError.generalError
+            throw PuzzleError.pieceCannotDrop
         }
         
         for gamePieceCoord in gamePieceCoords {

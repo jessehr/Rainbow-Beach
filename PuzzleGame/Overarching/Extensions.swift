@@ -45,8 +45,9 @@ extension Character {
     }
 }
 
-enum GeneralError: Error {
-    case generalError
+enum PuzzleError: Error {
+    case fileLoadingError
+    case pieceCannotDrop
 }
 
 extension Array where Element: Collection, Element.Index == Int {
