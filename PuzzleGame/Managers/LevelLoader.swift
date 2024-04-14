@@ -11,12 +11,16 @@ class LevelLoader {
     // FIXME: this is loading whole GamePiece but only strings for Map: different levels of abstraction
     static func load(levelNumber: Int) throws -> Level {
         let rowStrings = try getRowStrings(for: levelNumber)
-        
         let gamePiece = getGamePiece(from: rowStrings)
-
         let map = getMap(from: rowStrings)
-        
         return Level(map: map, gamePiece: gamePiece)
+    }
+    
+    private static func getGamePiece(from rowStrings: [String]) -> GamePiece {
+        let startIndex = Int(rowStrings.firstIndex(of: "Game-Piece:")!) + 1
+        let endIndex = Int(rowStrings.firstIndex(of: "Map:")!)
+        let gamePieceStrings = Array(rowStrings[startIndex..<endIndex])
+        return GamePiece(from: gamePieceStrings)
     }
     
     private static func getMap(from rowStrings: [String]) -> Map {
@@ -29,13 +33,6 @@ class LevelLoader {
         let startIndex = Int(rowStrings.firstIndex(of: "Map:")!) + 1
         let mapStrings = Array(rowStrings[startIndex...])
         return mapStrings
-    }
-    
-    private static func getGamePiece(from rowStrings: [String]) -> GamePiece {
-        let startIndex = Int(rowStrings.firstIndex(of: "Game-Piece:")!) + 1
-        let endIndex = Int(rowStrings.firstIndex(of: "Map:")!)
-        let gamePieceStrings = Array(rowStrings[startIndex..<endIndex])
-        return GamePiece(from: gamePieceStrings)
     }
     
     private static func getRowStrings(for levelNumber: Int) throws -> [String] {
