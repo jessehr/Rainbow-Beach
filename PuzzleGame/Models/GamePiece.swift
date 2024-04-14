@@ -15,16 +15,18 @@ struct GamePiece {
     }
     
     init(from strings: [String]) {
-        for row in strings {
-            for char in row {
+        var relativePositions: [RelativePosition] = []
+        for rowIndex in strings.indices {
+            for charIndex in strings[rowIndex].indices {
+                relativePositions.append(
+                    RelativePosition(
+                        rightward: charIndex.utf16Offset(in: strings[rowIndex]),
+                        downward: rowIndex
+                    )
+                )
             }
         }
-        self.relativePositions = [
-            RelativePosition(rightward: 0, downward: 0),
-            RelativePosition(rightward: 0, downward: 1),
-            RelativePosition(rightward: 0, downward: 2),
-            RelativePosition(rightward: 1, downward: 2)
-        ]
+        self.relativePositions = relativePositions
     }
     
     var normalizedLocalCoords: [Coordinates] {
