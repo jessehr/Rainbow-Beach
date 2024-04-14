@@ -8,14 +8,10 @@
 import Foundation
 import SwiftUI
 
-// FIXME: rename to Level since GamePiece is included now
-
 struct Map {
     var squares: [[Square]]
-    let gamePiece: GamePiece
     
-    init(depths: [[Int]], gamePiece: GamePiece) {
-        self.gamePiece = gamePiece
+    init(depths: [[Int]]) {
         self.squares = depths.indices.map { rowIndex in
             depths[rowIndex].indices.map { columnIndex in
                 let coords = Coordinates(x: columnIndex, y: rowIndex)

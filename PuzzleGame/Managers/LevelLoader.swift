@@ -1,5 +1,5 @@
 //
-//  MapLoader.swift
+//  LevelLoader.swift
 //  PuzzleGame
 //
 //  Created by Jesse R on 3/31/24.
@@ -7,17 +7,22 @@
 
 import Foundation
 
-class MapLoader {
+class LevelLoader {
     // FIXME: this is loading whole GamePiece but only strings for Map: different levels of abstraction
-    static func loadMap(levelNumber: Int) throws -> Map {
+    static func load(levelNumber: Int) throws -> Level {
         let rowStrings = try getRowStrings(for: levelNumber)
         
         let gamePiece = getGamePiece(from: rowStrings)
 
+        let map = getMap(from: rowStrings)
+        
+        return Level(map: map, gamePiece: gamePiece)
+    }
+    
+    private static func getMap(from rowStrings: [String]) -> Map {
         let mapStrings = getMapStrings(from: rowStrings)
         let mapDepths = rowStringsToInts(rowStrings: mapStrings)
-        
-        return Map(depths: mapDepths, gamePiece: gamePiece)
+        return Map(depths: mapDepths)
     }
     
     private static func getMapStrings(from rowStrings: [String]) -> [String] {
