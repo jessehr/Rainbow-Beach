@@ -11,7 +11,7 @@ struct SquareView: View {
     @Binding var square: Square
     
     var body: some View {
-        SandView(baseColor: square.color, sandAggressionFactor: 0.7)
+        square.color
             .smoothAnimation(value: square.color, for: 0.3)
     }
 }

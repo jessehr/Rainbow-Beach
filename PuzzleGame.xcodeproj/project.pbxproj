@@ -12,7 +12,6 @@
 		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
 		AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* MapLoader.swift */; };
 		AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE02BBA13AC0074B875 /* Map.swift */; };
-		AA29AFE32BBA50260074B875 /* SandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE22BBA50260074B875 /* SandManager.swift */; };
 		AA29AFE72BBAA6B40074B875 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level3.txt */; };
 		AA29AFE92BBAA8E80074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level4.txt */; };
 		AA29AFEB2BBAA9B10074B875 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level6.txt */; };
@@ -37,7 +36,6 @@
 		AAB656832BC1E21600DC0047 /* GamePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB656822BC1E21600DC0047 /* GamePieceView.swift */; };
 		AABE86192BB0A0A200E7B744 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86182BB0A0A200E7B744 /* Square.swift */; };
 		AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* SquareManager.swift */; };
-		AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861C2BB0A7E400E7B744 /* SandView.swift */; };
 		AAF3CAA02BBD3FF000FFDBF4 /* level5.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */; };
 		AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CAA12BBD420200FFDBF4 /* level2.txt */; };
 /* End PBXBuildFile section */
@@ -48,7 +46,6 @@
 		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		AA29AFDE2BBA13820074B875 /* MapLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLoader.swift; sourceTree = "<group>"; };
 		AA29AFE02BBA13AC0074B875 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		AA29AFE22BBA50260074B875 /* SandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandManager.swift; sourceTree = "<group>"; };
 		AA29AFE62BBAA6B40074B875 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 		AA29AFE82BBAA8E80074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
 		AA29AFEA2BBAA9B10074B875 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
@@ -74,7 +71,6 @@
 		AAB656822BC1E21600DC0047 /* GamePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceView.swift; sourceTree = "<group>"; };
 		AABE86182BB0A0A200E7B744 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		AABE861A2BB0A23B00E7B744 /* SquareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareManager.swift; sourceTree = "<group>"; };
-		AABE861C2BB0A7E400E7B744 /* SandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandView.swift; sourceTree = "<group>"; };
 		AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level5.txt; sourceTree = "<group>"; };
 		AAF3CAA12BBD420200FFDBF4 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +91,6 @@
 			children = (
 				AA1CEE0F2BB6A26000801892 /* SoundManager.swift */,
 				AA29AFD82BB9FE670074B875 /* TimeManager.swift */,
-				AA29AFE22BBA50260074B875 /* SandManager.swift */,
 				AABE861A2BB0A23B00E7B744 /* SquareManager.swift */,
 				AA29AFDE2BBA13820074B875 /* MapLoader.swift */,
 			);
@@ -106,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				AA5B5BB52BA96C3500FEC448 /* SquareView.swift */,
-				AABE861C2BB0A7E400E7B744 /* SandView.swift */,
 				AA5B5BB72BAE967400FEC448 /* GameView.swift */,
 				AAB656822BC1E21600DC0047 /* GamePieceView.swift */,
 				AA9572812BA827BF0001BBB5 /* ContentView.swift */,
@@ -298,7 +292,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AABE861D2BB0A7E400E7B744 /* SandView.swift in Sources */,
 				AA9572822BA827BF0001BBB5 /* ContentView.swift in Sources */,
 				AA29AFDF2BBA13830074B875 /* MapLoader.swift in Sources */,
 				AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */,
@@ -316,7 +309,6 @@
 				AA6326ED2BC33AB8000B9E8C /* OperatorOverloading.swift in Sources */,
 				AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */,
 				AA876AA12BBB99950072E712 /* ShakeSetup.swift in Sources */,
-				AA29AFE32BBA50260074B875 /* SandManager.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
 				AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */,
 			);
