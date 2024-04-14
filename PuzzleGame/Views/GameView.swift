@@ -119,7 +119,7 @@ struct GameView: View {
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        SquareView(square: $squareManager.map.squares[coords.y][coords.x])
+        SquareView(squareManager: squareManager, coords: coords)
             .frame(width: squareWidth, height: squareHeight)
             .possiblePosition(position(atCenterOf: coords))
     }

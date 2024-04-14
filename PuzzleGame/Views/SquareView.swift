@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct SquareView: View {   
-    @Binding var square: Square
+    @ObservedObject var squareManager: SquareManager
+    
+    let coords: Coordinates
     
     var body: some View {
         ZStack {
-            square.color
+            color
             sand
         }
-        .smoothAnimation(value: square.color, for: 0.3)
+        .smoothAnimation(value: color, for: 0.3)
+    }
+
+    var color: Color {
+        let square = squareManager.map.square(at: coords)
+        return square?.color ?? .black
     }
     
     var sand: some View {
@@ -26,5 +33,8 @@ struct SquareView: View {
 }
 
 #Preview {
-    SquareView(square: Binding.constant(Square(depth: 0)))
+    SquareView(
+        squareManager: SquareManager(),
+        coords: Coordinates(x: 0, y: 0)
+    )
 }

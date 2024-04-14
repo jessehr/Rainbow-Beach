@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 class ImageLoader {
-    func image(for stringToHash: String) -> Image? {
+    static func image(for stringToHash: String) -> Image? {
         guard let sandImageCount else { return nil }
         let hashedString = stringToHash.hashValue
         let sandImageNumber = abs(hashedString) % sandImageCount
         return Image("sand\(sandImageNumber)")
     }
     
-    var sandImageCount: Int? {
+    static var sandImageCount: Int? {
         var count = 0
         for i in 1...10000 {
             guard UIImage(named: "sand\(i)") != nil else {
