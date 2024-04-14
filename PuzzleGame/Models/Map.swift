@@ -14,13 +14,14 @@ struct Map {
     init(depths: [[Int]]) {
         self.squares = []
         for rowIndex in 0..<depths.count {
-            var row: [Square] = []
-            for depthIndex in 0..<depths[rowIndex].count {
-                let depth = depths[rowIndex][depthIndex]
-                let coords = Coordinates(x: depthIndex, y: rowIndex)
-                row.append(Square(depth: depth, coords: coords))
-            }
-            squares.append(row)
+            squares.append(
+                (0..<depths[rowIndex].count).map { columnIndex in
+                    Square(
+                        depth: depths[rowIndex][columnIndex],
+                        coords: Coordinates(x: columnIndex, y: rowIndex)
+                    )
+                }
+            )
         }
     }
     
