@@ -9,7 +9,7 @@ import Foundation
 
 class SquareManager: ObservableObject {
     @Published
-    var map: Map
+    var level: Level
     
     @Published
     var baseGamePieceCoords: Coordinates?
@@ -20,14 +20,9 @@ class SquareManager: ObservableObject {
     @Published
     private var levelNumber: Int
     
-    let gamePiece = GamePiece(
-        relativePositions: [
-            RelativePosition(rightward: 0, downward: 0),
-            RelativePosition(rightward: 0, downward: 1),
-            RelativePosition(rightward: 0, downward: 2),
-            RelativePosition(rightward: 1, downward: 2)
-        ]
-    )
+    var gamePiece: GamePiece {
+        level.gamePiece
+    }
      
     var gamePieceCoords: [Coordinates] {
         guard let baseGamePieceCoords else { return [] }
@@ -38,7 +33,7 @@ class SquareManager: ObservableObject {
     
     init() {
         self.levelNumber = 1
-        self.map = try! MapLoader.loadMap(levelNumber: 1)
+        self.level = try! LevelLoader.load(levelNumber: 1)
     }
     
     func dropGamePieceSand() throws {
@@ -49,7 +44,7 @@ class SquareManager: ObservableObject {
         }
         
         for gamePieceCoord in gamePieceCoords {
-            map.reduceDepth(at: gamePieceCoord)
+            level.map.reduceDepth(at: gamePieceCoord)
         }
         
         self.baseGamePieceCoords = nil
@@ -62,22 +57,22 @@ class SquareManager: ObservableObject {
         #if LEVELBUILDER
         true
         #else
-        gamePieceCoords.allSatisfy({ map.square(at: $0)?.canBeFilled ?? false })
+        gamePieceCoords.allSatisfy({ level.map.square(at: $0)?.canBeFilled ?? false })
         #endif
     }
     
     func incrementLevel() {
         levelNumber += 1
         do {
-            self.map = try MapLoader.loadMap(levelNumber: levelNumber)
+            self.level = try LevelLoader.load(levelNumber: levelNumber)
         } catch {
             outOfLevels = true
         }
     }
     
     func reset() {
-        if let refreshedMap = try? MapLoader.loadMap(levelNumber: levelNumber) {
-            self.map = refreshedMap
+        if let refreshedLevel = try? LevelLoader.load(levelNumber: levelNumber) {
+            self.level = refreshedLevel
         }
     }
 }

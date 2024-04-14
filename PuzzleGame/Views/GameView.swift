@@ -16,11 +16,11 @@ struct GameView: View {
     let soundManager: SoundManager
     
     var nRows: Int {
-        squareManager.map.squares.count
+        squareManager.level.map.squares.count
     }
     
     var nColumns: Int {
-        squareManager.map.squares.first?.count ?? 0
+        squareManager.level.map.squares.first?.count ?? 0
     }
     
     var gameWidth: CGFloat {
@@ -54,8 +54,8 @@ struct GameView: View {
                 .impact(flexibility: .rigid, intensity: 0.6),
                 trigger: squareManager.gamePieceCoords
             )
-            .onChange(of: squareManager.map.isSolved) {
-                if squareManager.map.isSolved {
+            .onChange(of: squareManager.level.map.isSolved) {
+                if squareManager.level.map.isSolved {
                     squareManager.incrementLevel()
                 }
             }
@@ -119,7 +119,7 @@ struct GameView: View {
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        SquareView(square: $squareManager.map.squares[coords.y][coords.x])
+        SquareView(square: $squareManager.level.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
             .possiblePosition(position(atCenterOf: coords))
     }

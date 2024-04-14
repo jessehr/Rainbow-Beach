@@ -10,6 +10,25 @@ import Foundation
 struct GamePiece {
     let relativePositions: [RelativePosition]
     
+    init(relativePositions: [RelativePosition]) {
+        self.relativePositions = relativePositions
+    }
+    
+    init(from strings: [String]) {
+        var relativePositions: [RelativePosition] = []
+        for rowIndex in strings.indices {
+            for charIndex in strings[rowIndex].indices where strings[rowIndex][charIndex] == "#" {
+                relativePositions.append(
+                    RelativePosition(
+                        rightward: charIndex.utf16Offset(in: strings[rowIndex]),
+                        downward: rowIndex
+                    )
+                )
+            }
+        }
+        self.relativePositions = relativePositions
+    }
+    
     var normalizedLocalCoords: [Coordinates] {
         let xMin = relativePositions.map { $0.rightward }.min() ?? 0
         let yMin = relativePositions.map { $0.downward }.min() ?? 0
