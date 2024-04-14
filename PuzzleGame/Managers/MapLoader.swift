@@ -14,8 +14,9 @@ class MapLoader {
         }
         let fileContents = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
         let rowStrings = fileContents.components(separatedBy: .newlines)
-        let gamePieceStrings = Array(rowStrings[1..<4])
-        let mapStrings = Array(rowStrings[5...])
+        let dividerIndex = Int(rowStrings.firstIndex(of: "Map:")!)
+        let gamePieceStrings = Array(rowStrings[1..<dividerIndex])
+        let mapStrings = Array(rowStrings[(dividerIndex + 1)...])
         let mapDepths = rowStringsToInts(rowStrings: mapStrings)
         let gamePiece = GamePiece(from: gamePieceStrings)
         return Map(depths: mapDepths, gamePiece: gamePiece)
