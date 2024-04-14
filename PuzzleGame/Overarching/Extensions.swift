@@ -48,3 +48,9 @@ extension Character {
 enum GeneralError: Error {
     case generalError
 }
+
+extension Array where Element: Collection, Element.Index == Int {
+    func at(_ coords: Coordinates) -> Element.Element {
+        return self[coords.y][coords.x]
+    }
+}

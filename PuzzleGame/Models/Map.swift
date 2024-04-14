@@ -14,9 +14,10 @@ struct Map {
     init(depths: [[Int]]) {
         self.squares = (0..<depths.count).map { rowIndex in
             (0..<depths[rowIndex].count).map { columnIndex in
-                Square(
-                    depth: depths[rowIndex][columnIndex],
-                    coords: Coordinates(x: columnIndex, y: rowIndex)
+                let coords = Coordinates(x: columnIndex, y: rowIndex)
+                return Square(
+                    depth: depths.at(coords),
+                    coords: coords
                 )
             }
         }
