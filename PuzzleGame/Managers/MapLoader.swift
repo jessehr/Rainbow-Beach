@@ -8,6 +8,7 @@
 import Foundation
 
 class MapLoader {
+    // FIXME: this is loading whole GamePiece but only strings for Map: different levels of abstraction
     static func loadMap(levelNumber: Int) throws -> Map {
         let rowStrings = try getRowStrings(for: levelNumber)
         

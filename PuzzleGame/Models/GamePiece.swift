@@ -17,7 +17,7 @@ struct GamePiece {
     init(from strings: [String]) {
         var relativePositions: [RelativePosition] = []
         for rowIndex in strings.indices {
-            for charIndex in strings[rowIndex].indices {
+            for charIndex in strings[rowIndex].indices where strings[rowIndex][charIndex] == "#" {
                 relativePositions.append(
                     RelativePosition(
                         rightward: charIndex.utf16Offset(in: strings[rowIndex]),
