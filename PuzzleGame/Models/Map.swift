@@ -12,7 +12,16 @@ struct Map {
     var squares: [[Square]]
     
     init(depths: [[Int]]) {
-        self.squares = depths.map { $0.map { Square(depth: $0) } }
+        self.squares = []
+        for rowIndex in 0..<depths.count {
+            var row: [Square] = []
+            for depthIndex in 0..<depths[rowIndex].count {
+                let depth = depths[rowIndex][depthIndex]
+                let coords = Coordinates(x: depthIndex, y: rowIndex)
+                row.append(Square(depth: depth, coords: coords))
+            }
+            squares.append(row)
+        }
     }
     
     mutating func reduceDepth(at coords: Coordinates) {

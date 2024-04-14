@@ -19,12 +19,18 @@ struct SquareView: View {
     }
     
     var sand: some View {
-        Image("sand1")
+        square.image
             .resizable()
             .clipped()
     }
 }
 
+
 #Preview {
-    SquareView(square: Binding.constant(Square(depth: 0)))
+    SquareView(square: Binding.constant(
+        Square(
+            depth: 0,
+            coords: Coordinates(x: 0, y: 0)
+        )
+    ))
 }
