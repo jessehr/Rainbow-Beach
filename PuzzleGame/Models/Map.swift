@@ -10,8 +10,10 @@ import SwiftUI
 
 struct Map {
     var squares: [[Square]]
+    let gamePiece: GamePiece
     
-    init(depths: [[Int]]) {
+    init(depths: [[Int]], gamePiece: GamePiece) {
+        self.gamePiece = gamePiece
         self.squares = depths.indices.map { rowIndex in
             depths[rowIndex].indices.map { columnIndex in
                 let coords = Coordinates(x: columnIndex, y: rowIndex)

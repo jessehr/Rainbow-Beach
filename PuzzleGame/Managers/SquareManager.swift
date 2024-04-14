@@ -20,14 +20,9 @@ class SquareManager: ObservableObject {
     @Published
     private var levelNumber: Int
     
-    let gamePiece = GamePiece(
-        relativePositions: [
-            RelativePosition(rightward: 0, downward: 0),
-            RelativePosition(rightward: 0, downward: 1),
-            RelativePosition(rightward: 0, downward: 2),
-            RelativePosition(rightward: 1, downward: 2)
-        ]
-    )
+    var gamePiece: GamePiece {
+        map.gamePiece
+    }
      
     var gamePieceCoords: [Coordinates] {
         guard let baseGamePieceCoords else { return [] }
