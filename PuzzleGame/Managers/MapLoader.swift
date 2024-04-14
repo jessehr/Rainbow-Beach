@@ -10,11 +10,19 @@ import Foundation
 class MapLoader {
     static func loadMap(levelNumber: Int) throws -> Map {
         let rowStrings = try getRowStrings(for: levelNumber)
-        let dividerIndex = Int(rowStrings.firstIndex(of: "Map:")!)
-        let mapStrings = Array(rowStrings[(dividerIndex + 1)...])
-        let mapDepths = rowStringsToInts(rowStrings: mapStrings)
+        
         let gamePiece = getGamePiece(from: rowStrings)
+
+        let mapStrings = getMapStrings(from: rowStrings)
+        let mapDepths = rowStringsToInts(rowStrings: mapStrings)
+        
         return Map(depths: mapDepths, gamePiece: gamePiece)
+    }
+    
+    private static func getMapStrings(from rowStrings: [String]) -> [String] {
+        let startIndex = Int(rowStrings.firstIndex(of: "Map:")!) + 1
+        let mapStrings = Array(rowStrings[startIndex...])
+        return mapStrings
     }
     
     private static func getGamePiece(from rowStrings: [String]) -> GamePiece {
