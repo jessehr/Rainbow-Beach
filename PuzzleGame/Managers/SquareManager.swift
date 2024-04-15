@@ -49,7 +49,7 @@ class SquareManager: ObservableObject {
         
         self.baseGamePieceCoords = nil
         #if LEVELBUILDER
-        map.printMap()
+        level.map.printMap()
         #endif
     }
     

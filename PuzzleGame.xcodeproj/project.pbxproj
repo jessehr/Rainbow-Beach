@@ -12,9 +12,9 @@
 		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
 		AA29AFDF2BBA13830074B875 /* LevelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* LevelLoader.swift */; };
 		AA29AFE12BBA13AC0074B875 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFE02BBA13AC0074B875 /* Map.swift */; };
-		AA29AFE72BBAA6B40074B875 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level3.txt */; };
-		AA29AFE92BBAA8E80074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level4.txt */; };
-		AA29AFEB2BBAA9B10074B875 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level6.txt */; };
+		AA29AFE72BBAA6B40074B875 /* level4.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE62BBAA6B40074B875 /* level4.txt */; };
+		AA29AFE92BBAA8E80074B875 /* level5.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFE82BBAA8E80074B875 /* level5.txt */; };
+		AA29AFEB2BBAA9B10074B875 /* level7.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFEA2BBAA9B10074B875 /* level7.txt */; };
 		AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */; };
 		AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */; };
 		AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3BD4D72BB8C3C40003BF48 /* Constants.swift */; };
@@ -31,14 +31,15 @@
 		AA9572842BA827BF0001BBB5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572832BA827BF0001BBB5 /* Item.swift */; };
 		AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572852BA827C00001BBB5 /* Assets.xcassets */; };
 		AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */; };
-		AAB6567B2BBE8B8900DC0047 /* level7.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567A2BBE8B8800DC0047 /* level7.txt */; };
-		AAB6567D2BBE8C6100DC0047 /* level8.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567C2BBE8C6100DC0047 /* level8.txt */; };
+		AAB6567B2BBE8B8900DC0047 /* level8.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567A2BBE8B8800DC0047 /* level8.txt */; };
+		AAB6567D2BBE8C6100DC0047 /* level9.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567C2BBE8C6100DC0047 /* level9.txt */; };
 		AAB656832BC1E21600DC0047 /* GamePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB656822BC1E21600DC0047 /* GamePieceView.swift */; };
 		AABE3AB62BCC62EF003940A2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE3AB52BCC62EF003940A2 /* ImageLoader.swift */; };
 		AABE3AB82BCC867C003940A2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE3AB72BCC867C003940A2 /* Level.swift */; };
+		AABE3ABA2BCCEA14003940A2 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AABE3AB92BCCEA14003940A2 /* level3.txt */; };
 		AABE86192BB0A0A200E7B744 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86182BB0A0A200E7B744 /* Square.swift */; };
 		AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* SquareManager.swift */; };
-		AAF3CAA02BBD3FF000FFDBF4 /* level5.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */; };
+		AAF3CAA02BBD3FF000FFDBF4 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */; };
 		AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CAA12BBD420200FFDBF4 /* level2.txt */; };
 /* End PBXBuildFile section */
 
@@ -48,9 +49,9 @@
 		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		AA29AFDE2BBA13820074B875 /* LevelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLoader.swift; sourceTree = "<group>"; };
 		AA29AFE02BBA13AC0074B875 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		AA29AFE62BBAA6B40074B875 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
-		AA29AFE82BBAA8E80074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
-		AA29AFEA2BBAA9B10074B875 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
+		AA29AFE62BBAA6B40074B875 /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
+		AA29AFE82BBAA8E80074B875 /* level5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level5.txt; sourceTree = "<group>"; };
+		AA29AFEA2BBAA9B10074B875 /* level7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level7.txt; sourceTree = "<group>"; };
 		AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-short.mp3"; sourceTree = "<group>"; };
 		AA3BD4D42BB8BF610003BF48 /* sand-medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sand-medium.mp3"; sourceTree = "<group>"; };
 		AA3BD4D72BB8C3C40003BF48 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -68,14 +69,15 @@
 		AA9572832BA827BF0001BBB5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AA9572852BA827C00001BBB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AAB6567A2BBE8B8800DC0047 /* level7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level7.txt; sourceTree = "<group>"; };
-		AAB6567C2BBE8C6100DC0047 /* level8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level8.txt; sourceTree = "<group>"; };
+		AAB6567A2BBE8B8800DC0047 /* level8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level8.txt; sourceTree = "<group>"; };
+		AAB6567C2BBE8C6100DC0047 /* level9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level9.txt; sourceTree = "<group>"; };
 		AAB656822BC1E21600DC0047 /* GamePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceView.swift; sourceTree = "<group>"; };
 		AABE3AB52BCC62EF003940A2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		AABE3AB72BCC867C003940A2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		AABE3AB92BCCEA14003940A2 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 		AABE86182BB0A0A200E7B744 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		AABE861A2BB0A23B00E7B744 /* SquareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareManager.swift; sourceTree = "<group>"; };
-		AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level5.txt; sourceTree = "<group>"; };
+		AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
 		AAF3CAA12BBD420200FFDBF4 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,12 +163,13 @@
 			children = (
 				AA29AFDC2BBA091A0074B875 /* level1.txt */,
 				AAF3CAA12BBD420200FFDBF4 /* level2.txt */,
-				AA29AFE62BBAA6B40074B875 /* level3.txt */,
-				AA29AFE82BBAA8E80074B875 /* level4.txt */,
-				AAF3CA9F2BBD3FF000FFDBF4 /* level5.txt */,
-				AA29AFEA2BBAA9B10074B875 /* level6.txt */,
-				AAB6567A2BBE8B8800DC0047 /* level7.txt */,
-				AAB6567C2BBE8C6100DC0047 /* level8.txt */,
+				AABE3AB92BCCEA14003940A2 /* level3.txt */,
+				AA29AFE62BBAA6B40074B875 /* level4.txt */,
+				AA29AFE82BBAA8E80074B875 /* level5.txt */,
+				AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */,
+				AA29AFEA2BBAA9B10074B875 /* level7.txt */,
+				AAB6567A2BBE8B8800DC0047 /* level8.txt */,
+				AAB6567C2BBE8C6100DC0047 /* level9.txt */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -276,15 +279,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA29AFE92BBAA8E80074B875 /* level4.txt in Resources */,
-				AAB6567B2BBE8B8900DC0047 /* level7.txt in Resources */,
+				AA29AFE92BBAA8E80074B875 /* level5.txt in Resources */,
+				AAB6567B2BBE8B8900DC0047 /* level8.txt in Resources */,
 				AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */,
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
-				AA29AFEB2BBAA9B10074B875 /* level6.txt in Resources */,
-				AA29AFE72BBAA6B40074B875 /* level3.txt in Resources */,
-				AAF3CAA02BBD3FF000FFDBF4 /* level5.txt in Resources */,
+				AABE3ABA2BCCEA14003940A2 /* level3.txt in Resources */,
+				AA29AFEB2BBAA9B10074B875 /* level7.txt in Resources */,
+				AA29AFE72BBAA6B40074B875 /* level4.txt in Resources */,
+				AAF3CAA02BBD3FF000FFDBF4 /* level6.txt in Resources */,
 				AA3BD4D62BB8BF610003BF48 /* sand-medium.mp3 in Resources */,
-				AAB6567D2BBE8C6100DC0047 /* level8.txt in Resources */,
+				AAB6567D2BBE8C6100DC0047 /* level9.txt in Resources */,
 				AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */,
 				AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */,
 				AA3BD4D52BB8BF610003BF48 /* sand-short.mp3 in Resources */,
