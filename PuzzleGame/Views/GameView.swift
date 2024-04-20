@@ -40,7 +40,15 @@ struct GameView: View {
     }
     
     @State
-    private var touchInfoString = ""
+    private var touchPoints: [CGPointWithID] = []
+    
+    var touchPointsDict: [UUID: CGPoint] {
+        var touchPointsDict: [UUID: CGPoint] = [:]
+        for touchPoint in touchPoints {
+            touchPointsDict[touchPoint.id] = touchPoint.point
+        }
+        return touchPointsDict
+    }
     
     init(using reader: GeometryProxy) {
         self.reader = reader
@@ -58,17 +66,18 @@ struct GameView: View {
     }
     
     private var touchHandler: some View {
-        TouchHandler(touchInfo: $touchInfoString)
-            .onChanged { points in
-                if let firstPoint = points.first {
-                    onDrag(to: firstPoint)
+        TouchHandler(touchPoints: $touchPoints)
+            .onChange(of: touchPointsDict) { oldDict, newDict in
+                for oldPointAndId in oldDict {
+                    let oldPoint = oldPointAndId.value
+                    let newPoint = newDict[oldPointAndId.key]
+                    if newPoint != oldPoint {
+                        print("\(newPoint) (changed)")
+                    } else {
+                        print("\(newPoint)")
+
+                    }
                 }
-            }
-            .onEnded { points in
-                do {
-                    try squareManager.dropGamePieceSand()
-                    soundManager.play(for: Constants.dropAnimationLength)
-                } catch { }
             }
     }
     

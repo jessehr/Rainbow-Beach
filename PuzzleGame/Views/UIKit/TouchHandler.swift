@@ -9,46 +9,60 @@ import SwiftUI
 import UIKit
 
 struct TouchHandler: UIViewRepresentable {
-    @Binding var touchInfo: String
-
-    var onChanged: (([CGPoint]) -> Void)?
-    var onEnded: (([CGPoint]) -> Void)?
+    @Binding var touchPoints: [CGPointWithID]  // Binding to an array of identified points
 
     func makeUIView(context: Context) -> TouchHandlingUIView {
         let view = TouchHandlingUIView()
         view.isMultipleTouchEnabled = true  // Enable multitouch
 
         view.touchBegan = { touches, event in
-            self.handleTouches(touches, view: view, callback: self.onChanged)
+            for touch in touches {
+                let key = NSValue(nonretainedObject: touch)
+                let newPoint = CGPointWithID(point: touch.location(in: view))
+                context.coordinator.touchPoints[key] = newPoint
+            }
+            self.updateBinding(from: context.coordinator.touchPoints)
         }
         view.touchMoved = { touches, event in
-            self.handleTouches(touches, view: view, callback: self.onChanged)
+            for touch in touches {
+                let key = NSValue(nonretainedObject: touch)
+                if var existingPoint = context.coordinator.touchPoints[key] {
+                    existingPoint.point = touch.location(in: view)
+                    context.coordinator.touchPoints[key] = existingPoint
+                }
+            }
+            self.updateBinding(from: context.coordinator.touchPoints)
         }
         view.touchEnded = { touches, event in
-            self.handleTouches(touches, view: view, callback: self.onEnded)
+            for touch in touches {
+                let key = NSValue(nonretainedObject: touch)
+                context.coordinator.touchPoints.removeValue(forKey: key)
+            }
+            self.updateBinding(from: context.coordinator.touchPoints)
         }
         view.touchCancelled = { touches, event in
-            self.handleTouches(touches, view: view, callback: self.onEnded)
+            for touch in touches {
+                let key = NSValue(nonretainedObject: touch)
+                context.coordinator.touchPoints.removeValue(forKey: key)
+            }
+            self.updateBinding(from: context.coordinator.touchPoints)
         }
         return view
     }
 
-    func updateUIView(_ uiView: TouchHandlingUIView, context: Context) {}
+    func updateUIView(_ uiView: TouchHandlingUIView, context: Context) { }
 
-    private func handleTouches(_ touches: Set<UITouch>, view: UIView, callback: (([CGPoint]) -> Void)?) {
-        let locations = touches.map { $0.location(in: view) }
-        callback?(locations)
+    private func updateBinding(from dictionary: [NSValue: CGPointWithID]) {
+        DispatchQueue.main.async {
+            self.touchPoints = Array(dictionary.values)
+        }
     }
 
-    func onChanged(_ handler: @escaping (([CGPoint]) -> Void)) -> TouchHandler {
-        var newView = self
-        newView.onChanged = handler
-        return newView
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 
-    func onEnded(_ handler: @escaping (([CGPoint]) -> Void)) -> TouchHandler {
-        var newView = self
-        newView.onEnded = handler
-        return newView
+    class Coordinator: NSObject {
+        var touchPoints = [NSValue: CGPointWithID]()  // Dictionary to track points by UITouch
     }
 }
