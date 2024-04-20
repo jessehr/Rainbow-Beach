@@ -53,19 +53,25 @@ struct GameView: View {
     var body: some View {
         ZStack {
             totalViewWithModifiers
-            TouchHandler(touchInfo: $touchInfoString)
-                .onChanged { value in
-                    print(value)
-                }
-                .onEnded { value in
-                    print("ended: \(value)")
-                }
+            touchHandler
         }
+    }
+    
+    private var touchHandler: some View {
+        TouchHandler(touchInfo: $touchInfoString)
+            .onChanged { point in
+                onDrag(to: point)
+            }
+            .onEnded { _ in
+                do {
+                    try squareManager.dropGamePieceSand()
+                    soundManager.play(for: Constants.dropAnimationLength)
+                } catch { }
+            }
     }
     
     private var totalViewWithModifiers: some View {
         totalView
-            .gesture(gestures)
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.6),
                 trigger: squareManager.gamePieceCoords
@@ -140,21 +146,8 @@ struct GameView: View {
             .possiblePosition(position(atCenterOf: coords))
     }
     
-    private var gestures: some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                onDrag(with: value)
-            }
-            .onEnded { _ in
-                do {
-                    try squareManager.dropGamePieceSand()
-                    soundManager.play(for: Constants.dropAnimationLength)
-                } catch { }
-            }
-    }
-    
-    private func onDrag(with value: DragGesture.Value) {
-        let tapCoords = coordinates(from: value.location)
+    private func onDrag(to point: CGPoint) {
+        let tapCoords = coordinates(from: point)
         guard squareManager.baseGamePieceCoords != tapCoords else {
             return
         }
