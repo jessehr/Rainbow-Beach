@@ -54,6 +54,12 @@ struct GameView: View {
         ZStack {
             totalViewWithModifiers
             TouchHandler(touchInfo: $touchInfoString)
+                .onChanged { value in
+                    print(value)
+                }
+                .onEnded { value in
+                    print("ended: \(value)")
+                }
         }
     }
     

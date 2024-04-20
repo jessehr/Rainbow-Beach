@@ -6,32 +6,45 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct TouchHandler: UIViewRepresentable {
     @Binding var touchInfo: String
 
+    var onChanged: ((CGPoint) -> Void)?
+    var onEnded: ((CGPoint) -> Void)?
+
     func makeUIView(context: Context) -> TouchHandlingUIView {
         let view = TouchHandlingUIView()
         view.touchBegan = { touches, event in
-            self.handleTouch("Began", touches: touches)
+            // Initialize touch data, if needed
         }
         view.touchMoved = { touches, event in
-            self.handleTouch("Moved", touches: touches)
+            if let touch = touches.first {
+                let location = touch.location(in: view)
+                self.onChanged?(location)
+            }
         }
         view.touchEnded = { touches, event in
-            self.handleTouch("Ended", touches: touches)
+            if let touch = touches.first {
+                let location = touch.location(in: view)
+                self.onEnded?(location)
+            }
         }
         return view
     }
 
-    func updateUIView(_ uiView: TouchHandlingUIView, context: Context) {
+    func updateUIView(_ uiView: TouchHandlingUIView, context: Context) {}
+
+    func onChanged(_ handler: @escaping ((CGPoint) -> Void)) -> TouchHandler {
+        var newView = self
+        newView.onChanged = handler
+        return newView
     }
 
-    private func handleTouch(_ phase: String, touches: Set<UITouch>) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: nil) // Get location relative to the window
-        Task { @MainActor in
-            self.touchInfo = "\(phase) at \(location)"
-        }
+    func onEnded(_ handler: @escaping ((CGPoint) -> Void)) -> TouchHandler {
+        var newView = self
+        newView.onEnded = handler
+        return newView
     }
 }
