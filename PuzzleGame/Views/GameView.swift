@@ -39,6 +39,9 @@ struct GameView: View {
         gameHeight / nRows
     }
     
+    @State
+    private var touchInfoString = ""
+    
     init(using reader: GeometryProxy) {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
@@ -48,6 +51,13 @@ struct GameView: View {
     }
     
     var body: some View {
+        ZStack {
+            totalViewWithModifiers
+            TouchHandler(touchInfo: $touchInfoString)
+        }
+    }
+    
+    private var totalViewWithModifiers: some View {
         totalView
             .gesture(gestures)
             .sensoryFeedback(
