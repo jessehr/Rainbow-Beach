@@ -68,17 +68,21 @@ struct GameView: View {
     private var touchHandler: some View {
         TouchHandler(touchPoints: $touchPoints)
             .onChange(of: touchPointsDict) { oldDict, newDict in
-                for oldPointAndId in oldDict {
-                    let oldPoint = oldPointAndId.value
-                    let newPoint = newDict[oldPointAndId.key]
-                    if newPoint != oldPoint {
-                        print("\(newPoint) (changed)")
-                    } else {
-                        print("\(newPoint)")
-
-                    }
+                if let firstTouchPoint = touchPoints.first {
+                    onDrag(to: firstTouchPoint.point)
+                } else {
+                    onTouchEnded()
                 }
             }
+    }
+    
+    private func onTouchEnded() {
+        do {
+            try squareManager.dropGamePieceSand()
+            print("cool")
+            soundManager.play(for: Constants.dropAnimationLength)
+        } catch {
+        }
     }
     
     private var totalViewWithModifiers: some View {
