@@ -59,10 +59,12 @@ struct GameView: View {
     
     private var touchHandler: some View {
         TouchHandler(touchInfo: $touchInfoString)
-            .onChanged { point in
-                onDrag(to: point)
+            .onChanged { points in
+                if let firstPoint = points.first {
+                    onDrag(to: firstPoint)
+                }
             }
-            .onEnded { _ in
+            .onEnded { points in
                 do {
                     try squareManager.dropGamePieceSand()
                     soundManager.play(for: Constants.dropAnimationLength)

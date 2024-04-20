@@ -14,6 +14,7 @@ class TouchHandlingUIView: UIView {
     var touchBegan: ((Set<UITouch>, UIEvent?) -> Void)?
     var touchMoved: ((Set<UITouch>, UIEvent?) -> Void)?
     var touchEnded: ((Set<UITouch>, UIEvent?) -> Void)?
+    var touchCancelled: ((Set<UITouch>, UIEvent?) -> Void)?
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchBegan?(touches, event)
