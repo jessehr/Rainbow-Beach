@@ -17,7 +17,10 @@ struct TouchHandler: UIViewRepresentable {
     func makeUIView(context: Context) -> TouchHandlingUIView {
         let view = TouchHandlingUIView()
         view.touchBegan = { touches, event in
-            // Initialize touch data, if needed
+            if let touch = touches.first {
+                let location = touch.location(in: view)
+                self.onChanged?(location)
+            }
         }
         view.touchMoved = { touches, event in
             if let touch = touches.first {
