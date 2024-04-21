@@ -68,18 +68,23 @@ struct GameView: View {
     private var touchHandler: some View {
         TouchHandler(touchPoints: $touchPoints)
             .onChange(of: touchPointsDict) { oldDict, newDict in
-                if let firstTouchPoint = touchPoints.first {
-                    onDrag(to: firstTouchPoint.point)
-                } else {
+                if touchPoints.count == 0 {
                     onTouchEnded()
+                } else if touchPoints.count == 1 {
+                    onDrag(to: touchPoints[0].point)
+                } else {
+                    onMultitouch()
                 }
             }
+    }
+    
+    private func onMultitouch() {
+        print("TODO: implement multi touch behavior")
     }
     
     private func onTouchEnded() {
         do {
             try squareManager.dropGamePieceSand()
-            print("cool")
             soundManager.play(for: Constants.dropAnimationLength)
         } catch {
         }
