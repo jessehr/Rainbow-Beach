@@ -58,7 +58,13 @@ extension Array where Element: Collection, Element.Index == Int {
 
 extension Array where Element == TouchPoint {
     private var sortedByAge: [TouchPoint] {
-        self.sorted { $0.creationTime < $1.creationTime }
+        self.sorted {
+            if $0.creationTime != $1.creationTime {
+                return $0.creationTime < $1.creationTime
+            } else {
+                return $0.id.uuidString < $1.id.uuidString
+            }
+        }
     }
     
     var oldest: TouchPoint? {
