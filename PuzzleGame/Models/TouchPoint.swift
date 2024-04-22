@@ -22,13 +22,8 @@ struct TouchPoint: Equatable, Identifiable {
     }
     
     func degreesRotated(by otherTouchPoint: TouchPoint) -> Double {
-        // Old line vector from A's startingPoint to B's startingPoint
-        let oldVector = CGVector(dx: otherTouchPoint.startingPoint.x - self.startingPoint.x,
-                                 dy: otherTouchPoint.startingPoint.y - self.startingPoint.y)
-        
-        // New line vector from A's current point to B's current point
-        let newVector = CGVector(dx: otherTouchPoint.point.x - self.point.x,
-                                 dy: otherTouchPoint.point.y - self.point.y)
+        let oldVector = self.startingPoint.vector(to: otherTouchPoint.startingPoint)
+        let newVector = self.point.vector(to: otherTouchPoint.point)
         
         let dotProduct = oldVector.dx * newVector.dx + oldVector.dy * newVector.dy
         let oldMagnitude = sqrt(oldVector.dx * oldVector.dx + oldVector.dy * oldVector.dy)

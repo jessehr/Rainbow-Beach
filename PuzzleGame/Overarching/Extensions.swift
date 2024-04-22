@@ -77,10 +77,10 @@ extension Array where Element == TouchPoint {
 }
 
 extension CGPoint {
-    func slope(to otherPoint: CGPoint) -> Double {
-        let deltaY = otherPoint.y - self.y
-        let deltaX = otherPoint.x - self.x
-        guard deltaX != 0 else { return 0 }
-        return deltaY / deltaX
+    func vector(to otherPoint: CGPoint) -> CGVector {
+        CGVector(
+            dx: otherPoint.x - self.x,
+            dy: otherPoint.y - self.y
+        )
     }
 }
