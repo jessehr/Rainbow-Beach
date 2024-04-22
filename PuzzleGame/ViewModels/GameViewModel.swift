@@ -1,5 +1,5 @@
 //
-//  SquareManager.swift
+//  GameViewModel.swift
 //  PuzzleGame
 //
 //  Created by Jesse R on 3/24/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SquareManager: ObservableObject {
+class GameViewModel: ObservableObject {
     @Published
     var level: Level
     

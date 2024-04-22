@@ -41,7 +41,7 @@
 		AABE3ABF2BD4670F003940A2 /* TouchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE3ABE2BD4670F003940A2 /* TouchHandler.swift */; };
 		AABE3AC12BD4742E003940A2 /* TouchPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE3AC02BD4742E003940A2 /* TouchPoint.swift */; };
 		AABE86192BB0A0A200E7B744 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE86182BB0A0A200E7B744 /* Square.swift */; };
-		AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* SquareManager.swift */; };
+		AABE861B2BB0A23B00E7B744 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* GameViewModel.swift */; };
 		AAF3CAA02BBD3FF000FFDBF4 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */; };
 		AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CAA12BBD420200FFDBF4 /* level2.txt */; };
 /* End PBXBuildFile section */
@@ -82,7 +82,7 @@
 		AABE3ABE2BD4670F003940A2 /* TouchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchHandler.swift; sourceTree = "<group>"; };
 		AABE3AC02BD4742E003940A2 /* TouchPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchPoint.swift; sourceTree = "<group>"; };
 		AABE86182BB0A0A200E7B744 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
-		AABE861A2BB0A23B00E7B744 /* SquareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareManager.swift; sourceTree = "<group>"; };
+		AABE861A2BB0A23B00E7B744 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
 		AAF3CAA12BBD420200FFDBF4 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +103,6 @@
 			children = (
 				AA1CEE0F2BB6A26000801892 /* SoundManager.swift */,
 				AA29AFD82BB9FE670074B875 /* TimeManager.swift */,
-				AABE861A2BB0A23B00E7B744 /* SquareManager.swift */,
 				AA29AFDE2BBA13820074B875 /* LevelLoader.swift */,
 				AABE3AB52BCC62EF003940A2 /* ImageLoader.swift */,
 			);
@@ -210,6 +209,7 @@
 		AA95727E2BA827BF0001BBB5 /* PuzzleGame */ = {
 			isa = PBXGroup;
 			children = (
+				AAFC8A182BD605C100145BE3 /* ViewModels */,
 				AA29AFD32BB9FB1C0074B875 /* Views */,
 				AA29AFD22BB9FB170074B875 /* Managers */,
 				AA29AFD72BB9FBA40074B875 /* Overarching */,
@@ -236,6 +236,14 @@
 				AABE3ABE2BD4670F003940A2 /* TouchHandler.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		AAFC8A182BD605C100145BE3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AABE861A2BB0A23B00E7B744 /* GameViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,7 +340,7 @@
 				AAB656832BC1E21600DC0047 /* GamePieceView.swift in Sources */,
 				AABE3AC12BD4742E003940A2 /* TouchPoint.swift in Sources */,
 				AA5B5BBA2BAE9DCC00FEC448 /* Extensions.swift in Sources */,
-				AABE861B2BB0A23B00E7B744 /* SquareManager.swift in Sources */,
+				AABE861B2BB0A23B00E7B744 /* GameViewModel.swift in Sources */,
 				AA29AFD92BB9FE670074B875 /* TimeManager.swift in Sources */,
 				AABE86192BB0A0A200E7B744 /* Square.swift in Sources */,
 				AA9572802BA827BF0001BBB5 /* PuzzleGameApp.swift in Sources */,

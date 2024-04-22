@@ -11,7 +11,7 @@ struct GameView: View {
     let reader: GeometryProxy
     
     @StateObject
-    var squareManager: SquareManager
+    var squareManager: GameViewModel
     
     let soundManager: SoundManager
     
@@ -46,7 +46,7 @@ struct GameView: View {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
         self._squareManager = StateObject(wrappedValue:
-            SquareManager()
+            GameViewModel()
         )
     }
     
