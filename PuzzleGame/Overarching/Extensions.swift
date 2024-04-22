@@ -84,3 +84,13 @@ extension CGPoint {
         )
     }
 }
+
+extension CGVector {
+    func cosTheta(to otherVector: CGVector) -> Double {
+        let dotProduct = otherVector.dx * self.dx + otherVector.dy * self.dy
+        let oldMagnitude = sqrt(otherVector.dx * otherVector.dx + otherVector.dy * otherVector.dy)
+        let newMagnitude = sqrt(self.dx * self.dx + self.dy * self.dy)
+        let cosTheta = dotProduct / (oldMagnitude * newMagnitude)
+        return cosTheta
+    }
+}
