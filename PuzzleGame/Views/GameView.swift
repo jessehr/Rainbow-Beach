@@ -41,22 +41,7 @@ struct GameView: View {
     
     @State
     private var touchPoints: [TouchPoint] = []
-    
-    var touchPointsDict: [UUID: CGPoint] {
-        var touchPointsDict: [UUID: CGPoint] = [:]
-        for touchPoint in touchPoints {
-            touchPointsDict[touchPoint.id] = touchPoint.point
-        }
-        return touchPointsDict
-    }
-    
-    var primaryTouch: TouchPoint? {
-        touchPoints.oldest
-    }
-    var secondaryTouch: TouchPoint? {
-        touchPoints.secondOldest
-    }
-    
+
     init(using reader: GeometryProxy) {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
@@ -74,21 +59,35 @@ struct GameView: View {
     
     private var touchHandler: some View {
         TouchHandler(touchPoints: $touchPoints)
-            .onChange(of: touchPointsDict) { oldDict, newDict in
-                if touchPoints.count == 0 {
+            .onChange(of: touchPoints) { oldPoints, newPoints in
+                guard let newPrimaryTouch = newPoints.primaryTouch else {
                     onTouchEnded()
-                } else if touchPoints.count == 1 {
-                    onDrag(to: touchPoints[0].point)
-                } else {
-                    onMultitouch()
+                    return
                 }
+                
+                guard let newSecondaryTouch = newPoints.secondaryTouch else {
+                    onDrag(to: newPrimaryTouch.point)
+                    return
+                }
+                
+                onMultitouch(
+                    newPrimaryTouch: newPrimaryTouch,
+                    newSecondaryTouch: newSecondaryTouch,
+                    oldPrimaryTouch: oldPoints.primaryTouch,
+                    oldSecondaryTouch: oldPoints.secondaryTouch
+                )
             }
     }
     
-    private func onMultitouch() {
+    private func onMultitouch(
+        newPrimaryTouch: TouchPoint,
+        newSecondaryTouch: TouchPoint,
+        oldPrimaryTouch: TouchPoint?,
+        oldSecondaryTouch: TouchPoint?
+    ) {
         print("TODO: implement multi touch behavior")
     }
-    
+
     private func onTouchEnded() {
         do {
             try squareManager.dropGamePieceSand()

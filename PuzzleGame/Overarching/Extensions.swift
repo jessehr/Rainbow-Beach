@@ -67,11 +67,11 @@ extension Array where Element == TouchPoint {
         }
     }
     
-    var oldest: TouchPoint? {
+    var primaryTouch: TouchPoint? {
         sortedByAge[safe: 0]
     }
     
-    var secondOldest: TouchPoint? {
+    var secondaryTouch: TouchPoint? {
         sortedByAge[safe: 1]
     }
 }
