@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     let reader: GeometryProxy
-        
+    
     @StateObject
     var squareManager: SquareManager
     
@@ -40,7 +40,7 @@ struct GameView: View {
     }
     
     @State
-    private var touchPoints: [CGPointWithID] = []
+    private var touchPoints: [TouchPoint] = []
     
     var touchPointsDict: [UUID: CGPoint] {
         var touchPointsDict: [UUID: CGPoint] = [:]
@@ -48,6 +48,13 @@ struct GameView: View {
             touchPointsDict[touchPoint.id] = touchPoint.point
         }
         return touchPointsDict
+    }
+    
+    var primaryTouch: TouchPoint? {
+        touchPoints[safe: 0]
+    }
+    var secondaryTouch: TouchPoint? {
+        touchPoints[safe: 1]
     }
     
     init(using reader: GeometryProxy) {

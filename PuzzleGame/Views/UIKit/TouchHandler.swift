@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct TouchHandler: UIViewRepresentable {
-    @Binding var touchPoints: [CGPointWithID]  // Binding to an array of identified points
+    @Binding var touchPoints: [TouchPoint]  // Binding to an array of identified points
 
     func makeUIView(context: Context) -> TouchHandlingUIView {
         let view = TouchHandlingUIView()
@@ -18,7 +18,7 @@ struct TouchHandler: UIViewRepresentable {
         view.touchBegan = { touches, event in
             for touch in touches {
                 let key = NSValue(nonretainedObject: touch)
-                let newPoint = CGPointWithID(point: touch.location(in: view))
+                let newPoint = TouchPoint(point: touch.location(in: view))
                 context.coordinator.touchPoints[key] = newPoint
             }
             self.updateBinding(from: context.coordinator.touchPoints)
@@ -52,7 +52,7 @@ struct TouchHandler: UIViewRepresentable {
 
     func updateUIView(_ uiView: TouchHandlingUIView, context: Context) { }
 
-    private func updateBinding(from dictionary: [NSValue: CGPointWithID]) {
+    private func updateBinding(from dictionary: [NSValue: TouchPoint]) {
         DispatchQueue.main.async {
             self.touchPoints = Array(dictionary.values)
         }
@@ -63,6 +63,6 @@ struct TouchHandler: UIViewRepresentable {
     }
 
     class Coordinator: NSObject {
-        var touchPoints = [NSValue: CGPointWithID]()  // Dictionary to track points by UITouch
+        var touchPoints = [NSValue: TouchPoint]()  // Dictionary to track points by UITouch
     }
 }
