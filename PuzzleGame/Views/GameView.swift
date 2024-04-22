@@ -65,21 +65,18 @@ struct GameView: View {
                 }
                 
                 onMultitouch(
-                    newPrimaryTouch: newPrimaryTouch,
-                    newSecondaryTouch: newSecondaryTouch,
-                    oldPrimaryTouch: oldPoints.primaryTouch,
-                    oldSecondaryTouch: oldPoints.secondaryTouch
+                    primary: newPrimaryTouch,
+                    secondary: newSecondaryTouch
                 )
             }
     }
     
     private func onMultitouch(
-        newPrimaryTouch: TouchPoint,
-        newSecondaryTouch: TouchPoint,
-        oldPrimaryTouch: TouchPoint?,
-        oldSecondaryTouch: TouchPoint?
+        primary: TouchPoint,
+        secondary: TouchPoint
     ) {
-        print("TODO: implement multi touch behavior")
+        print(primary.degreesRotated(by: secondary))
+        // TODO: implement multi touch behavior
     }
 
     private func onTouchEnded() {
