@@ -51,10 +51,10 @@ struct GameView: View {
     }
     
     var primaryTouch: TouchPoint? {
-        touchPoints[safe: 0]
+        touchPoints.oldest
     }
     var secondaryTouch: TouchPoint? {
-        touchPoints[safe: 1]
+        touchPoints.secondOldest
     }
     
     init(using reader: GeometryProxy) {

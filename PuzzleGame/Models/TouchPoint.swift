@@ -8,6 +8,7 @@
 import Foundation
 
 struct TouchPoint: Equatable, Identifiable {
+    let creationTime = Date.now
     var id = UUID()
     var point: CGPoint
 }

@@ -55,3 +55,17 @@ extension Array where Element: Collection, Element.Index == Int {
         return self[coords.y][coords.x]
     }
 }
+
+extension Array where Element == TouchPoint {
+    private var sortedByAge: [TouchPoint] {
+        self.sorted { $0.creationTime < $1.creationTime }
+    }
+    
+    var oldest: TouchPoint? {
+        sortedByAge[safe: 0]
+    }
+    
+    var secondOldest: TouchPoint? {
+        sortedByAge[safe: 1]
+    }
+}
