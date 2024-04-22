@@ -9,6 +9,9 @@ import Foundation
 
 class GameViewModel: ObservableObject {
     @Published
+    var touchPoints: [TouchPoint] = []
+
+    @Published
     var level: Level
     
     @Published
@@ -30,7 +33,7 @@ class GameViewModel: ObservableObject {
             baseGamePieceCoords.moved(to: relativePosition)
         }
     }
-    
+        
     init() {
         self.levelNumber = 1
         self.level = try! LevelLoader.load(levelNumber: 1)

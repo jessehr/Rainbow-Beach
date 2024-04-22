@@ -38,9 +38,6 @@ struct GameView: View {
     var squareHeight: CGFloat {
         gameHeight / nRows
     }
-    
-    @State
-    private var touchPoints: [TouchPoint] = []
 
     init(using reader: GeometryProxy) {
         self.reader = reader
@@ -58,8 +55,8 @@ struct GameView: View {
     }
     
     private var touchHandler: some View {
-        TouchHandler(touchPoints: $touchPoints)
-            .onChange(of: touchPoints) { oldPoints, newPoints in
+        TouchHandler(touchPoints: $viewModel.touchPoints)
+            .onChange(of: viewModel.touchPoints) { oldPoints, newPoints in
                 guard let newPrimaryTouch = newPoints.primaryTouch else {
                     onTouchEnded()
                     return
@@ -85,7 +82,6 @@ struct GameView: View {
         oldPrimaryTouch: TouchPoint?,
         oldSecondaryTouch: TouchPoint?
     ) {
-        //        let newAngle = getAngle(newPrimaryTouch, newSecondaryTouch)
         print("TODO: implement multi touch behavior")
     }
 
