@@ -11,16 +11,16 @@ struct GameView: View {
     let reader: GeometryProxy
     
     @StateObject
-    var squareManager: GameViewModel
+    var viewModel: GameViewModel
     
     let soundManager: SoundManager
     
     var nRows: Int {
-        squareManager.level.map.squares.count
+        viewModel.level.map.squares.count
     }
     
     var nColumns: Int {
-        squareManager.level.map.squares.first?.count ?? 0
+        viewModel.level.map.squares.first?.count ?? 0
     }
     
     var gameWidth: CGFloat {
@@ -45,7 +45,7 @@ struct GameView: View {
     init(using reader: GeometryProxy) {
         self.reader = reader
         self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
-        self._squareManager = StateObject(wrappedValue:
+        self._viewModel = StateObject(wrappedValue:
             GameViewModel()
         )
     }
@@ -85,12 +85,13 @@ struct GameView: View {
         oldPrimaryTouch: TouchPoint?,
         oldSecondaryTouch: TouchPoint?
     ) {
+        //        let newAngle = getAngle(newPrimaryTouch, newSecondaryTouch)
         print("TODO: implement multi touch behavior")
     }
 
     private func onTouchEnded() {
         do {
-            try squareManager.dropGamePieceSand()
+            try viewModel.dropGamePieceSand()
             soundManager.play(for: Constants.dropAnimationLength)
         } catch {
         }
@@ -100,15 +101,15 @@ struct GameView: View {
         totalView
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.6),
-                trigger: squareManager.gamePieceCoords
+                trigger: viewModel.gamePieceCoords
             )
-            .onChange(of: squareManager.level.map.isSolved) {
-                if squareManager.level.map.isSolved {
-                    squareManager.incrementLevel()
+            .onChange(of: viewModel.level.map.isSolved) {
+                if viewModel.level.map.isSolved {
+                    viewModel.incrementLevel()
                 }
             }
             .onShake {
-                squareManager.reset()
+                viewModel.reset()
             }
     }
     
@@ -133,29 +134,29 @@ struct GameView: View {
         GamePieceView(
             squareWidth: squareWidth,
             squareHeight: squareHeight,
-            gamePiece: squareManager.gamePiece
+            gamePiece: viewModel.gamePiece
         )
-        .opacity(squareManager.gamePieceCanDrop ? 1.0 : 0.5)
-        .smoothAnimation(value: squareManager.gamePieceCanDrop)
+        .opacity(viewModel.gamePieceCanDrop ? 1.0 : 0.5)
+        .smoothAnimation(value: viewModel.gamePieceCanDrop)
     }
     
     private var gamePieceViewPositioned: some View {
         gamePieceView
-            .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
-            .smoothAnimation(value: squareManager.gamePieceCoords)
+            .possiblePosition(position(atCenterOf: viewModel.baseGamePieceCoords))
+            .smoothAnimation(value: viewModel.gamePieceCoords)
             .offset(gamePieceOffset)
     }
     
     private var gamePieceOffset: CGSize {
         CGSize(
-            width: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
-            height: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
+            width: 0.5 * squareWidth * (viewModel.gamePiece.widthInSquares - 1),
+            height: 0.5 * squareHeight * (viewModel.gamePiece.heightInSquares - 1)
         )
     }
     
     @ViewBuilder
     private var winningView: some View {
-        if squareManager.outOfLevels {
+        if viewModel.outOfLevels {
             Text("You won! Yay!")
                 .font(.largeTitle)
                 .bold()
@@ -167,17 +168,17 @@ struct GameView: View {
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        SquareView(square: $squareManager.level.map.squares[coords.y][coords.x])
+        SquareView(square: $viewModel.level.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
             .possiblePosition(position(atCenterOf: coords))
     }
     
     private func onDrag(to point: CGPoint) {
         let tapCoords = coordinates(from: point)
-        guard squareManager.baseGamePieceCoords != tapCoords else {
+        guard viewModel.baseGamePieceCoords != tapCoords else {
             return
         }
-        squareManager.baseGamePieceCoords = tapCoords
+        viewModel.baseGamePieceCoords = tapCoords
     }
 
     private func coordinates(from position: CGPoint) -> Coordinates {
