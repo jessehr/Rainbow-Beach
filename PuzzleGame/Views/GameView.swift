@@ -12,9 +12,7 @@ struct GameView: View {
     
     @StateObject
     var viewModel: GameViewModel
-    
-    let soundManager: SoundManager
-    
+        
     var nRows: Int {
         viewModel.level.map.squares.count
     }
@@ -41,7 +39,6 @@ struct GameView: View {
 
     init(using reader: GeometryProxy) {
         self.reader = reader
-        self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
         self._viewModel = StateObject(wrappedValue:
             GameViewModel()
         )
@@ -86,11 +83,7 @@ struct GameView: View {
     }
 
     private func onTouchEnded() {
-        do {
-            try viewModel.dropGamePieceSand()
-            soundManager.play(for: Constants.dropAnimationLength)
-        } catch {
-        }
+        try? viewModel.dropGamePieceSand()
     }
     
     private var totalViewWithModifiers: some View {

@@ -33,10 +33,13 @@ class GameViewModel: ObservableObject {
             baseGamePieceCoords.moved(to: relativePosition)
         }
     }
-        
+    
+    private let soundManager: SoundManager
+
     init() {
         self.levelNumber = 1
         self.level = try! LevelLoader.load(levelNumber: 1)
+        self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
     }
     
     func dropGamePieceSand() throws {
@@ -45,6 +48,8 @@ class GameViewModel: ObservableObject {
         guard gamePieceCanDrop else {
             throw PuzzleError.pieceCannotDrop
         }
+        
+        soundManager.play(for: Constants.dropAnimationLength)
         
         for gamePieceCoord in gamePieceCoords {
             level.map.reduceDepth(at: gamePieceCoord)
