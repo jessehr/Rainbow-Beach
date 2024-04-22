@@ -28,6 +28,6 @@ struct TouchPoint: Equatable, Identifiable {
         let angleInDegrees = newVector.angleInDegrees(to: oldVector)
         let crossProduct = newVector.crossProduct(with: oldVector)
         
-        return crossProduct >= 0 ? angleInDegrees : -angleInDegrees  // Positive if counter-clockwise, negative if clockwise
+        return crossProduct >= 0 ? angleInDegrees : 360 - angleInDegrees
     }
 }
