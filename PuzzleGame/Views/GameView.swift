@@ -39,16 +39,7 @@ struct GameView: View {
         gameHeight / nRows
     }
     
-    @State
-    private var touchPoints: [CGPointWithID] = []
-    
-    var touchPointsDict: [UUID: CGPoint] {
-        var touchPointsDict: [UUID: CGPoint] = [:]
-        for touchPoint in touchPoints {
-            touchPointsDict[touchPoint.id] = touchPoint.point
-        }
-        return touchPointsDict
-    }
+    @State private var touchSet = TouchSet()
     
     init(using reader: GeometryProxy) {
         self.reader = reader
@@ -66,14 +57,19 @@ struct GameView: View {
     }
     
     private var touchHandler: some View {
-        TouchHandler(touchPoints: $touchPoints)
-            .onChange(of: touchPointsDict) { oldDict, newDict in
-                if touchPoints.count == 0 {
-                    onTouchEnded()
-                } else if touchPoints.count == 1 {
-                    onDrag(to: touchPoints[0].point)
+        TouchHandler(touchSet: $touchSet)
+            .onChange(of: touchSet) {
+                if let primary = touchSet.primary {
+                    if let secondary = touchSet.secondary {
+                        onMultitouch()
+                    } else {
+                        onDrag(to: primary.point)
+                    }
+                } else if let secondary = touchSet.secondary {
+                    // FIXME: might need to be a specialized onDrag for secondary-only touch
+                    onDrag(to: secondary.point)
                 } else {
-                    onMultitouch()
+                    onTouchEnded()
                 }
             }
     }
