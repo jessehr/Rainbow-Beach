@@ -86,11 +86,24 @@ extension CGPoint {
 }
 
 extension CGVector {
-    func cosTheta(to otherVector: CGVector) -> Double {
+    private func cosTheta(to otherVector: CGVector) -> Double {
         let dotProduct = otherVector.dx * self.dx + otherVector.dy * self.dy
         let oldMagnitude = sqrt(otherVector.dx * otherVector.dx + otherVector.dy * otherVector.dy)
         let newMagnitude = sqrt(self.dx * self.dx + self.dy * self.dy)
         let cosTheta = dotProduct / (oldMagnitude * newMagnitude)
         return cosTheta
+    }
+    
+    func angleInDegrees(to otherVector: CGVector) -> Double {
+        let cosTheta = self.cosTheta(to: otherVector)
+        
+        let angleInRadians = acos(min(max(cosTheta, -1.0), 1.0))  // Clamping the cosTheta value to avoid domain error
+        let angleInDegrees = angleInRadians * 180 / .pi
+        
+        return angleInDegrees
+    }
+    
+    func crossProduct(with otherVector: CGVector) -> Double {
+        return otherVector.dx * self.dy - otherVector.dy * self.dx
     }
 }

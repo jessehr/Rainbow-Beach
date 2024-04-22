@@ -24,13 +24,10 @@ struct TouchPoint: Equatable, Identifiable {
     func degreesRotated(by otherTouchPoint: TouchPoint) -> Double {
         let oldVector = self.startingPoint.vector(to: otherTouchPoint.startingPoint)
         let newVector = self.point.vector(to: otherTouchPoint.point)
-                
-        let cosTheta = newVector.cosTheta(to: oldVector)
         
-        let angleRadians = acos(min(max(cosTheta, -1.0), 1.0))  // Clamping the cosTheta value to avoid domain error
+        let angleInDegrees = newVector.angleInDegrees(to: oldVector)
+        let crossProduct = newVector.crossProduct(with: oldVector)
         
-        let crossProduct = oldVector.dx * newVector.dy - oldVector.dy * newVector.dx
-        let angleDegrees = angleRadians * 180 / .pi
-        return crossProduct >= 0 ? angleDegrees : -angleDegrees  // Positive if counter-clockwise, negative if clockwise
+        return crossProduct >= 0 ? angleInDegrees : -angleInDegrees  // Positive if counter-clockwise, negative if clockwise
     }
 }
