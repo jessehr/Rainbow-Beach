@@ -75,3 +75,12 @@ extension Array where Element == TouchPoint {
         sortedByAge[safe: 1]
     }
 }
+
+extension CGPoint {
+    func slope(to otherPoint: CGPoint) -> Double {
+        let deltaY = otherPoint.y - self.y
+        let deltaX = otherPoint.x - self.x
+        guard deltaX != 0 else { return 0 }
+        return deltaY / deltaX
+    }
+}

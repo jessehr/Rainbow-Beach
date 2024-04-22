@@ -20,4 +20,11 @@ struct TouchPoint: Equatable, Identifiable {
         self.startingPoint = point
         self.point = point
     }
+    
+    func degreesRotated(by otherTouchPoint: TouchPoint) -> Double {
+        let startingSlope = self.startingPoint.slope(to: otherTouchPoint.startingPoint)
+        let currentSlope  = self.point.slope(to: otherTouchPoint.point)
+
+        return 360.0
+    }
 }
