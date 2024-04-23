@@ -14,6 +14,9 @@ struct GameView: View {
     var viewModel: GameViewModel
     
     @State
+    var touchPoints: [TouchPoint] = []
+
+    @State
     var rotationInDegrees: Double = 0.0
         
     var nRows: Int {
@@ -55,8 +58,8 @@ struct GameView: View {
     }
     
     private var touchHandler: some View {
-        TouchHandler(touchPoints: $viewModel.touchPoints)
-            .onChange(of: viewModel.touchPoints) { oldPoints, newPoints in
+        TouchHandler(touchPoints: $touchPoints)
+            .onChange(of: touchPoints) { oldPoints, newPoints in
                 guard let newPrimaryTouch = newPoints.primaryTouch else {
                     onTouchEnded()
                     return

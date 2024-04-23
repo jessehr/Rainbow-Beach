@@ -9,9 +9,6 @@ import Foundation
 
 class GameViewModel: ObservableObject {
     @Published
-    var touchPoints: [TouchPoint] = []
-
-    @Published
     var level: Level
     
     @Published
