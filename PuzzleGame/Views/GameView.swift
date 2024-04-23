@@ -81,7 +81,18 @@ struct GameView: View {
         primary: TouchPoint,
         secondary: TouchPoint
     ) {
-        self.rotationInDegrees = primary.degreesRotated(by: secondary)
+        let newRotation = primary.degreesRotated(by: secondary)
+        if newRotation > 350 || newRotation < 10 {
+            self.rotationInDegrees = 0
+        } else if newRotation > 80 && newRotation < 100 {
+            self.rotationInDegrees = 90
+        } else if newRotation > 170 && newRotation < 190 {
+            self.rotationInDegrees = 180
+        } else if newRotation > 260 && newRotation < 280 {
+            self.rotationInDegrees = 270
+        } else {
+            self.rotationInDegrees = newRotation
+        }
     }
 
     private func onTouchEnded() {
