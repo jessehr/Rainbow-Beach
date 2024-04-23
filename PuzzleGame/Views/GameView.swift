@@ -12,6 +12,9 @@ struct GameView: View {
     
     @StateObject
     var viewModel: GameViewModel
+    
+    @State
+    var rotationInDegrees: Double = 0.0
         
     var nRows: Int {
         viewModel.level.map.squares.count
@@ -75,12 +78,12 @@ struct GameView: View {
         primary: TouchPoint,
         secondary: TouchPoint
     ) {
-        print(primary.degreesRotated(by: secondary))
-        // TODO: implement multi touch behavior
+        self.rotationInDegrees = primary.degreesRotated(by: secondary)
     }
 
     private func onTouchEnded() {
         try? viewModel.dropGamePieceSand()
+        self.rotationInDegrees = 0
     }
     
     private var totalViewWithModifiers: some View {
@@ -124,6 +127,7 @@ struct GameView: View {
         )
         .opacity(viewModel.gamePieceCanDrop ? 1.0 : 0.5)
         .smoothAnimation(value: viewModel.gamePieceCanDrop)
+        .rotationEffect(Angle(degrees: rotationInDegrees))
     }
     
     private var gamePieceViewPositioned: some View {
