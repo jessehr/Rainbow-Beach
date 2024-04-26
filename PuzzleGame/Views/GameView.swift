@@ -141,7 +141,16 @@ struct GameView: View {
         )
         .opacity(viewModel.gamePieceCanDrop ? 1.0 : 0.5)
         .smoothAnimation(value: viewModel.gamePieceCanDrop)
-        .rotationEffect(Angle(degrees: rotationInDegrees))
+        .rotationEffect(
+            Angle(degrees: rotationInDegrees),
+            anchor: rotationAnchor
+        )
+    }
+    
+    private var rotationAnchor: UnitPoint {
+        let x = UnitPoint.topLeading.x + 1/(2*CGFloat(viewModel.gamePiece.widthInSquares))
+        let y = UnitPoint.topLeading.y + 1/(2*CGFloat(viewModel.gamePiece.heightInSquares))
+        return UnitPoint(x: x, y: y)
     }
     
     private var gamePieceViewPositioned: some View {
