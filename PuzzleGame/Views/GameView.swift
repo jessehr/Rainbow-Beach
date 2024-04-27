@@ -9,18 +9,22 @@ import SwiftUI
 
 struct GameView: View {
     let reader: GeometryProxy
-        
+    
     @StateObject
-    var squareManager: SquareManager
+    var viewModel: GameViewModel
     
-    let soundManager: SoundManager
-    
+    @State
+    var touchPoints: [TouchPoint] = []
+
+    @State
+    var rotationInDegrees: Double = 0.0
+        
     var nRows: Int {
-        squareManager.level.map.squares.count
+        viewModel.level.map.squares.count
     }
     
     var nColumns: Int {
-        squareManager.level.map.squares.first?.count ?? 0
+        viewModel.level.map.squares.first?.count ?? 0
     }
     
     var gameWidth: CGFloat {
@@ -38,29 +42,77 @@ struct GameView: View {
     var squareHeight: CGFloat {
         gameHeight / nRows
     }
-    
+
     init(using reader: GeometryProxy) {
         self.reader = reader
-        self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
-        self._squareManager = StateObject(wrappedValue:
-            SquareManager()
+        self._viewModel = StateObject(wrappedValue:
+            GameViewModel()
         )
     }
     
     var body: some View {
+        ZStack {
+            totalViewWithModifiers
+            touchHandler
+        }
+    }
+    
+    private var touchHandler: some View {
+        TouchHandler(touchPoints: $touchPoints)
+            .onChange(of: touchPoints) { oldPoints, newPoints in
+                guard let newPrimaryTouch = newPoints.primaryTouch else {
+                    onTouchEnded()
+                    return
+                }
+                
+                guard let newSecondaryTouch = newPoints.secondaryTouch else {
+                    onDrag(to: newPrimaryTouch.point)
+                    return
+                }
+                
+                onMultitouch(
+                    primary: newPrimaryTouch,
+                    secondary: newSecondaryTouch
+                )
+            }
+    }
+    
+    private func onMultitouch(
+        primary: TouchPoint,
+        secondary: TouchPoint
+    ) {
+        let newRotation = primary.degreesRotated(by: secondary)
+        if newRotation > 350 || newRotation < 10 {
+            self.rotationInDegrees = 0
+        } else if newRotation > 80 && newRotation < 100 {
+            self.rotationInDegrees = 90
+        } else if newRotation > 170 && newRotation < 190 {
+            self.rotationInDegrees = 180
+        } else if newRotation > 260 && newRotation < 280 {
+            self.rotationInDegrees = 270
+        } else {
+            self.rotationInDegrees = newRotation
+        }
+    }
+
+    private func onTouchEnded() {
+        try? viewModel.dropGamePieceSand()
+        self.rotationInDegrees = 0
+    }
+    
+    private var totalViewWithModifiers: some View {
         totalView
-            .gesture(gestures)
             .sensoryFeedback(
                 .impact(flexibility: .rigid, intensity: 0.6),
-                trigger: squareManager.gamePieceCoords
+                trigger: viewModel.gamePieceCoords
             )
-            .onChange(of: squareManager.level.map.isSolved) {
-                if squareManager.level.map.isSolved {
-                    squareManager.incrementLevel()
+            .onChange(of: viewModel.level.map.isSolved) {
+                if viewModel.level.map.isSolved {
+                    viewModel.incrementLevel()
                 }
             }
             .onShake {
-                squareManager.reset()
+                viewModel.reset()
             }
     }
     
@@ -85,29 +137,39 @@ struct GameView: View {
         GamePieceView(
             squareWidth: squareWidth,
             squareHeight: squareHeight,
-            gamePiece: squareManager.gamePiece
+            gamePiece: viewModel.gamePiece
         )
-        .opacity(squareManager.gamePieceCanDrop ? 1.0 : 0.5)
-        .smoothAnimation(value: squareManager.gamePieceCanDrop)
+        .opacity(viewModel.gamePieceCanDrop ? 1.0 : 0.5)
+        .smoothAnimation(value: viewModel.gamePieceCanDrop)
+        .rotationEffect(
+            Angle(degrees: rotationInDegrees),
+            anchor: rotationAnchor
+        )
+    }
+    
+    private var rotationAnchor: UnitPoint {
+        let x = UnitPoint.topLeading.x + 1/(2*CGFloat(viewModel.gamePiece.widthInSquares))
+        let y = UnitPoint.topLeading.y + 1/(2*CGFloat(viewModel.gamePiece.heightInSquares))
+        return UnitPoint(x: x, y: y)
     }
     
     private var gamePieceViewPositioned: some View {
         gamePieceView
-            .possiblePosition(position(atCenterOf: squareManager.baseGamePieceCoords))
-            .smoothAnimation(value: squareManager.gamePieceCoords)
+            .possiblePosition(position(atCenterOf: viewModel.baseGamePieceCoords))
+            .smoothAnimation(value: viewModel.gamePieceCoords)
             .offset(gamePieceOffset)
     }
     
     private var gamePieceOffset: CGSize {
         CGSize(
-            width: 0.5 * squareWidth * (squareManager.gamePiece.widthInSquares - 1),
-            height: 0.5 * squareHeight * (squareManager.gamePiece.heightInSquares - 1)
+            width: 0.5 * squareWidth * (viewModel.gamePiece.widthInSquares - 1),
+            height: 0.5 * squareHeight * (viewModel.gamePiece.heightInSquares - 1)
         )
     }
     
     @ViewBuilder
     private var winningView: some View {
-        if squareManager.outOfLevels {
+        if viewModel.outOfLevels {
             Text("You won! Yay!")
                 .font(.largeTitle)
                 .bold()
@@ -119,30 +181,17 @@ struct GameView: View {
     }
     
     private func squareView(at coords: Coordinates) -> some View {
-        SquareView(square: $squareManager.level.map.squares[coords.y][coords.x])
+        SquareView(square: $viewModel.level.map.squares[coords.y][coords.x])
             .frame(width: squareWidth, height: squareHeight)
             .possiblePosition(position(atCenterOf: coords))
     }
     
-    private var gestures: some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                onDrag(with: value)
-            }
-            .onEnded { _ in
-                do {
-                    try squareManager.dropGamePieceSand()
-                    soundManager.play(for: Constants.dropAnimationLength)
-                } catch { }
-            }
-    }
-    
-    private func onDrag(with value: DragGesture.Value) {
-        let tapCoords = coordinates(from: value.location)
-        guard squareManager.baseGamePieceCoords != tapCoords else {
+    private func onDrag(to point: CGPoint) {
+        let tapCoords = coordinates(from: point)
+        guard viewModel.baseGamePieceCoords != tapCoords else {
             return
         }
-        squareManager.baseGamePieceCoords = tapCoords
+        viewModel.baseGamePieceCoords = tapCoords
     }
 
     private func coordinates(from position: CGPoint) -> Coordinates {
