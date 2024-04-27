@@ -97,12 +97,12 @@ struct GameView: View {
     
     private func saveRotationToNearestPosition() {
         let nearestPosition = RotationPosition.positionClosest(to: self.rotationInDegrees)
+        viewModel.lastRotationPosition = viewModel.rotationPosition
         updateRotationPosition(to: nearestPosition)
     }
     
     private func updateRotationPosition(to rotationPosition: RotationPosition) {
         self.rotationInDegrees = rotationPosition.rawValue
-        viewModel.lastRotationPosition = rotationPosition
         viewModel.rotationPosition = rotationPosition
     }
     
