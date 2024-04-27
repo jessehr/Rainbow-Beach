@@ -18,13 +18,7 @@ struct GameView: View {
 
     @State
     var rotationInDegrees: Double = 0.0
-    
-    @State
-    var rotationPosition: RotationPosition = .standard
-    
-    @State
-    var lastRotationPosition: RotationPosition = .standard
-        
+            
     var nRows: Int {
         viewModel.level.map.squares.count
     }
@@ -87,11 +81,11 @@ struct GameView: View {
         primary: TouchPoint,
         secondary: TouchPoint
     ) {
-        let rawRotationInDegrees = primary.degreesRotated(by: secondary) + lastRotationPosition.rawValue
+        let rawRotationInDegrees = primary.degreesRotated(by: secondary) + viewModel.lastRotationPosition.rawValue
         let rotationInDegrees = rawRotationInDegrees.truncatingRemainder(dividingBy: 360.0)
         if let nearbyPosition = RotationPosition.nearbyPosition(to: rotationInDegrees) {
             self.rotationInDegrees = nearbyPosition.rawValue
-            self.rotationPosition = nearbyPosition
+            viewModel.rotationPosition = nearbyPosition
         } else {
             self.rotationInDegrees = rotationInDegrees
         }
@@ -100,11 +94,11 @@ struct GameView: View {
     private func onTouchEnded() {
         try? viewModel.dropGamePieceSand()
         saveRotationToLastOneLockedInto()
-        lastRotationPosition = rotationPosition
+        viewModel.lastRotationPosition = viewModel.rotationPosition
     }
     
     private func saveRotationToLastOneLockedInto() {
-        self.rotationInDegrees = rotationPosition.rawValue
+        self.rotationInDegrees = viewModel.rotationPosition.rawValue
     }
     
     private var totalViewWithModifiers: some View {

@@ -20,6 +20,12 @@ class GameViewModel: ObservableObject {
     @Published
     private var levelNumber: Int
     
+    @Published
+    var rotationPosition: RotationPosition = .standard
+    
+    @Published
+    var lastRotationPosition: RotationPosition = .standard
+
     var gamePiece: GamePiece {
         level.gamePiece
     }
@@ -27,7 +33,7 @@ class GameViewModel: ObservableObject {
     var gamePieceCoords: [Coordinates] {
         guard let baseGamePieceCoords else { return [] }
         return gamePiece.relativePositions.map { relativePosition in
-            baseGamePieceCoords.moved(to: relativePosition)
+            baseGamePieceCoords.moved(to: relativePosition, with: rotationPosition)
         }
     }
     
