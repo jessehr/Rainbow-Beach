@@ -83,9 +83,8 @@ struct GameView: View {
     ) {
         let rawRotationInDegrees = primary.degreesRotated(by: secondary) + viewModel.lastRotationPosition.rawValue
         let rotationInDegrees = rawRotationInDegrees.truncatingRemainder(dividingBy: 360.0)
-        if let nearbyPosition = RotationPosition.nearbyPosition(to: rotationInDegrees) {
-            self.rotationInDegrees = nearbyPosition.rawValue
-            viewModel.rotationPosition = nearbyPosition
+        if let nearbyPosition = RotationPosition.positionVeryClose(to: rotationInDegrees) {
+            updateRotationPosition(to: nearbyPosition)
         } else {
             self.rotationInDegrees = rotationInDegrees
         }
@@ -93,12 +92,18 @@ struct GameView: View {
 
     private func onTouchEnded() {
         try? viewModel.dropGamePieceSand()
-        saveRotationToLastOneLockedInto()
-        viewModel.lastRotationPosition = viewModel.rotationPosition
+        saveRotationToNearestPosition()
     }
     
-    private func saveRotationToLastOneLockedInto() {
-        self.rotationInDegrees = viewModel.rotationPosition.rawValue
+    private func saveRotationToNearestPosition() {
+        let nearestPosition = RotationPosition.positionClosest(to: self.rotationInDegrees)
+        updateRotationPosition(to: nearestPosition)
+    }
+    
+    private func updateRotationPosition(to rotationPosition: RotationPosition) {
+        self.rotationInDegrees = rotationPosition.rawValue
+        viewModel.lastRotationPosition = rotationPosition
+        viewModel.rotationPosition = rotationPosition
     }
     
     private var totalViewWithModifiers: some View {
@@ -188,6 +193,7 @@ struct GameView: View {
     }
     
     private func onDrag(to point: CGPoint) {
+        saveRotationToNearestPosition()
         let tapCoords = coordinates(from: point)
         guard viewModel.baseGamePieceCoords != tapCoords else {
             return

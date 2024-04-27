@@ -13,17 +13,25 @@ enum RotationPosition: Double, CaseIterable {
     case upsideDown = 180
     case counterClockwise = 270
     
-    static func nearbyPosition(to angle: Double) -> RotationPosition? {
+    static func positionClosest(to angle: Double) -> RotationPosition {
         for position in RotationPosition.allCases {
-            if position.isCloseTo(angle) {
+            if position.isCloseTo(angle, within: 45.0) {
+                return position
+            }
+        }
+        return .standard
+    }
+    
+    static func positionVeryClose(to angle: Double) -> RotationPosition? {
+        for position in RotationPosition.allCases {
+            if position.isCloseTo(angle, within: 5.0) {
                 return position
             }
         }
         return nil
     }
     
-    private func isCloseTo(_ rotationInDegrees: Double) -> Bool {
-        let nearbyDistance = 5.0
+    private func isCloseTo(_ rotationInDegrees: Double, within nearbyDistance: Double) -> Bool {
         guard self != .standard else {
             return rotationInDegrees < nearbyDistance || rotationInDegrees > 360 - nearbyDistance
         }
