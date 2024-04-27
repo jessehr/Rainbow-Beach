@@ -1,5 +1,5 @@
 //
-//  SquareManager.swift
+//  GameViewModel.swift
 //  PuzzleGame
 //
 //  Created by Jesse R on 3/24/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SquareManager: ObservableObject {
+class GameViewModel: ObservableObject {
     @Published
     var level: Level
     
@@ -31,9 +31,12 @@ class SquareManager: ObservableObject {
         }
     }
     
+    private let soundManager: SoundManager
+
     init() {
         self.levelNumber = 1
         self.level = try! LevelLoader.load(levelNumber: 1)
+        self.soundManager = SoundManager(filename: Constants.dropSoundFilename)
     }
     
     func dropGamePieceSand() throws {
@@ -42,6 +45,8 @@ class SquareManager: ObservableObject {
         guard gamePieceCanDrop else {
             throw PuzzleError.pieceCannotDrop
         }
+        
+        soundManager.play(for: Constants.dropAnimationLength)
         
         for gamePieceCoord in gamePieceCoords {
             level.map.reduceDepth(at: gamePieceCoord)
