@@ -9,11 +9,11 @@ import SwiftUI
 import UIKit
 
 struct TouchHandler: UIViewRepresentable {
-    @Binding var touchPoints: [TouchPoint]  // Binding to an array of identified points
+    @Binding var touchPoints: [TouchPoint]
 
     func makeUIView(context: Context) -> TouchHandlingUIView {
         let view = TouchHandlingUIView()
-        view.isMultipleTouchEnabled = true  // Enable multitouch
+        view.isMultipleTouchEnabled = true
 
         view.touchBegan = { touches, event in
             for touch in touches {

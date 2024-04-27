@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class TouchHandlingUIView: UIView {
-    // Closure to send touch events back to SwiftUI
     var touchBegan: ((Set<UITouch>, UIEvent?) -> Void)?
     var touchMoved: ((Set<UITouch>, UIEvent?) -> Void)?
     var touchEnded: ((Set<UITouch>, UIEvent?) -> Void)?
