@@ -31,6 +31,7 @@
 		AA9572842BA827BF0001BBB5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9572832BA827BF0001BBB5 /* Item.swift */; };
 		AA9572862BA827C00001BBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572852BA827C00001BBB5 /* Assets.xcassets */; };
 		AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */; };
+		AAAE62152BDC91D1003CF665 /* RotationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE62142BDC91D1003CF665 /* RotationPosition.swift */; };
 		AAB6567B2BBE8B8900DC0047 /* level8.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567A2BBE8B8800DC0047 /* level8.txt */; };
 		AAB6567D2BBE8C6100DC0047 /* level9.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB6567C2BBE8C6100DC0047 /* level9.txt */; };
 		AAB656832BC1E21600DC0047 /* GamePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB656822BC1E21600DC0047 /* GamePieceView.swift */; };
@@ -72,6 +73,7 @@
 		AA9572832BA827BF0001BBB5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AA9572852BA827C00001BBB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA9572882BA827C00001BBB5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AAAE62142BDC91D1003CF665 /* RotationPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationPosition.swift; sourceTree = "<group>"; };
 		AAB6567A2BBE8B8800DC0047 /* level8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level8.txt; sourceTree = "<group>"; };
 		AAB6567C2BBE8C6100DC0047 /* level9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level9.txt; sourceTree = "<group>"; };
 		AAB656822BC1E21600DC0047 /* GamePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceView.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				AA29AFE02BBA13AC0074B875 /* Map.swift */,
 				AABE3AB72BCC867C003940A2 /* Level.swift */,
 				AABE3AC02BD4742E003940A2 /* TouchPoint.swift */,
+				AAAE62142BDC91D1003CF665 /* RotationPosition.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				AABE3AB82BCC867C003940A2 /* Level.swift in Sources */,
 				AA6326ED2BC33AB8000B9E8C /* OperatorOverloading.swift in Sources */,
 				AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */,
+				AAAE62152BDC91D1003CF665 /* RotationPosition.swift in Sources */,
 				AA876AA12BBB99950072E712 /* ShakeSetup.swift in Sources */,
 				AA5B5BB82BAE967400FEC448 /* GameView.swift in Sources */,
 				AA3BD4D82BB8C3C40003BF48 /* Constants.swift in Sources */,
