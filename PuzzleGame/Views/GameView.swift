@@ -79,6 +79,11 @@ struct GameView: View {
             }
     }
     
+    private func giveHapticFeedback() {
+        hapticGenerator.impactOccurred(intensity: 0.4)
+        hapticGenerator.prepare()
+    }
+    
     private func onMultitouch(
         primary: TouchPoint,
         secondary: TouchPoint
@@ -88,6 +93,11 @@ struct GameView: View {
         if let nearbyPosition = RotationPosition.positionVeryClose(to: rotationInDegrees) {
             updateRotationPosition(to: nearbyPosition)
         } else {
+            // when leaving a 90 degree angle state, generate haptic feedback
+            if self.rotationInDegrees.truncatingRemainder(dividingBy: 90.0) == 0 &&
+                    rotationInDegrees.truncatingRemainder(dividingBy: 90.0) != 0 {
+                giveHapticFeedback()
+            }
             self.rotationInDegrees = rotationInDegrees
         }
     }
@@ -113,7 +123,7 @@ struct GameView: View {
     
     private func handleRotationFullSpin() {
         if self.rotationInDegrees != 360.0 {
-            hapticGenerator.impactOccurred(intensity: 0.5)
+            giveHapticFeedback()
             self.rotationInDegrees = 360.0
         }
         viewModel.rotationPosition = .standard
@@ -121,7 +131,7 @@ struct GameView: View {
     
     private func handleNormalRotation(to rotationPosition: RotationPosition) {
         if self.rotationInDegrees != rotationPosition.rawValue {
-            hapticGenerator.impactOccurred(intensity: 0.5)
+            giveHapticFeedback()
             self.rotationInDegrees = rotationPosition.rawValue
         }
         viewModel.rotationPosition = rotationPosition

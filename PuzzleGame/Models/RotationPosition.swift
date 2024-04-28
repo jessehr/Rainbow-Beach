@@ -24,7 +24,7 @@ enum RotationPosition: Double, CaseIterable {
     
     static func positionVeryClose(to angle: Double) -> RotationPosition? {
         for position in RotationPosition.allCases {
-            if position.isCloseTo(angle, within: 5.0) {
+            if position.isCloseTo(angle, within: 10.0) {
                 return position
             }
         }
