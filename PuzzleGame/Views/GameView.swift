@@ -90,15 +90,19 @@ struct GameView: View {
     ) {
         let rawRotationInDegrees = primary.degreesRotated(by: secondary) + viewModel.lastRotationPosition.rawValue
         let rotationInDegrees = rawRotationInDegrees.truncatingRemainder(dividingBy: 360.0)
-        if let nearbyPosition = RotationPosition.positionVeryClose(to: rotationInDegrees) {
+        
+        let isRightAngleStart = self.rotationInDegrees.truncatingRemainder(dividingBy: 90.0) == 0
+        let snappingThreshold = isRightAngleStart ? 10.0 : 1.5
+
+        if let nearbyPosition = RotationPosition.positionVeryClose(to: rotationInDegrees, with: snappingThreshold) {
             updateRotationPosition(to: nearbyPosition)
         } else {
-            // when leaving a 90 degree angle state, generate haptic feedback
-            if self.rotationInDegrees.truncatingRemainder(dividingBy: 90.0) == 0 &&
-                    rotationInDegrees.truncatingRemainder(dividingBy: 90.0) != 0 {
-                giveHapticFeedback()
-            }
             self.rotationInDegrees = rotationInDegrees
+        }
+        
+        let isRightAngleEnd = self.rotationInDegrees.truncatingRemainder(dividingBy: 90.0) == 0
+        if isRightAngleStart != isRightAngleEnd {
+            giveHapticFeedback()
         }
     }
 
@@ -122,18 +126,12 @@ struct GameView: View {
     }
     
     private func handleRotationFullSpin() {
-        if self.rotationInDegrees != 360.0 {
-            giveHapticFeedback()
-            self.rotationInDegrees = 360.0
-        }
+        self.rotationInDegrees = 360.0
         viewModel.rotationPosition = .standard
     }
     
     private func handleNormalRotation(to rotationPosition: RotationPosition) {
-        if self.rotationInDegrees != rotationPosition.rawValue {
-            giveHapticFeedback()
-            self.rotationInDegrees = rotationPosition.rawValue
-        }
+        self.rotationInDegrees = rotationPosition.rawValue
         viewModel.rotationPosition = rotationPosition
     }
     
