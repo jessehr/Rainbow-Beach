@@ -145,12 +145,19 @@ struct GameView: View {
             )
             .onChange(of: viewModel.level.map.isSolved) {
                 if viewModel.level.map.isSolved {
-                    viewModel.incrementLevel()
+                    incrementLevel()
                 }
             }
             .onShake {
                 viewModel.reset()
             }
+    }
+    
+    private func incrementLevel() {
+        self.rotationInDegrees = 0.0
+        viewModel.rotationPosition = .standard
+        viewModel.lastRotationPosition = .standard
+        viewModel.incrementLevel()
     }
     
     private var totalView: some View {
