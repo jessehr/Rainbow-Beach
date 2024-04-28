@@ -102,8 +102,15 @@ struct GameView: View {
     }
     
     private func updateRotationPosition(to rotationPosition: RotationPosition) {
-        self.rotationInDegrees = rotationPosition.rawValue
         viewModel.rotationPosition = rotationPosition
+        
+        // set to 360° instead of 0° if coming from right side to prevent 360° spin bug
+        guard !(rotationPosition == .standard && self.rotationInDegrees > 180.0) else {
+            self.rotationInDegrees = 360.0
+            return
+        }
+        
+        self.rotationInDegrees = rotationPosition.rawValue
     }
     
     private var totalViewWithModifiers: some View {
