@@ -10,43 +10,48 @@ import AVFoundation
 import UIKit
 
 class SoundManager {
+    private let nPlayers = 100
+    
     private let filename: String
-    private let fileType: String
-    private var player: AVAudioPlayer!
-    private var stopTimer: Timer?
-    private var timeManager: TimeManager
-    
-    init(filename: String, fileType: String = "mp3") {
+    private var players: [AVAudioPlayer]!
+    private let soundLength: Double
+
+    init(filename: String, soundLength: Double = Constants.dropAnimationLength) {
         self.filename = filename
-        self.fileType = fileType
-        self.timeManager = TimeManager()
-        self.player = nil
-        
-        // now that everything is initialized, use instance vars
-        self.timeManager.callback = self.pause
-        self.player = makePlayer(filename: filename, fileType: fileType)
+        self.soundLength = soundLength
+        self.players = []
+        fillUpPlayers()
     }
     
-    func play(for durationInSeconds: TimeInterval) {
-        if !player.isPlaying {
+    func play() {
+        Task {
+            let player = players.removeFirst()
             player.play()
+            try? await Task.sleep(for: .seconds(soundLength))
+            player.pause()
+            fillUpPlayers()
         }
-        timeManager.setOrResetTimer(for: durationInSeconds)
-    }
-            
-    private func play() {
-        player.play()
     }
     
-    private func pause() {
-        player.pause()
-        player.currentTime = 0
+    private var fileURL: URL? {
+        Bundle.main.url(forResource: filename, withExtension: "mp3")
     }
     
-    private func makePlayer(filename: String, fileType: String) -> AVAudioPlayer? {
-        guard let url = Bundle.main.url(forResource: filename, withExtension: fileType) else { return nil }
-        let player = try? AVAudioPlayer(contentsOf: url)
+    private func makePlayer() -> AVAudioPlayer? {
+        guard let fileURL else { return nil }
+        let player = try? AVAudioPlayer(contentsOf: fileURL)
         player?.prepareToPlay()
         return player
+    }
+    
+    private func fillUpPlayers() {
+        while players.count < nPlayers {
+            if let player = makePlayer() {
+                players.append(player)
+            } else {
+                return
+            }
+        }
+        
     }
 }

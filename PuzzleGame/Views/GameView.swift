@@ -19,6 +19,9 @@ struct GameView: View {
 
     @State
     var rotationInDegrees: Double = 0.0
+    
+    @State
+    var rotationFeedbackJustHappened = false
             
     var nRows: Int {
         viewModel.level.map.squares.count
@@ -79,9 +82,18 @@ struct GameView: View {
             }
     }
     
-    private func giveHapticFeedback() {
+    private func giveRotationFeedback() {
+        guard !rotationFeedbackJustHappened else { return }
+        rotationFeedbackJustHappened = true
+        
+        viewModel.clickSoundManager.play()
         hapticGenerator.impactOccurred(intensity: 0.4)
         hapticGenerator.prepare()
+
+        Task {
+            try? await Task.sleep(for: .seconds(0.3))
+            rotationFeedbackJustHappened = false
+        }
     }
     
     private func onMultitouch(
@@ -102,7 +114,7 @@ struct GameView: View {
         
         let isRightAngleEnd = self.rotationInDegrees.truncatingRemainder(dividingBy: 90.0) == 0
         if isRightAngleStart != isRightAngleEnd {
-            giveHapticFeedback()
+            giveRotationFeedback()
         }
     }
 

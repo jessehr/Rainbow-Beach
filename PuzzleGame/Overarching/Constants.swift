@@ -10,4 +10,5 @@ import Foundation
 struct Constants {
     static let dropAnimationLength = 0.25
     static let dropSoundFilename = "sand-short"
+    static let clickSoundFilename = "click"
 }
