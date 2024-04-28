@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     let reader: GeometryProxy
+    let hapticGenerator = UIImpactFeedbackGenerator()
     
     @StateObject
     var viewModel: GameViewModel
@@ -60,6 +61,7 @@ struct GameView: View {
     private var touchHandler: some View {
         TouchHandler(touchPoints: $touchPoints)
             .onChange(of: touchPoints) { oldPoints, newPoints in
+                hapticGenerator.prepare()
                 guard let newPrimaryTouch = newPoints.primaryTouch else {
                     onTouchEnded()
                     return
@@ -102,15 +104,27 @@ struct GameView: View {
     }
     
     private func updateRotationPosition(to rotationPosition: RotationPosition) {
-        viewModel.rotationPosition = rotationPosition
-        
-        // set to 360° instead of 0° if coming from right side to prevent 360° spin bug
-        guard !(rotationPosition == .standard && self.rotationInDegrees > 180.0) else {
-            self.rotationInDegrees = 360.0
-            return
+        if rotationPosition == .standard && self.rotationInDegrees > 180.0 {
+            handleRotationFullSpin()
+        } else {
+            handleNormalRotation(to: rotationPosition)
         }
-        
-        self.rotationInDegrees = rotationPosition.rawValue
+    }
+    
+    private func handleRotationFullSpin() {
+        if self.rotationInDegrees != 360.0 {
+            hapticGenerator.impactOccurred(intensity: 0.5)
+            self.rotationInDegrees = 360.0
+        }
+        viewModel.rotationPosition = .standard
+    }
+    
+    private func handleNormalRotation(to rotationPosition: RotationPosition) {
+        if self.rotationInDegrees != rotationPosition.rawValue {
+            hapticGenerator.impactOccurred(intensity: 0.5)
+            self.rotationInDegrees = rotationPosition.rawValue
+        }
+        viewModel.rotationPosition = rotationPosition
     }
     
     private var totalViewWithModifiers: some View {
