@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA1659FD2BDEDEE500615306 /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA1659FC2BDEDEE500615306 /* click.mp3 */; };
 		AA1CEE102BB6A26000801892 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE0F2BB6A26000801892 /* SoundManager.swift */; };
 		AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA29AFDC2BBA091A0074B875 /* level1.txt */; };
 		AA29AFDF2BBA13830074B875 /* LevelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AFDE2BBA13820074B875 /* LevelLoader.swift */; };
@@ -44,10 +43,10 @@
 		AABE861B2BB0A23B00E7B744 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE861A2BB0A23B00E7B744 /* GameViewModel.swift */; };
 		AAF3CAA02BBD3FF000FFDBF4 /* level6.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */; };
 		AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAF3CAA12BBD420200FFDBF4 /* level2.txt */; };
+		BCCCAB5F2C651C7000851C4C /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BCCCAB5E2C651C7000851C4C /* click.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA1659FC2BDEDEE500615306 /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = click.mp3; path = ../../../../../Downloads/click.mp3; sourceTree = "<group>"; };
 		AA1CEE0F2BB6A26000801892 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		AA29AFDC2BBA091A0074B875 /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		AA29AFDE2BBA13820074B875 /* LevelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLoader.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		AABE861A2BB0A23B00E7B744 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		AAF3CA9F2BBD3FF000FFDBF4 /* level6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level6.txt; sourceTree = "<group>"; };
 		AAF3CAA12BBD420200FFDBF4 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		BCCCAB5E2C651C7000851C4C /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +184,7 @@
 		AA3BD4D22BB8BF180003BF48 /* SoundFiles */ = {
 			isa = PBXGroup;
 			children = (
-				AA1659FC2BDEDEE500615306 /* click.mp3 */,
+				BCCCAB5E2C651C7000851C4C /* click.mp3 */,
 				AA3BD4D32BB8BF610003BF48 /* sand-short.mp3 */,
 			);
 			path = SoundFiles;
@@ -307,11 +307,11 @@
 				AA29AFE92BBAA8E80074B875 /* level5.txt in Resources */,
 				AAB6567B2BBE8B8900DC0047 /* level8.txt in Resources */,
 				AA29AFDD2BBA091A0074B875 /* level1.txt in Resources */,
+				BCCCAB5F2C651C7000851C4C /* click.mp3 in Resources */,
 				AA9572892BA827C00001BBB5 /* Preview Assets.xcassets in Resources */,
 				AABE3ABA2BCCEA14003940A2 /* level3.txt in Resources */,
 				AA29AFEB2BBAA9B10074B875 /* level7.txt in Resources */,
 				AA29AFE72BBAA6B40074B875 /* level4.txt in Resources */,
-				AA1659FD2BDEDEE500615306 /* click.mp3 in Resources */,
 				AAF3CAA02BBD3FF000FFDBF4 /* level6.txt in Resources */,
 				AAB6567D2BBE8C6100DC0047 /* level9.txt in Resources */,
 				AAF3CAA22BBD420200FFDBF4 /* level2.txt in Resources */,
